@@ -19,4 +19,6 @@ Original Fork
 
 * next I created a fork in the FluentSharp_Fork.WatiN folder
 * created a fork called Code_SVN_1217
-	
+* back in master branch
+** Moved the Code files from \watin-code-1217-trunk\src into \Watin.Core
+** deleted watin-code-1217-trunk
