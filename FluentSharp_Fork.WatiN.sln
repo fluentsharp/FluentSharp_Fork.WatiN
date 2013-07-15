@@ -1,0 +1,53 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Watin.Core\Core.csproj", "{217E2D34-F6DF-431B-AC5A-B368F481A530}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentSharp.WatiN", "FluentSharp.WatiN\FluentSharp.WatiN.csproj", "{95399705-D70E-44FD-9D48-F71C33E2D9D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests.FluentSharp.WatiN", "UnitTests.FluentSharp.WatiN\UnitTests.FluentSharp.WatiN.csproj", "{E3A47198-8891-4ABC-B34E-A73F716C8711}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		AutomatedDebug|Any CPU = AutomatedDebug|Any CPU
+		Debug (.Net 4.0)|Any CPU = Debug (.Net 4.0)|Any CPU
+		Debug|Any CPU = Debug|Any CPU
+		Release (.Net 4.0)|Any CPU = Release (.Net 4.0)|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{217E2D34-F6DF-431B-AC5A-B368F481A530}.AutomatedDebug|Any CPU.ActiveCfg = AutomatedDebug|Any CPU
+		{217E2D34-F6DF-431B-AC5A-B368F481A530}.AutomatedDebug|Any CPU.Build.0 = AutomatedDebug|Any CPU
+		{217E2D34-F6DF-431B-AC5A-B368F481A530}.Debug (.Net 4.0)|Any CPU.ActiveCfg = Debug (.Net 4.0)|Any CPU
+		{217E2D34-F6DF-431B-AC5A-B368F481A530}.Debug (.Net 4.0)|Any CPU.Build.0 = Debug (.Net 4.0)|Any CPU
+		{217E2D34-F6DF-431B-AC5A-B368F481A530}.Debug|Any CPU.ActiveCfg = AutomatedDebug|Any CPU
+		{217E2D34-F6DF-431B-AC5A-B368F481A530}.Debug|Any CPU.Build.0 = AutomatedDebug|Any CPU
+		{217E2D34-F6DF-431B-AC5A-B368F481A530}.Release (.Net 4.0)|Any CPU.ActiveCfg = Release (.Net 4.0)|Any CPU
+		{217E2D34-F6DF-431B-AC5A-B368F481A530}.Release (.Net 4.0)|Any CPU.Build.0 = Release (.Net 4.0)|Any CPU
+		{217E2D34-F6DF-431B-AC5A-B368F481A530}.Release|Any CPU.ActiveCfg = Release (.Net 4.0)|Any CPU
+		{217E2D34-F6DF-431B-AC5A-B368F481A530}.Release|Any CPU.Build.0 = Release (.Net 4.0)|Any CPU
+		{95399705-D70E-44FD-9D48-F71C33E2D9D1}.AutomatedDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95399705-D70E-44FD-9D48-F71C33E2D9D1}.AutomatedDebug|Any CPU.Build.0 = Debug|Any CPU
+		{95399705-D70E-44FD-9D48-F71C33E2D9D1}.Debug (.Net 4.0)|Any CPU.ActiveCfg = Debug|Any CPU
+		{95399705-D70E-44FD-9D48-F71C33E2D9D1}.Debug (.Net 4.0)|Any CPU.Build.0 = Debug|Any CPU
+		{95399705-D70E-44FD-9D48-F71C33E2D9D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95399705-D70E-44FD-9D48-F71C33E2D9D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95399705-D70E-44FD-9D48-F71C33E2D9D1}.Release (.Net 4.0)|Any CPU.ActiveCfg = Release|Any CPU
+		{95399705-D70E-44FD-9D48-F71C33E2D9D1}.Release (.Net 4.0)|Any CPU.Build.0 = Release|Any CPU
+		{95399705-D70E-44FD-9D48-F71C33E2D9D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95399705-D70E-44FD-9D48-F71C33E2D9D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3A47198-8891-4ABC-B34E-A73F716C8711}.AutomatedDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3A47198-8891-4ABC-B34E-A73F716C8711}.AutomatedDebug|Any CPU.Build.0 = Debug|Any CPU
+		{E3A47198-8891-4ABC-B34E-A73F716C8711}.Debug (.Net 4.0)|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3A47198-8891-4ABC-B34E-A73F716C8711}.Debug (.Net 4.0)|Any CPU.Build.0 = Debug|Any CPU
+		{E3A47198-8891-4ABC-B34E-A73F716C8711}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3A47198-8891-4ABC-B34E-A73F716C8711}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3A47198-8891-4ABC-B34E-A73F716C8711}.Release (.Net 4.0)|Any CPU.ActiveCfg = Release|Any CPU
+		{E3A47198-8891-4ABC-B34E-A73F716C8711}.Release (.Net 4.0)|Any CPU.Build.0 = Release|Any CPU
+		{E3A47198-8891-4ABC-B34E-A73F716C8711}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3A47198-8891-4ABC-B34E-A73F716C8711}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
