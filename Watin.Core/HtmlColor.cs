@@ -53,10 +53,10 @@ namespace WatiN.Core
     /// </example>
     public class HtmlColor
     {
-        private static readonly Regex RgbValuePattern = new Regex(@"(?<r>\d{1,3}) ?, ?(?<g>\d{1,3}) ?, ?(?<b>\d{1,3})",
+        public static readonly Regex RgbValuePattern = new Regex(@"(?<r>\d{1,3}) ?, ?(?<g>\d{1,3}) ?, ?(?<b>\d{1,3})",
                                                                   RegexOptions.Compiled | RegexOptions.ExplicitCapture);
 
-        private static readonly Dictionary<int, string> W3CColorNames = new Dictionary<int, string>
+        public static readonly Dictionary<int, string> W3CColorNames = new Dictionary<int, string>
             {
                 { -16711681, "Aqua" },      // #00FFFF
                 { -16777216, "Black" },     // #000000
@@ -97,7 +97,7 @@ namespace WatiN.Core
         /// Returns the <see cref="System.Drawing.Color"/> wrapped by this class.
         /// </summary>
         /// <value>The color.</value>
-        public Color Color { get; private set; }
+        public Color Color { get; set;}
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HtmlColor"/> class.
@@ -153,7 +153,7 @@ namespace WatiN.Core
             get { return W3CColorNames.ContainsKey(ToArgb) ? W3CColorNames[ToArgb] : "unknown"; }
         }
 
-        private int ToArgb
+        public int ToArgb
         {
             get { return Color.ToArgb(); }
         }
@@ -183,7 +183,7 @@ namespace WatiN.Core
             }
         }
 
-        public string OriginalValue { get; private set; }
+        public string OriginalValue { get; set;}
 
         /// <summary>
         /// Determines whether the specified <see cref="T:System.Object"/> is equal to the current <see cref="HtmlColor"/>.

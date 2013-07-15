@@ -37,7 +37,7 @@ namespace WatiN.Core
     public abstract class Browser : DomContainer 
     {
 
-        private static readonly Dictionary<Type, IAttachTo> AttachToHelpers = new Dictionary<Type, IAttachTo>();
+        public static readonly Dictionary<Type, IAttachTo> AttachToHelpers = new Dictionary<Type, IAttachTo>();
 
         static Browser()
         {
@@ -47,7 +47,7 @@ namespace WatiN.Core
 
         public abstract INativeBrowser NativeBrowser { get; }
 
-        protected internal virtual void FinishInitialization()
+        public virtual void FinishInitialization()
         {
             StartDialogWatcher();
         }
@@ -343,13 +343,13 @@ namespace WatiN.Core
         }
 
         /// <inheritdoc />
-        protected override INativeDocument OnGetNativeDocument()
+        public override INativeDocument OnGetNativeDocument()
         {
             return NativeBrowser.NativeDocument;
         }
 
         /// <inheritdoc />
-        protected override string GetAttributeValueImpl(string attributeName)
+        public override string GetAttributeValueImpl(string attributeName)
         {
             var name = attributeName.ToLowerInvariant();
             string value = null;
@@ -644,7 +644,7 @@ namespace WatiN.Core
             return helper.Exists(constraint);
         }
 
-        private static IAttachTo GetAttachToHelper(Type browserType)
+        public static IAttachTo GetAttachToHelper(Type browserType)
         {
             if (!AttachToHelpers.ContainsKey(browserType)) throw new WatiNException("No AttachToHelper registered for type " + browserType);
             return AttachToHelpers[browserType];

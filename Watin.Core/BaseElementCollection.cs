@@ -34,8 +34,8 @@ namespace WatiN.Core
         where TElement : Element
         where TCollection : BaseElementCollection<TElement, TCollection>
 	{
-		private readonly DomContainer domContainer;
-		private readonly ElementFinder elementFinder;
+		public readonly DomContainer domContainer;
+		public readonly ElementFinder elementFinder;
 
 		/// <summary>
 		/// Creates a base collection.
@@ -44,7 +44,7 @@ namespace WatiN.Core
 		/// <param name="elementFinder">The element finder</param>
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="domContainer"/>
         /// or <paramref name="elementFinder"/> is null</exception>
-        protected BaseElementCollection(DomContainer domContainer, ElementFinder elementFinder)
+        public BaseElementCollection(DomContainer domContainer, ElementFinder elementFinder)
 		{
             if (domContainer == null)
                 throw new ArgumentNullException("domContainer");
@@ -81,7 +81,7 @@ namespace WatiN.Core
         /// <summary>
         /// Gets the DOM container to which the collection belongs.
         /// </summary>
-        protected DomContainer DomContainer
+        public DomContainer DomContainer
         {
             get { return domContainer; }
         }
@@ -89,7 +89,7 @@ namespace WatiN.Core
         /// <summary>
         /// Gets the underlying element finder.
         /// </summary>
-        protected ElementFinder ElementFinder
+        public ElementFinder ElementFinder
         {
             get { return elementFinder; }
         }
@@ -99,16 +99,16 @@ namespace WatiN.Core
         /// </summary>
         /// <param name="elementFinder">The element finder, not null</param>
         /// <returns>The element collection</returns>
-        protected abstract TCollection CreateFilteredCollection(ElementFinder elementFinder);
+        public abstract TCollection CreateFilteredCollection(ElementFinder elementFinder);
 
         /// <inheritdoc />
-        protected sealed override TCollection CreateFilteredCollection(Constraint findBy)
+        public sealed override TCollection CreateFilteredCollection(Constraint findBy)
         {
             return CreateFilteredCollection(elementFinder.Filter(findBy));
         }
 
         /// <inheritdoc />
-        protected sealed override IEnumerable<TElement> GetComponents()
+        public sealed override IEnumerable<TElement> GetComponents()
         {
             foreach (TElement element in elementFinder.FindAll())
                 yield return element;

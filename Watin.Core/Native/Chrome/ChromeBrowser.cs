@@ -45,7 +45,7 @@ namespace WatiN.Core.Native.Chrome
         /// </summary>
         /// <param name="url">The URL to laod.</param>
         /// <param name="waitForComplete">If false, makes to execution of LoadUri asynchronous.</param>
-        protected override void LoadUri(Uri url, bool waitForComplete)
+        public override void LoadUri(Uri url, bool waitForComplete)
         {
             if (!url.IsFile)
             {
@@ -69,7 +69,7 @@ namespace WatiN.Core.Native.Chrome
         /// <summary>
         /// Reattaches to the first tab. This is required every time the document
         /// </summary>
-        private void ReAttachToTab(Uri url)
+        public void ReAttachToTab(Uri url)
         {            
             do
             {

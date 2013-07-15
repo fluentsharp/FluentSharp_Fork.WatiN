@@ -25,12 +25,12 @@ namespace WatiN.Core
     /// <summary>
     /// Assists with finding components generically by type.
     /// </summary>
-    internal static class ComponentFinder
+    public static class ComponentFinder
     {
-        private delegate T Finder<T>(IElementContainer container, Constraint constraint);
+        public delegate T Finder<T>(IElementContainer container, Constraint constraint);
 
-        private static readonly MethodInfo FindElementMethod = new Finder<Element>(FindElement<Element>).Method.GetGenericMethodDefinition();
-        private static readonly MethodInfo FindControlMethod = new Finder<Control>(FindControl<DummyControl>).Method.GetGenericMethodDefinition();
+        public static readonly MethodInfo FindElementMethod = new Finder<Element>(FindElement<Element>).Method.GetGenericMethodDefinition();
+        public static readonly MethodInfo FindControlMethod = new Finder<Control>(FindControl<DummyControl>).Method.GetGenericMethodDefinition();
 
         public static Component FindComponent(Type componentType, IElementContainer container, Constraint constraint)
         {
@@ -46,24 +46,24 @@ namespace WatiN.Core
             throw new NotSupportedException(string.Format("WatiN does not know how to find a component of type '{0}'.", componentType));
         }
 
-        private static Element FindUntypedElement(IElementContainer container, Constraint constraint)
+        public static Element FindUntypedElement(IElementContainer container, Constraint constraint)
         {
             return container.Element(constraint);
         }
 
-        private static TElement FindElement<TElement>(IElementContainer container, Constraint constraint)
+        public static TElement FindElement<TElement>(IElementContainer container, Constraint constraint)
             where TElement : Element
         {
             return container.ElementOfType<TElement>(constraint);
         }
 
-        private static TControl FindControl<TControl>(IElementContainer container, Constraint constraint)
+        public static TControl FindControl<TControl>(IElementContainer container, Constraint constraint)
             where TControl : Control, new()
         {
             return container.Control<TControl>(constraint);
         }
 
-        private sealed class DummyControl : Control<Element>
+        public sealed class DummyControl : Control<Element>
         {
         }
     }

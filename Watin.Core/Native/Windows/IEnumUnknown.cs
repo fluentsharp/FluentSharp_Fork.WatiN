@@ -21,7 +21,7 @@ using System.Runtime.InteropServices;
 namespace WatiN.Core.Native.Windows
 {
     [ComImport, Guid("00000100-0000-0000-C000-000000000046"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-    internal interface IEnumUnknown
+    public interface IEnumUnknown
     {
         [PreserveSig]
         int Next(

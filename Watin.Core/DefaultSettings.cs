@@ -23,7 +23,7 @@ namespace WatiN.Core
 {
     public class DefaultSettings : ISettings
     {
-        private struct settingsStruct
+        public struct settingsStruct
         {
             public int attachToBrowserTimeOut;
             public int waitUntilExistsTimeOut;
@@ -40,14 +40,14 @@ namespace WatiN.Core
             public bool closeExistingFireFoxInstances;
         }
 
-        private settingsStruct settings;
+        public settingsStruct settings;
 
         public DefaultSettings()
         {
             SetDefaults();
         }
 
-        private DefaultSettings(settingsStruct settings)
+        public DefaultSettings(settingsStruct settings)
         {
             this.settings = settings;
         }
@@ -69,7 +69,7 @@ namespace WatiN.Core
             return new DefaultSettings(settings);
         }
 
-        private void SetDefaults()
+        public void SetDefaults()
         {
             settings = new settingsStruct
                            {
@@ -246,7 +246,7 @@ namespace WatiN.Core
             set { settings.closeExistingFireFoxInstances = value; }
         }
 
-        private static void IfValueLessThenZeroThrowArgumentOutOfRangeException(int value)
+        public static void IfValueLessThenZeroThrowArgumentOutOfRangeException(int value)
         {
             if (value < 0)
             {

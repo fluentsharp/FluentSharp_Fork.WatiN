@@ -27,7 +27,7 @@ namespace WatiN.Core.DialogHandlers
         public abstract override bool HandleDialog(Window window);
         public abstract override bool CanHandleDialog(Window window);
 
-        public bool HasHandledDialog { get; protected set; }
+        public bool HasHandledDialog { get; set; }
 
         public bool WaitUntilHandled()
         {

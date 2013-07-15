@@ -32,7 +32,7 @@ namespace WatiN.Core
 	/// </summary>
 	public class HtmlDialog : DomContainer
 	{
-		private readonly IntPtr hwnd = IntPtr.Zero;
+		public readonly IntPtr hwnd = IntPtr.Zero;
 
 		public override IntPtr hWnd
 		{
@@ -45,7 +45,7 @@ namespace WatiN.Core
 			StartDialogWatcher();
 		}
 
-		protected override void Dispose(bool disposing)
+		public override void Dispose(bool disposing)
 		{
 			Close();
 		}
@@ -74,13 +74,13 @@ namespace WatiN.Core
 	        }
 	    }
 
-	    protected override INativeDocument OnGetNativeDocument()
+	    public override INativeDocument OnGetNativeDocument()
 		{
 			return new IEDocument(IEUtils.IEDOMFromhWnd(hwnd));
 		}
 
         /// <inheritdoc />
-        protected override string GetAttributeValueImpl(string attributeName)
+        public override string GetAttributeValueImpl(string attributeName)
         {
 			string value = null;
 

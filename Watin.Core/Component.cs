@@ -104,7 +104,7 @@ namespace WatiN.Core
         /// <param name="constraint">The constraint to match, not null</param>
         /// <param name="context">The constraint context, not null</param>
         /// <returns>True if the component matches the constraint</returns>
-        private bool MatchesImpl(Constraint constraint, ConstraintContext context)
+        public bool MatchesImpl(Constraint constraint, ConstraintContext context)
         {
             return constraint.Matches(this, context);
         }
@@ -114,6 +114,6 @@ namespace WatiN.Core
         /// </summary>
         /// <param name="attributeName">The name of the attribute, not null</param>
         /// <returns>The attribute's associated value or null if none</returns>
-        protected abstract string GetAttributeValueImpl(string attributeName);
+        public abstract string GetAttributeValueImpl(string attributeName);
     }
 }

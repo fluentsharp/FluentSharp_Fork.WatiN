@@ -21,11 +21,11 @@ using WatiN.Core.UtilityClasses;
 
 namespace WatiN.Core.Actions
 {
-    internal class HighlightAction
+    public class HighlightAction
     {
-        private readonly Element _element;
-        private int _highlightDepth;
-        private string _originalColor;
+        public readonly Element _element;
+        public int _highlightDepth;
+        public string _originalColor;
 
         public HighlightAction(Element element)
         {
@@ -77,12 +77,12 @@ namespace WatiN.Core.Actions
                 Off();
         }
 
-        private static string GetBackgroundColor(INativeElement nativeElement)
+        public static string GetBackgroundColor(INativeElement nativeElement)
         {
             return nativeElement.GetStyleAttributeValue("backgroundColor");
         }
 
-        private static void SetBackgroundColor(INativeElement nativeElement, string color)
+        public static void SetBackgroundColor(INativeElement nativeElement, string color)
         {
             nativeElement.SetStyleAttributeValue("backgroundColor", color ?? "");
         }

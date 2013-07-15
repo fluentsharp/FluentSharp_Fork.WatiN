@@ -21,7 +21,7 @@ using System.Runtime.InteropServices;
 namespace WatiN.Core.Native.Windows
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal struct RECT
+    public struct RECT
     {
         public int Left;
         public int Top;

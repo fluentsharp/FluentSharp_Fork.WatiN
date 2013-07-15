@@ -26,7 +26,7 @@ namespace WatiN.Core
         public TableBodyCollection(DomContainer domContainer, ElementFinder finder) : base(domContainer, finder) { }
 
         /// <inheritdoc />
-        protected override TableBodyCollection CreateFilteredCollection(ElementFinder elementFinder)
+        public override TableBodyCollection CreateFilteredCollection(ElementFinder elementFinder)
         {
             return new TableBodyCollection(DomContainer, elementFinder);
         }

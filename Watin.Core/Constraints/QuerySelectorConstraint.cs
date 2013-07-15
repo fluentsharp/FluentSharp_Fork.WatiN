@@ -30,7 +30,7 @@ namespace WatiN.Core.Constraints
             Selector = selector;
         }
 
-        public string Selector { get; private set; }
+        public string Selector { get; set; }
 
         public string EncodedSelector { get { return Selector.Replace("'", "\\'"); } }
 
@@ -39,7 +39,7 @@ namespace WatiN.Core.Constraints
             writer.Write("Selector = '{0}'", Selector);
         }
 
-        protected override bool MatchesImpl(IAttributeBag attributeBag, ConstraintContext context)
+        public override bool MatchesImpl(IAttributeBag attributeBag, ConstraintContext context)
         {
             return true;
         }

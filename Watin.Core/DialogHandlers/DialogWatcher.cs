@@ -35,14 +35,14 @@ namespace WatiN.Core.DialogHandlers
 	/// </summary>
 	public class DialogWatcher : IDisposable
 	{
-        private static IList<DialogWatcher> dialogWatchers = new List<DialogWatcher>();
+        public static IList<DialogWatcher> dialogWatchers = new List<DialogWatcher>();
         
-        private bool _keepRunning = true;
-		private readonly IList<IDialogHandler> _handlers;
-		private readonly Thread _watcherThread;
-		private bool _closeUnhandledDialogs = Settings.AutoCloseDialogs;
+        public bool _keepRunning = true;
+		public readonly IList<IDialogHandler> _handlers;
+		public readonly Thread _watcherThread;
+		public bool _closeUnhandledDialogs = Settings.AutoCloseDialogs;
 
-        public Window MainWindow { get; private set; }
+        public Window MainWindow { get; set; }
 
 
 	    /// <summary>
@@ -291,7 +291,7 @@ namespace WatiN.Core.DialogHandlers
 		/// Called by the constructor to start watching popups
 		/// on a separate thread.
 		/// </summary>
-		private void Start()
+		public void Start()
 		{
 			while (_keepRunning)
 			{
@@ -327,7 +327,7 @@ namespace WatiN.Core.DialogHandlers
 			get { return _watcherThread.IsAlive; }
 		}
 
-	    public int ReferenceCount { get; private set; }
+	    public int ReferenceCount { get; set; }
 
 	    /// <summary>
 	    /// Get the last stored exception thrown by a dialog handler while 
@@ -335,7 +335,7 @@ namespace WatiN.Core.DialogHandlers
 	    /// dialog handler.
 	    /// </summary>
 	    /// <value>The last exception.</value>
-	    public Exception LastException { get; private set; }
+	    public Exception LastException { get; set; }
 
 	    /// <summary>
 		/// If the window is a dialog and visible, it will be passed to
@@ -382,13 +382,13 @@ namespace WatiN.Core.DialogHandlers
 		    }
 		}
 
-	    private bool HasDialogSameProcessNameAsBrowserWindow(Window window)
+	    public bool HasDialogSameProcessNameAsBrowserWindow(Window window)
 	    {
             var comparer = new Comparers.StringComparer(window.ProcessName, true);
 	        return comparer.Compare(MainWindow.ProcessName);
 	    }
 
-	    private static void WaitUntilVisibleOrTimeOut(Window window)
+	    public static void WaitUntilVisibleOrTimeOut(Window window)
 		{
 			// Wait untill window is visible so all properties
 			// of the window class (like Style and StyleInHex)

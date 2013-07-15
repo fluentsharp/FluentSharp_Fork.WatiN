@@ -27,7 +27,7 @@ namespace WatiN.Core
 	/// </summary>
 	public class Style
 	{
-	    private readonly INativeElement _nativeElement;
+	    public readonly INativeElement _nativeElement;
 
         /// <summary>
 		/// Initializes a new instance of the <see cref="Style"/> class.

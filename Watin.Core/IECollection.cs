@@ -30,9 +30,9 @@ namespace WatiN.Core
 	public class IECollection : BaseComponentCollection<IE, IECollection>
 	{
         // TODO: earlier implementation had an optimization to only wait for complete of returned instances
-		private readonly List<IE> internetExplorers;
-        private readonly Constraint findBy;
-        private readonly bool waitForComplete;
+		public readonly List<IE> internetExplorers;
+        public readonly Constraint findBy;
+        public readonly bool waitForComplete;
 
         public IECollection()
             : this(true)
@@ -61,7 +61,7 @@ namespace WatiN.Core
             }
         }
 
-        private IECollection(Constraint findBy, List<IE> internetExplorers, bool waitForComplete)
+        public IECollection(Constraint findBy, List<IE> internetExplorers, bool waitForComplete)
         {
             this.findBy = findBy;
             this.internetExplorers = internetExplorers;
@@ -69,13 +69,13 @@ namespace WatiN.Core
         }
 
 	    /// <inheritdoc />
-        protected override IECollection CreateFilteredCollection(Constraint findBy)
+        public override IECollection CreateFilteredCollection(Constraint findBy)
         {
             return new IECollection(this.findBy & findBy, internetExplorers, waitForComplete);
         }
 
         /// <inheritdoc />
-        protected override IEnumerable<IE> GetComponents()
+        public override IEnumerable<IE> GetComponents()
         {
             var context = new ConstraintContext();
             foreach (IE ie in internetExplorers)

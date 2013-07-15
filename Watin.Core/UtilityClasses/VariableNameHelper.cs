@@ -23,9 +23,9 @@ namespace WatiN.Core.UtilityClasses
         /// <summary>
         /// Used by CreateElementVariableName
         /// </summary>
-        private long _elementCounter;
+        public long _elementCounter;
 
-        private readonly string _prefix;
+        public readonly string _prefix;
 
         public VariableNameHelper() :this("watin") { }
 

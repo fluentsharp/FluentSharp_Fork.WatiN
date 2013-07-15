@@ -28,11 +28,11 @@ namespace WatiN.Core.Native
     /// </summary>
     public abstract class JSElementCollectionBase : INativeElementCollection2
     {
-        protected ClientPortBase clientPort;
+        public ClientPortBase clientPort;
 
-        protected string containerReference;
+        public string containerReference;
 
-        protected JSElementCollectionBase(ClientPortBase clientPort, string containerReference)
+        public JSElementCollectionBase(ClientPortBase clientPort, string containerReference)
         {
             if (clientPort == null)
                 throw new ArgumentNullException("clientPort");
@@ -58,7 +58,7 @@ namespace WatiN.Core.Native
         /// </summary>
         /// <param name="tagName">Name of the tag.</param>
         /// <returns>Collection of elements for the given <paramref name="tagName"/>.</returns>
-        protected virtual IEnumerable<INativeElement> GetElementByTagImpl(string tagName)
+        public virtual IEnumerable<INativeElement> GetElementByTagImpl(string tagName)
         {
             if (tagName == null)
             {
@@ -77,7 +77,7 @@ namespace WatiN.Core.Native
             }
         }
 
-        protected virtual IEnumerable<JSElement> GetElementArrayEnumerator(string command)
+        public virtual IEnumerable<JSElement> GetElementArrayEnumerator(string command)
         {
             return JSUtils.ElementArrayEnumerator(command, clientPort);
         }
@@ -87,7 +87,7 @@ namespace WatiN.Core.Native
         /// </summary>
         /// <param name="id">The id of the element.</param>
         /// <returns>Collection of elements for the given <paramref name="id"/>.</returns>
-        protected IEnumerable<INativeElement> GetElementsByIdImpl(string id)
+        public IEnumerable<INativeElement> GetElementsByIdImpl(string id)
         {
             if (id == null)
             {
@@ -120,13 +120,13 @@ namespace WatiN.Core.Native
         /// <summary>
         /// Initializes this instance.
         /// </summary>
-        protected void Initialize()
+        public void Initialize()
         {
             // In case of a redirect this call makes sure the doc variable is pointing to the "active" page.
             clientPort.InitializeDocument();
         }
 
-        protected static string GetDocumentReference(string referencedElement)
+        public static string GetDocumentReference(string referencedElement)
         {
             if (referencedElement.Contains(".") &&
                 !(referencedElement.EndsWith("contentDocument") || referencedElement.EndsWith("ownerDocument")))

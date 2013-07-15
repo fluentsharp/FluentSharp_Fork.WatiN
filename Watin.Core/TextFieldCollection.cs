@@ -32,7 +32,7 @@ namespace WatiN.Core
         public TextFieldCollection(DomContainer domContainer, ElementFinder finder) : base(domContainer, finder) { }
 
         /// <inheritdoc />
-        protected override TextFieldCollection CreateFilteredCollection(ElementFinder elementFinder)
+        public override TextFieldCollection CreateFilteredCollection(ElementFinder elementFinder)
         {
             return new TextFieldCollection(DomContainer, elementFinder);
         }

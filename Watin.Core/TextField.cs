@@ -35,7 +35,7 @@ namespace WatiN.Core
     [ElementTag("textarea", Index = 4)]
     public class TextField : Element<TextField>
 	{
-	    private ITypeTextAction _typeTextAction;
+	    public ITypeTextAction _typeTextAction;
 
 	    public TextField(DomContainer domContainer, INativeElement element) : base(domContainer, element) { }
 
@@ -97,7 +97,7 @@ namespace WatiN.Core
             set { _typeTextAction = value;}
 	    }
 
-        protected virtual ITypeTextAction CreateTypeTextAction()
+        public virtual ITypeTextAction CreateTypeTextAction()
 	    {
             return NativeElement.CreateTypeTextAction(this);
 	    }
@@ -136,7 +136,7 @@ namespace WatiN.Core
 		}
 
         /// <inheritdoc />
-        protected override string DefaultToString()
+        public override string DefaultToString()
         {
 		    var title = Title;
 		    if (UtilityClass.IsNotNullOrEmpty(title))

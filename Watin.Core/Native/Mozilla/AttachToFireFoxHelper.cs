@@ -27,7 +27,7 @@ namespace WatiN.Core.Native.Mozilla
 {
     public class AttachToFireFoxHelper :IAttachTo
     {
-        private FireFox FindFireFox(Constraint findBy)
+        public FireFox FindFireFox(Constraint findBy)
         {
             var clientPort = FireFox.GetClientPort();
             clientPort.ConnectToExisting();
@@ -49,7 +49,7 @@ namespace WatiN.Core.Native.Mozilla
             return null;
         }
 
-        protected virtual FireFox CreateBrowserInstance(FFBrowser ffBrowser)
+        public virtual FireFox CreateBrowserInstance(FFBrowser ffBrowser)
         {
             return new FireFox(ffBrowser);
         }

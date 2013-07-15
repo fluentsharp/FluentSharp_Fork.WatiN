@@ -22,8 +22,8 @@ namespace WatiN.Core.DialogHandlers
 {
 	public class SimpleJavaDialogHandler : WaitUntilHandledDialogHandler
 	{
-		private readonly JavaDialogHandler dialogHandler;
-		private readonly bool clickCancelButton;
+		public readonly JavaDialogHandler dialogHandler;
+		public readonly bool clickCancelButton;
 
 	    public SimpleJavaDialogHandler()
 		{
@@ -36,7 +36,7 @@ namespace WatiN.Core.DialogHandlers
 			dialogHandler = new ConfirmDialogHandler();
 		}
 
-	    public string Message { get; private set; }
+	    public string Message { get; set;}
 
 	    public override bool HandleDialog(Window window)
 		{

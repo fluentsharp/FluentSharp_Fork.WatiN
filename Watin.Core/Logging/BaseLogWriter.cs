@@ -45,7 +45,7 @@ namespace WatiN.Core.Logging
 	    	if (HandlesLogDebug) LogDebugImpl(message);
         }
 	    
-	    protected abstract void LogActionImpl(string message);
-	    protected abstract void LogDebugImpl(string message);
+	    public abstract void LogActionImpl(string message);
+	    public abstract void LogDebugImpl(string message);
 	}
 }

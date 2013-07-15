@@ -21,7 +21,7 @@ using System.Runtime.InteropServices;
 namespace WatiN.Core.Native.Windows
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal struct WINDOWPLACEMENT
+    public struct WINDOWPLACEMENT
     {
         public int length;
         public int flags;

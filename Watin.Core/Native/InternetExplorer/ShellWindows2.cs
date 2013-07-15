@@ -29,10 +29,10 @@ namespace WatiN.Core.Native.InternetExplorer
 {
     public class ShellWindows2 : IEnumerable<IWebBrowser2>
     {
-        private List<IWebBrowser2> _browsers;
+        public List<IWebBrowser2> _browsers;
 
-        private Guid SID_STopLevelBrowser = new Guid(0x4C96BE40, 0x915C, 0x11CF, 0x99, 0xD3, 0x00, 0xAA, 0x00, 0x4A, 0xE8, 0x37);
-        private Guid SID_SWebBrowserApp = new Guid(0x0002DF05, 0x0000, 0x0000, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46);
+        public Guid SID_STopLevelBrowser = new Guid(0x4C96BE40, 0x915C, 0x11CF, 0x99, 0xD3, 0x00, 0xAA, 0x00, 0x4A, 0xE8, 0x37);
+        public Guid SID_SWebBrowserApp = new Guid(0x0002DF05, 0x0000, 0x0000, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46);
 
         public ShellWindows2()
         {
@@ -44,7 +44,7 @@ namespace WatiN.Core.Native.InternetExplorer
             get { return _browsers.Count; }
         }
 
-        private void CollectInternetExplorerInstances()
+        public void CollectInternetExplorerInstances()
         {
             var enumerator = new WindowsEnumerator();
             _browsers = new List<IWebBrowser2>();

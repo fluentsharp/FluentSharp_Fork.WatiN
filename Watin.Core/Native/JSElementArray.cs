@@ -25,8 +25,8 @@ namespace WatiN.Core.Native
     {
         public delegate bool IsMatch(JSElement jsElement);
 
-        public ClientPortBase ClientPort { get; private set; }
-        public string GetCommand { get; private set; }
+        public ClientPortBase ClientPort { get; set;}
+        public string GetCommand { get; set;}
 
         public JSElementArray(ClientPortBase clientPort, string getCommand)
         {
@@ -52,7 +52,7 @@ namespace WatiN.Core.Native
             return GetArrayElements(ffElement => Comparers.StringComparer.AreEqual(ffElement.GetAttributeValue("id"), id, true));
         }
 
-        private IEnumerable<INativeElement> GetArrayElements(IsMatch constraint)
+        public IEnumerable<INativeElement> GetArrayElements(IsMatch constraint)
         {
             Initialize();
 
@@ -65,7 +65,7 @@ namespace WatiN.Core.Native
             }
         }
 
-        private void Initialize()
+        public void Initialize()
         {
             // In case of a redirect this call makes sure the doc variable is pointing to the "active" page.
             ClientPort.InitializeDocument();

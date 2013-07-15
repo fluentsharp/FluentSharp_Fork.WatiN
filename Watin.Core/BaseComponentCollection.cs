@@ -36,12 +36,12 @@ namespace WatiN.Core
         where TComponent : Component
         where TCollection : BaseComponentCollection<TComponent, TCollection>
 	{
-        private IList<TComponent> cache;
+        public IList<TComponent> cache;
 
 		/// <summary>
 		/// Creates a base collection.
 		/// </summary>
-        protected BaseComponentCollection()
+        public BaseComponentCollection()
 		{
         }
 
@@ -173,20 +173,20 @@ namespace WatiN.Core
         /// </summary>
         /// <param name="findBy">The constraint, not null</param>
         /// <returns>The component collection</returns>
-        protected abstract TCollection CreateFilteredCollection(Constraint findBy);
+        public abstract TCollection CreateFilteredCollection(Constraint findBy);
 
         /// <summary>
         /// Gets the components of the collection.
         /// </summary>
         /// <returns>The collection components</returns>
-        protected abstract IEnumerable<TComponent> GetComponents();
+        public abstract IEnumerable<TComponent> GetComponents();
 
         /// <summary>
         /// Creates a new constraint from a given component-based predicate.
         /// </summary>
         /// <param name="predicate">The predicate</param>
         /// <returns>The constraint</returns>
-        protected Constraint CreateConstraintFromPredicate(Predicate<TComponent> predicate)
+        public Constraint CreateConstraintFromPredicate(Predicate<TComponent> predicate)
         {
             return new ComponentConstraint(new PredicateComparer<TComponent, Component>(predicate));
         }
@@ -194,7 +194,7 @@ namespace WatiN.Core
         /// <summary>
         /// Gets a lazily-populated list of all components within the collection.
         /// </summary>
-        protected IList<TComponent> Cache
+        public IList<TComponent> Cache
         {
             get
             {
@@ -265,12 +265,12 @@ namespace WatiN.Core
             return false;
         }
 
-        private static void ThrowCollectionDoesNotSupportSearchingByEquality()
+        public static void ThrowCollectionDoesNotSupportSearchingByEquality()
         {
             throw new NotSupportedException(Resources.BaseComponentCollection_DoesNotSupportSearchingByEquality);
         }
 
-	    private static void ThrowCollectionIsReadOnly()
+	    public static void ThrowCollectionIsReadOnly()
         {
             throw new NotSupportedException(Resources.BaseComponentCollection_CollectionIsReadonly);
         }

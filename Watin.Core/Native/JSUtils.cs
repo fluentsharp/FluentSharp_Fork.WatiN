@@ -20,7 +20,7 @@ using System.Collections.Generic;
 
 namespace WatiN.Core.Native
 {
-    internal static class JSUtils
+    public static class JSUtils
     {
         public static string WrapCommandInTimer(string command)
         {
@@ -49,14 +49,14 @@ namespace WatiN.Core.Native
             }
         }
 
-        private static void DeleteElementArray(string elementName, IClientPort clientPort)
+        public static void DeleteElementArray(string elementName, IClientPort clientPort)
         {
             var command = string.Format("delete {0};", elementName);
 
             clientPort.Write(command);
         }
 
-        private static int GetNumberOfElements(string getElementsCommand, IClientPort clientPort, string elementArrayName)
+        public static int GetNumberOfElements(string getElementsCommand, IClientPort clientPort, string elementArrayName)
         {
             var command = string.Format("{0}={1}; {0}.length;", elementArrayName, getElementsCommand);
 

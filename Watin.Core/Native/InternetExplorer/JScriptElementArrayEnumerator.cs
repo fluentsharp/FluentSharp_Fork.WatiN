@@ -24,8 +24,8 @@ namespace WatiN.Core.Native.InternetExplorer
 {
     public class JScriptElementArrayEnumerator : IEnumerable<INativeElement>
     {
-        private readonly IEDocument _ieDocument;
-        private readonly string _fieldName;
+        public readonly IEDocument _ieDocument;
+        public readonly string _fieldName;
 
         public JScriptElementArrayEnumerator(IEDocument ieDocument, string fieldName)
         {

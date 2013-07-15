@@ -32,7 +32,7 @@ namespace WatiN.Core
         public CheckBoxCollection(DomContainer domContainer, ElementFinder finder) : base(domContainer, finder) { }
 
         /// <inheritdoc />
-        protected override CheckBoxCollection CreateFilteredCollection(ElementFinder elementFinder)
+        public override CheckBoxCollection CreateFilteredCollection(ElementFinder elementFinder)
         {
             return new CheckBoxCollection(DomContainer, elementFinder);
         }

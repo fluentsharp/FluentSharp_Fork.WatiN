@@ -26,7 +26,7 @@ namespace WatiN.Core.DialogHandlers
 {
 	public abstract class JavaDialogHandler : BaseDialogHandler
 	{
-		internal Window _window;
+		public Window _window;
 
 		public string Title
 		{
@@ -96,15 +96,15 @@ namespace WatiN.Core.DialogHandlers
 		    return _window != null && _window.Exists();
 		}
 
-	    protected abstract int getOKButtonID();
+	    public abstract int getOKButtonID();
 
-		protected static bool ButtonWithId1Exists(IntPtr windowHwnd)
+		public static bool ButtonWithId1Exists(IntPtr windowHwnd)
 		{
 			var button = new WinButton(1, windowHwnd);
 			return button.Exists();
 		}
 
-		protected void ThrowExceptionIfDialogDoesNotExist()
+		public void ThrowExceptionIfDialogDoesNotExist()
 		{
 			if (!Exists())
 			{

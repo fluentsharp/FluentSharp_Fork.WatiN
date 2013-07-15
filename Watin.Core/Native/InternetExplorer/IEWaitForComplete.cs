@@ -27,8 +27,8 @@ namespace WatiN.Core.Native.InternetExplorer
 {
     public class IEWaitForComplete : WaitForCompleteBase
     {
-        private readonly IEBrowser ieBrowser;
-        private IEDocument ieDocument;
+        public readonly IEBrowser ieBrowser;
+        public IEDocument ieDocument;
 
         public IEWaitForComplete(IEBrowser ieBrowser)
             : this(ieBrowser, Settings.WaitForCompleteTimeOut)
@@ -52,12 +52,12 @@ namespace WatiN.Core.Native.InternetExplorer
             this.ieDocument = ieDocument;
         }
 
-        protected override void InitialSleep()
+        public override void InitialSleep()
         {
             Thread.Sleep(Settings.SleepTime);
         }
 
-        protected override void WaitForCompleteOrTimeout()
+        public override void WaitForCompleteOrTimeout()
         {
             if (ieBrowser != null)
             {
@@ -76,7 +76,7 @@ namespace WatiN.Core.Native.InternetExplorer
             WaitForFramesToComplete(ieDocument.HtmlDocument);
         }
 
-        protected virtual void WaitForFramesToComplete(IHTMLDocument2 maindocument)
+        public virtual void WaitForFramesToComplete(IHTMLDocument2 maindocument)
         {
             var mainHtmlDocument = UtilityClass.GetWithFailOver(() => (HTMLDocument)maindocument);
 
@@ -112,7 +112,7 @@ namespace WatiN.Core.Native.InternetExplorer
             }
         }
 
-        protected virtual void WaitWhileDocumentStateNotCompleteOrInteractive(IHTMLDocument2 htmlDocument)
+        public virtual void WaitWhileDocumentStateNotCompleteOrInteractive(IHTMLDocument2 htmlDocument)
         {
             WaitUntil(() => DocumentReadyStateIsAvailable(htmlDocument),
                       () => "waiting for document ready state available.");
@@ -121,24 +121,24 @@ namespace WatiN.Core.Native.InternetExplorer
                       () => "waiting for document state complete. Last state was '" + htmlDocument.readyState + "'");
         }
 
-        protected virtual void WaitWhileMainDocumentNotAvailable(IHTMLDocument2 htmlDocument)
+        public virtual void WaitWhileMainDocumentNotAvailable(IHTMLDocument2 htmlDocument)
         {
             WaitUntil(() => DocumentReadyStateIsAvailable(htmlDocument),
                       () => "waiting for main document becoming available");
         }
 
-        protected virtual void WaitWhileFrameDocumentNotAvailable(IWebBrowser2 frame)
+        public virtual void WaitWhileFrameDocumentNotAvailable(IWebBrowser2 frame)
         {
             WaitUntil(() => DocumentReadyStateIsAvailable(GetFrameDocument(frame)),
                       () => "waiting for frame document becoming available");
         }
 
-        protected virtual IHTMLDocument2 GetFrameDocument(IWebBrowser2 frame)
+        public virtual IHTMLDocument2 GetFrameDocument(IWebBrowser2 frame)
         {
             return UtilityClass.TryFuncIgnoreException(() => frame.Document as IHTMLDocument2);
         }
 
-        protected virtual bool DocumentReadyStateIsAvailable(IHTMLDocument2 document)
+        public virtual bool DocumentReadyStateIsAvailable(IHTMLDocument2 document)
         {
             // Sometimes an OutOfMemoryException or ComException occurs while accessing
             // the readystate property of IHTMLDocument2. Giving MSHTML some time
@@ -150,7 +150,7 @@ namespace WatiN.Core.Native.InternetExplorer
             });
         }
 
-        protected virtual bool WaitWhileIEReadyStateNotComplete(IWebBrowser2 ie)
+        public virtual bool WaitWhileIEReadyStateNotComplete(IWebBrowser2 ie)
         {
             return WaitUntilNotNull(() =>
                 {
@@ -168,12 +168,12 @@ namespace WatiN.Core.Native.InternetExplorer
                 () => "Internet Explorer state not complete");
         }
 
-        protected virtual bool IsStateInteractiveOrComplete(tagREADYSTATE readystate)
+        public virtual bool IsStateInteractiveOrComplete(tagREADYSTATE readystate)
         {
             return readystate == tagREADYSTATE.READYSTATE_INTERACTIVE || readystate == tagREADYSTATE.READYSTATE_COMPLETE;
         }
 
-        protected virtual bool WaitWhileIEBusy(IWebBrowser2 ie)
+        public virtual bool WaitWhileIEBusy(IWebBrowser2 ie)
         {
             return WaitUntilNotNull(() =>
                 {
@@ -198,7 +198,7 @@ namespace WatiN.Core.Native.InternetExplorer
         /// <param name="exceptionMessage">A function to build an exception message.</param>
         /// <returns>The last function result.</returns>
         /// <exception cref="TimeoutException">Thrown if a timeout occurs.</exception>
-        protected bool WaitUntilNotNull(DoFunc<bool?> func, BuildTimeOutExceptionMessage exceptionMessage)
+        public bool WaitUntilNotNull(DoFunc<bool?> func, BuildTimeOutExceptionMessage exceptionMessage)
         {
             var result = false;
             WaitUntil(() =>

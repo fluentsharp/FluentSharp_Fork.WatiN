@@ -120,7 +120,7 @@ namespace WatiN.Core.Native.InternetExplorer
             return NativeMethods.CompareClassNames(hWnd, "Internet Explorer_Server");
         }
 
-        internal static void EnumIWebBrowser2Interfaces(IWebBrowser2Processor processor)
+        public static void EnumIWebBrowser2Interfaces(IWebBrowser2Processor processor)
         {
             var oc = processor.HTMLDocument() as IOleContainer;
 
@@ -184,7 +184,7 @@ namespace WatiN.Core.Native.InternetExplorer
             }
         }
 
-        private static void ReleaseComObjectButIgnoreNull(object comObject)
+        public static void ReleaseComObjectButIgnoreNull(object comObject)
         {
             if (comObject != null)
             {

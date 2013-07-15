@@ -26,9 +26,9 @@ namespace WatiN.Core.Constraints
     /// </summary>
     public sealed class NoneConstraint : Constraint
     {
-        private static readonly NoneConstraint instance = new NoneConstraint();
+        public static readonly NoneConstraint instance = new NoneConstraint();
 
-        private NoneConstraint()
+        public NoneConstraint()
         {
         }
 
@@ -47,7 +47,7 @@ namespace WatiN.Core.Constraints
         }
 
         /// <inheritdoc />
-        protected override bool MatchesImpl(IAttributeBag attributeBag, ConstraintContext context)
+        public override bool MatchesImpl(IAttributeBag attributeBag, ConstraintContext context)
         {
             return false;
         }

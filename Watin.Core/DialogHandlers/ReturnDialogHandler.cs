@@ -59,7 +59,7 @@ namespace WatiN.Core.DialogHandlers
 
     public class ReturnDialogHandlerIe9 : BaseDialogHandler, IReturnDialogHandler
     {
-        private Window _window;
+        public Window _window;
 
         public WinButton CancelButton
         {
@@ -115,7 +115,7 @@ namespace WatiN.Core.DialogHandlers
             return _window != null && _window.Exists();
         }
 
-        private IntPtr GetChildWindowHwnd(IntPtr parentHwnd, string styleInHex)
+        public IntPtr GetChildWindowHwnd(IntPtr parentHwnd, string styleInHex)
         {
             var hWnd = IntPtr.Zero;
             NativeMethods.EnumChildWindows(parentHwnd, (childHwnd, lParam) =>

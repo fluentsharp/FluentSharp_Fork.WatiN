@@ -41,22 +41,22 @@ namespace WatiN.Core.Native.Chrome
         /// <summary>
         /// List of known errors  that the Google remote port might return.
         /// </summary>
-        private static readonly List<string> knownResponseErrors = new List<string> { "unknown command", "TypeError", "SyntaxError", "\"Uncaught SyntaxError", "Uncaught ReferenceError", "true\r\r\n\"Not allowed to load local resource: file:///" };
+        public static readonly List<string> knownResponseErrors = new List<string> { "unknown command", "TypeError", "SyntaxError", "\"Uncaught SyntaxError", "Uncaught ReferenceError", "true\r\r\n\"Not allowed to load local resource: file:///" };
 
         /// <summary>
         /// The port used to connect to chrome.
         /// </summary>
-        private const int ChromePort = 9999;
+        public const int ChromePort = 9999;
 
         /// <summary>
         /// <c>true</c> if the <see cref="Dispose()"/> method has been called to release resources.
         /// </summary>
-        private bool disposed;
+        public bool disposed;
 
         /// <summary>
         /// Underlying socket used to create a <see cref="NetworkStream"/>.
         /// </summary>
-        private Socket telnetSocket;
+        public Socket telnetSocket;
 
         /// <summary>
         /// Finalizes an instance of the <see cref="ChromeClientPort"/> class. 
@@ -72,7 +72,7 @@ namespace WatiN.Core.Native.Chrome
         /// Gets a value indicating whether this <see cref="ChromeClientPort"/> is connected.
         /// </summary>
         /// <value><c>true</c> if connected; otherwise, <c>false</c>.</value>
-        public bool Connected { get; private set; }
+        public bool Connected { get; set;}
 
         /// <summary>
         /// Gets the name of the javascript variable that references the DOM:document object.
@@ -113,7 +113,7 @@ namespace WatiN.Core.Native.Chrome
         /// Gets or sets the last command send to the chrome client.
         /// </summary>
         /// <value>The last command send.</value>
-        private string LastCommandSend
+        public string LastCommandSend
         {
             get;
             set;
@@ -184,7 +184,7 @@ namespace WatiN.Core.Native.Chrome
         /// <param name="resultExpected"><c>true</c> if a result is expected.</param>
         /// <param name="checkForErrors"><c>true</c> if error checking should be applied.</param>
         /// <param name="args">Arguments to format with the data.</param>
-        protected override void SendAndRead(string data, bool resultExpected, bool checkForErrors, params object[] args)
+        public override void SendAndRead(string data, bool resultExpected, bool checkForErrors, params object[] args)
         {
             if (string.IsNullOrEmpty(data))
             {
@@ -206,7 +206,7 @@ namespace WatiN.Core.Native.Chrome
         /// Releases unmanaged and - optionally - managed resources
         /// </summary>
         /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
-        protected void Dispose(bool disposing)
+        public void Dispose(bool disposing)
         {
             // Check to see if Dispose has already been called.
             if (!this.disposed)
@@ -255,7 +255,7 @@ namespace WatiN.Core.Native.Chrome
         /// <param name="resultExpected"><c>true</c> if a result is expected.</param>
         /// <param name="checkForErrors"><c>true</c> if error checking should be applied.</param>
         /// <param name="args">Arguments to format with the data.</param>
-        private void SendRawAndRead(string data, bool resultExpected, bool checkForErrors, params object[] args)
+        public void SendRawAndRead(string data, bool resultExpected, bool checkForErrors, params object[] args)
         {
             var command = UtilityClass.StringFormat(data, args);
             this.SendCommand(command);
@@ -266,7 +266,7 @@ namespace WatiN.Core.Native.Chrome
         /// Checks the response for an error.
         /// </summary>
         /// <param name="response">The response.</param>
-        private static void CheckForError(string response)
+        public static void CheckForError(string response)
         {
             if (string.IsNullOrEmpty(response))
             {
@@ -287,7 +287,7 @@ namespace WatiN.Core.Native.Chrome
         /// </summary>
         /// <param name="data">The data to clean.</param>
         /// <returns>Cleaned response data</returns>
-        private string CleanTelnetResponse(string data)
+        public string CleanTelnetResponse(string data)
         {
             if (string.IsNullOrEmpty(data))
             {
@@ -305,7 +305,7 @@ namespace WatiN.Core.Native.Chrome
         /// Sends the command.
         /// </summary>
         /// <param name="data">The data to send.</param>
-        private void SendCommand(string data)
+        public void SendCommand(string data)
         {
             if (!this.Connected)
             {
@@ -328,7 +328,7 @@ namespace WatiN.Core.Native.Chrome
         /// </summary>
         /// <param name="resultExpected">if set to <c>true</c> a result is expected.</param>
         /// <param name="checkForErrors">if set to <c>true</c> check for errors.</param>
-        private void ReadResponse(bool resultExpected, bool checkForErrors)
+        public void ReadResponse(bool resultExpected, bool checkForErrors)
         {
             var stream = new NetworkStream(this.telnetSocket);
 
@@ -371,7 +371,7 @@ namespace WatiN.Core.Native.Chrome
         /// <summary>
         /// Validates the we can connect to chrome.
         /// </summary>
-        private void ValidateCanConnect()
+        public void ValidateCanConnect()
         {
             if (this.Connected)
             {
@@ -392,7 +392,7 @@ namespace WatiN.Core.Native.Chrome
         /// <summary>
         /// Waits for connection established.
         /// </summary>
-        private void WaitForConnectionEstablished()
+        public void WaitForConnectionEstablished()
         {
             this.SendCommand("\n");
 

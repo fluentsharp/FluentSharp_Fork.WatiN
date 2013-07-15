@@ -302,19 +302,19 @@ namespace WatiN.Core
         }
 
         /// <inheritdoc />
-        protected override string DefaultToString()
+        public override string DefaultToString()
         {
             return Id;
         }
 
-        private TableRow FindInTableRows(Constraint findBy)
+        public TableRow FindInTableRows(Constraint findBy)
         {
             var finder = CreateElementFinder<TableRow>(nativeElement => nativeElement.AllDescendants, findBy);
             var element = finder.FindFirst();
             return element == null ? null : new TableRow(DomContainer, element.NativeElement);
         }
 
-        private TableRow FindInOwnTableRows(Constraint findBy)
+        public TableRow FindInOwnTableRows(Constraint findBy)
         {
             var finder = CreateElementFinder<TableRow>(nativeElement => nativeElement.TableRows, findBy);
             var element = finder.FindFirst();

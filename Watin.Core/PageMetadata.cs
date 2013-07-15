@@ -28,9 +28,9 @@ namespace WatiN.Core
     /// </summary>
     public class PageMetadata
     {
-        private readonly Type pageType;
-        private readonly Regex urlRegex;
-        private readonly bool isSecure;
+        public readonly Type pageType;
+        public readonly Regex urlRegex;
+        public readonly bool isSecure;
 
         /// <summary>
         /// Creates a page metadata object about a particular subclass of <see cref="Page" />.
@@ -79,7 +79,7 @@ namespace WatiN.Core
             get { return isSecure; }
         }
 
-        private static PageAttribute GetPageAttribute(ICustomAttributeProvider pageType)
+        public static PageAttribute GetPageAttribute(ICustomAttributeProvider pageType)
         {
             var attribs = pageType.GetCustomAttributes(typeof(PageAttribute), true);
             return attribs.Length != 0 ? (PageAttribute) attribs[0] : null;

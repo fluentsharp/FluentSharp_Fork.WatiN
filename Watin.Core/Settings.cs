@@ -86,9 +86,9 @@ namespace WatiN.Core
 	/// </example>
 	public static class Settings
     {
-        private static ISettings _instance = CreateDefaultSettings();
+        public static ISettings _instance = CreateDefaultSettings();
 
-        private static DefaultSettings CreateDefaultSettings()
+        public static DefaultSettings CreateDefaultSettings()
         {
             return new DefaultSettings();
         }

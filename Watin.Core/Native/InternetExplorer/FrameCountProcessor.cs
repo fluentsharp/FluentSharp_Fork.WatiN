@@ -22,16 +22,16 @@ using WatiN.Core.Native.Windows;
 
 namespace WatiN.Core.Native.InternetExplorer
 {
-    internal class FrameCountProcessor : IWebBrowser2Processor
+    public class FrameCountProcessor : IWebBrowser2Processor
     {
-        private readonly HTMLDocument htmlDocument;
+        public readonly HTMLDocument htmlDocument;
 
         public FrameCountProcessor(HTMLDocument htmlDocument)
         {
             this.htmlDocument = htmlDocument;
         }
 
-        public int FramesCount { get; private set; }
+        public int FramesCount { get; set;}
 
         public HTMLDocument HTMLDocument()
         {
@@ -48,7 +48,7 @@ namespace WatiN.Core.Native.InternetExplorer
             return true;
         }
 
-        internal static int GetFrameCountFromHTMLDocument(HTMLDocument htmlDocument)
+        public static int GetFrameCountFromHTMLDocument(HTMLDocument htmlDocument)
         {
             var processor = new FrameCountProcessor(htmlDocument);
 

@@ -34,7 +34,7 @@ namespace WatiN.Core
         public static string IpAdress = FireFoxClientPort.LOCAL_IP_ADRESS;
         public static int Port = FireFoxClientPort.DEFAULT_PORT;
 
-        private FFBrowser _ffBrowser;
+        public FFBrowser _ffBrowser;
 
         #region Public constructors / destructor
 
@@ -89,7 +89,7 @@ namespace WatiN.Core
         /// Gets the current FireFox process (all instances run under 1 process).
         /// </summary>
         /// <value>The current FireFox process or null if none is found.</value>
-        internal static Process CurrentProcess
+        public static Process CurrentProcess
         {
             get
             {
@@ -105,7 +105,7 @@ namespace WatiN.Core
             }
         }
 
-        private static string pathToExe;
+        public static string pathToExe;
 
         /// <summary>
         /// Gets or sets the path to FireFox executable. By default the registry and common
@@ -129,7 +129,7 @@ namespace WatiN.Core
             set { pathToExe = value; }
         }
 
-        internal static void CreateProcess(string arguments, bool waitForMainWindow)
+        public static void CreateProcess(string arguments, bool waitForMainWindow)
         {
             var ffProcess = new Process {StartInfo = {FileName = PathToExe, Arguments = arguments}};
             
@@ -164,7 +164,7 @@ namespace WatiN.Core
         /// <summary>
         /// Initalizes the executable path.
         /// </summary>
-        private static string GetExecutablePath()
+        public static string GetExecutablePath()
         {
             string path;
             var mozillaKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Mozilla\Mozilla Firefox");
@@ -201,7 +201,7 @@ namespace WatiN.Core
         /// Initializes the executable path to FireFox using the registry.
         /// </summary>
         /// <param name="mozillaKey">The mozilla key.</param>
-        private static string GetExecutablePathUsingRegistry(RegistryKey mozillaKey)
+        public static string GetExecutablePathUsingRegistry(RegistryKey mozillaKey)
         {
             var currentVersion = (string)mozillaKey.GetValue("CurrentVersion");
             if (string.IsNullOrEmpty(currentVersion))
@@ -235,12 +235,12 @@ namespace WatiN.Core
 
         #endregion Public instance methods
         
-        #region Protected instance methods
+        #region public instance methods
         /// <summary>
         /// Releases unmanaged and - optionally - managed resources
         /// </summary>
         /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
-        protected override void Dispose(bool disposing)
+        public override void Dispose(bool disposing)
         {
             // Check to see if Dispose has already been called.
             if (IsDisposed) return;
@@ -258,9 +258,9 @@ namespace WatiN.Core
             base.Dispose(disposing);
         }
 
-        #endregion Protected instance methods
+        #endregion public instance methods
 
-        private void CreateFireFoxInstance(string url)
+        public void CreateFireFoxInstance(string url)
         {
             Logger.LogAction("Creating FireFox instance");
 
@@ -274,7 +274,7 @@ namespace WatiN.Core
             WaitForComplete();
         }
 
-        internal static FireFoxClientPort GetClientPort()
+        public static FireFoxClientPort GetClientPort()
         {
             return new FireFoxClientPort(IpAdress, Port);
         }

@@ -25,9 +25,9 @@ namespace WatiN.Core
 {
     public class StaticElementFinder : ElementFinder
     {
-        private readonly DomContainer _domContainer;
-        private Element _element;
-        private readonly INativeElement _nativeElement; 
+        public readonly DomContainer _domContainer;
+        public Element _element;
+        public readonly INativeElement _nativeElement; 
 
         public StaticElementFinder(DomContainer domcontainer, INativeElement nativeElement) : base(CreateTagList(nativeElement), Find.First())
         {
@@ -35,17 +35,17 @@ namespace WatiN.Core
             _nativeElement = nativeElement;
         }
 
-        private static IList<ElementTag> CreateTagList(INativeElement nativeElement)
+        public static IList<ElementTag> CreateTagList(INativeElement nativeElement)
         {
             return new[] { ElementTag.FromNativeElement(nativeElement) };
         }
 
-        protected override ElementFinder FilterImpl(Constraint findBy)
+        public override ElementFinder FilterImpl(Constraint findBy)
         {
             throw new NotImplementedException("Didn't expect filtering on static element");
         }
 
-        protected override IEnumerable<Element> FindAllImpl()
+        public override IEnumerable<Element> FindAllImpl()
         {
             if (_nativeElement.IsElementReferenceStillValid())
             {
@@ -53,7 +53,7 @@ namespace WatiN.Core
             }
         }
 
-        private Element Element
+        public Element Element
         {
             get
             {

@@ -36,7 +36,7 @@ namespace WatiN.Core.Constraints
     /// </remarks>
     public sealed class ConstraintContext
     {
-        private Dictionary<Constraint, object> data;
+        public Dictionary<Constraint, object> data;
 
         /// <summary>
         /// Creates an empty constraint context.

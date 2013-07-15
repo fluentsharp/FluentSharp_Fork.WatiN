@@ -36,9 +36,9 @@ namespace WatiN.Core.Logging
     public class StringLogWriter : BaseLogWriter, IDisposable
     {
         /// <summary>
-        /// private StringBuilder keeping the log
+        /// public StringBuilder keeping the log
         /// </summary>
-        private readonly StringBuilder Builder = new StringBuilder();
+        public readonly StringBuilder Builder = new StringBuilder();
 
         /// <summary>
         /// flag to indicate inclusion of a timestamp (in "yyyy-mm-ddThh:nn:ss" format)
@@ -54,21 +54,21 @@ namespace WatiN.Core.Logging
         }
 
         /// <summary>
-        /// private method to write the log line
+        /// public method to write the log line
         /// </summary>
         /// <param name="message">message to write</param>
-        private void WriteLogLine(string message)
+        public void WriteLogLine(string message)
         {
             var line = IncludeTimestamp ? DateTime.Now.ToString("s") + " " + message : message;
             Builder.AppendLine(line);
         }
 
-        protected override void LogActionImpl(string message)
+        public override void LogActionImpl(string message)
         {
             WriteLogLine("[Action]: " + message);
         }
 
-        protected override void LogDebugImpl(string message)
+        public override void LogDebugImpl(string message)
         {
             WriteLogLine("[Debug ]: " + message);
         }

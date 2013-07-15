@@ -63,7 +63,7 @@ namespace WatiN.Core.Constraints
             : base(Find.innerTextAttribute, new PredicateComparer<string, string>(comparer)) { }
 
         /// <inheritdoc />
-        protected override bool MatchesImpl(IAttributeBag attributeBag, ConstraintContext context)
+        public override bool MatchesImpl(IAttributeBag attributeBag, ConstraintContext context)
         {
             var element = attributeBag.GetAdapter<Element>();
             if (element == null)
@@ -85,10 +85,10 @@ namespace WatiN.Core.Constraints
             writer.Write("With Label Text '{0}'", Comparer);
         }
 
-        private sealed class LabelCache
+        public sealed class LabelCache
         {
-            private readonly Comparers.Comparer<string> _comparer;
-            private Dictionary<string, bool> _labelIdsWithMatchingText;
+            public readonly Comparers.Comparer<string> _comparer;
+            public Dictionary<string, bool> _labelIdsWithMatchingText;
 
             public LabelCache(Comparers.Comparer<string> comparer)
             {
@@ -108,7 +108,7 @@ namespace WatiN.Core.Constraints
                 return parent != null && _comparer.Compare(parent.Text);
             }
 
-            private void InitLabelIdsWithMatchingText(IElementContainer domContainer)
+            public void InitLabelIdsWithMatchingText(IElementContainer domContainer)
             {
                 _labelIdsWithMatchingText = new Dictionary<string, bool>();
 

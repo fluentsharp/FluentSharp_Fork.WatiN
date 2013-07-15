@@ -28,10 +28,10 @@ namespace WatiN.Core
     /// Wraps a <see cref="DomContainer" /> and <see cref="INativeElementCollection" /> as
     /// an implementation of <see cref="IElementContainer" />.
     /// </summary>
-    internal class NativeElementCollectionAdapter : IElementContainer
+    public class NativeElementCollectionAdapter : IElementContainer
     {
-        private readonly DomContainer domContainer;
-        private readonly NativeElementFinder.NativeElementCollectionFactory nativeElementCollectionFactory;
+        public readonly DomContainer domContainer;
+        public readonly NativeElementFinder.NativeElementCollectionFactory nativeElementCollectionFactory;
 
         /// <summary>
         /// Creates a new adapter.
@@ -729,20 +729,20 @@ namespace WatiN.Core
 
         #endregion
 
-        private NativeElementFinder CreateElementFinder<TElement>(Constraint findBy)
+        public NativeElementFinder CreateElementFinder<TElement>(Constraint findBy)
             where TElement : Element
         {
         	return NativeElementFinder.CreateNativeElementFinder<TElement>(nativeElementCollectionFactory, domContainer, findBy);
         }
 
-        private NativeElementFinder CreateElementFinder(Constraint findBy, string tagName, params string[] inputTypes)
+        public NativeElementFinder CreateElementFinder(Constraint findBy, string tagName, params string[] inputTypes)
         {
             var tags = ElementTag.ToElementTags(tagName, inputTypes);
 
             return CreateElementFinder(findBy, tags);
         }
 
-        private NativeElementFinder CreateElementFinder(Constraint findBy, IEnumerable<ElementTag> tags)
+        public NativeElementFinder CreateElementFinder(Constraint findBy, IEnumerable<ElementTag> tags)
         {
             return new NativeElementFinder(nativeElementCollectionFactory, domContainer, new List<ElementTag>(tags), findBy);
         }

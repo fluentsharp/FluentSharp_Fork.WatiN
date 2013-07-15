@@ -32,7 +32,7 @@ namespace WatiN.Core
         public RadioButtonCollection(DomContainer domContainer, ElementFinder finder) : base(domContainer, finder) { }
 
         /// <inheritdoc />
-        protected override RadioButtonCollection CreateFilteredCollection(ElementFinder elementFinder)
+        public override RadioButtonCollection CreateFilteredCollection(ElementFinder elementFinder)
         {
             return new RadioButtonCollection(DomContainer, elementFinder);
         }

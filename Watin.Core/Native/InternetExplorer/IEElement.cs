@@ -34,11 +34,11 @@ namespace WatiN.Core.Native.InternetExplorer
 	/// </summary>
     public class IEElement : INativeElement
     {
-        private const string CSSTEXT = "cssText";
+        public const string CSSTEXT = "cssText";
 
-        private readonly object _element;
-	    private string _javascriptElementReference;
-	    private IEFireEventHandler _fireEventHandler;
+        public readonly object _element;
+	    public string _javascriptElementReference;
+	    public IEFireEventHandler _fireEventHandler;
 
 	    public IEElement(object element)
         {
@@ -224,18 +224,18 @@ namespace WatiN.Core.Native.InternetExplorer
             return value;
         }
 
-        private static T GetWithFailOver<T>(DoFunc<T> func)
+        public static T GetWithFailOver<T>(DoFunc<T> func)
         {
             return UtilityClass.GetWithFailOver(func);
         }
 
-        private object RetrieveNodeValue(string attributeName)
+        public object RetrieveNodeValue(string attributeName)
         {
             var ihtmlElement4 = AsHtmlElement as IHTMLElement4;
             return ihtmlElement4 == null ? null : ihtmlElement4.getAttributeNode(attributeName).nodeValue;
         }
 
-        private static bool DidReturnObjectReference(object attributeValue)
+        public static bool DidReturnObjectReference(object attributeValue)
         {
             if (attributeValue == null) return false;
             return attributeValue.GetType().ToString() == "System.__ComObject";
@@ -249,7 +249,7 @@ namespace WatiN.Core.Native.InternetExplorer
             AsHtmlElement.setAttribute(attributeName, value, 0);
         }
 
-        private static string HandleAttributesWhichHaveNoValuePart(string attributeName, string value)
+        public static string HandleAttributesWhichHaveNoValuePart(string attributeName, string value)
         {
             // selected is attribute of Option
             // checked is attribute of RadioButton and CheckBox
@@ -282,7 +282,7 @@ namespace WatiN.Core.Native.InternetExplorer
             FireEventHandler.FireEventNoWait(eventName, eventProperties);
         }
 
-        private IEFireEventHandler FireEventHandler
+        public IEFireEventHandler FireEventHandler
         {
             get
             {
@@ -337,7 +337,7 @@ namespace WatiN.Core.Native.InternetExplorer
 	        AsDispHTMLBaseElement.click();
 	    }
 
-	    private IHTMLFormElement AsHtmlFormElement
+	    public IHTMLFormElement AsHtmlFormElement
         {
             get { return (IHTMLFormElement)_element; }
         }
@@ -373,7 +373,7 @@ namespace WatiN.Core.Native.InternetExplorer
             return stringAttributeValue;
         }
 
-	    private object GetStyleAttributeValueInternal(string attributeName)
+	    public object GetStyleAttributeValueInternal(string attributeName)
         {
             attributeName = UtilityClass.TurnStyleAttributeIntoProperty(attributeName);
 
@@ -391,12 +391,12 @@ namespace WatiN.Core.Native.InternetExplorer
             AsHtmlElement.style.setAttribute(attributeName, value, 0);
         }
 
-        private IHTMLElement2 AsHtmlElement2
+        public IHTMLElement2 AsHtmlElement2
         {
             get { return (IHTMLElement2)_element; }
         }
 
-        private IHTMLDOMNode AsDomNode
+        public IHTMLDOMNode AsDomNode
         {
             get { return (IHTMLDOMNode)_element; }
         }
@@ -464,7 +464,7 @@ namespace WatiN.Core.Native.InternetExplorer
             throw new WatiNException(String.Format("Element didn't reach readystate = complete within {0} seconds: {1}", Settings.WaitForCompleteTimeOut, AsHtmlElement.outerText));
         }
 
-        private void WaitUntilElementAvailable()
+        public void WaitUntilElementAvailable()
         {
             var tryActionUntilTimeOut = new TryFuncUntilTimeOut(TimeSpan.FromSeconds(Settings.WaitForCompleteTimeOut));
             var ihtmlElement = AsHtmlElement;
@@ -514,7 +514,7 @@ namespace WatiN.Core.Native.InternetExplorer
             get { return ((IHTMLDocument2)AsHtmlElement.document).parentWindow; }
 	    }
 
-	    internal static Rectangle GetHtmlElementBounds(IHTMLElement element)
+	    public static Rectangle GetHtmlElementBounds(IHTMLElement element)
         {
             var left = element.offsetLeft;
             var top = element.offsetTop;

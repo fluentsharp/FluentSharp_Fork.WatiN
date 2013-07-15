@@ -28,8 +28,8 @@ namespace WatiN.Core
     [ElementTag("iframe", Index = 1)]
     public class Frame : Document
 	{
-	    public Element FrameElement { get; private set; }
-	    private readonly INativeDocument _frameDocument;
+	    public Element FrameElement { get; set; }
+	    public readonly INativeDocument _frameDocument;
 
 	    /// <summary>
 	    /// This constructor will mainly be used by the constructor of FrameCollection
@@ -55,7 +55,7 @@ namespace WatiN.Core
 	    /// </summary>
 	    /// <param name="parentDocument"> </param>
 	    /// <param name="frameDocument"> </param>
-	    private void SetFrameHierarchy(Frame parentDocument, INativeDocument frameDocument)
+	    public void SetFrameHierarchy(Frame parentDocument, INativeDocument frameDocument)
 	    {
 
             var nameOrId = GetFrameElementNameOrId(FrameElement);
@@ -73,7 +73,7 @@ namespace WatiN.Core
             frameDocument.RunScript(frameDocument.JavaScriptVariableName + ".___WATINFRAMEHIERARCHY = '" + hierarchy + "'", "javascript");
 	    }
 
-	    private static string GetFrameElementNameOrId(Element frameElement)
+	    public static string GetFrameElementNameOrId(Element frameElement)
 	    {
             var idOrName = frameElement.Name;
 
@@ -89,7 +89,7 @@ namespace WatiN.Core
             return idOrName;
 	    }
 
-	    private static Element CreateFrameElement(DomContainer domContainer, INativeDocument frameDocument)
+	    public static Element CreateFrameElement(DomContainer domContainer, INativeDocument frameDocument)
 	    {
 	        return new Element(domContainer, frameDocument.ContainingFrameElement);
 	    }
@@ -111,7 +111,7 @@ namespace WatiN.Core
 		}
 
 	    /// <inheritdoc />
-        protected override string GetAttributeValueImpl(string attributeName)
+        public override string GetAttributeValueImpl(string attributeName)
         {
             switch (attributeName.ToLowerInvariant())
             {

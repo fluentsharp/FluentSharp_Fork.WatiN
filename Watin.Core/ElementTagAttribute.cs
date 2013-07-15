@@ -42,7 +42,7 @@ namespace WatiN.Core
         /// <summary>
         /// Gets the tag name.
         /// </summary>
-        public string TagName { get; private set; }
+        public string TagName { get; set;}
 
         /// <summary>
         /// Gets or sets the "type" attribute value to qualify which variations of an INPUT tag are supported.

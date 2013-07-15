@@ -32,7 +32,7 @@ namespace WatiN.Core
         public ElementCollection(DomContainer domContainer, ElementFinder finder) : base(domContainer, finder) { }
 
         /// <inheritdoc />
-        protected override ElementCollection CreateFilteredCollection(ElementFinder elementFinder)
+        public override ElementCollection CreateFilteredCollection(ElementFinder elementFinder)
         {
             return new ElementCollection(DomContainer, elementFinder);
         }
@@ -54,7 +54,7 @@ namespace WatiN.Core
         public ElementCollection(DomContainer domContainer, ElementFinder finder) : base(domContainer, finder) { }
 
         /// <inheritdoc />
-        protected override ElementCollection<TElement> CreateFilteredCollection(ElementFinder elementFinder)
+        public override ElementCollection<TElement> CreateFilteredCollection(ElementFinder elementFinder)
         {
             return new ElementCollection<TElement>(DomContainer, elementFinder);
         }

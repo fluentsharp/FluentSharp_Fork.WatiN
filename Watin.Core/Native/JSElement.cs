@@ -34,7 +34,7 @@ namespace WatiN.Core.Native
     {
         public delegate T DoFuncWithValue<T>(string value);
 
-        private const int NodeType_Text = 3;
+        public const int NodeType_Text = 3;
 
         /// <summary>
         /// List of html attributes that have to be retrieved as properties in order to get the correct value.
@@ -68,7 +68,7 @@ namespace WatiN.Core.Native
                                                                                                                     }
                                                                                                             };
 
-        private Dictionary<string, object> _attributeCache;
+        public Dictionary<string, object> _attributeCache;
 
         public JSElement(ClientPortBase clientPort, string elementReference)
         {
@@ -84,12 +84,12 @@ namespace WatiN.Core.Native
         /// <summary>
         /// Gets the FireFox client port.
         /// </summary>
-        public ClientPortBase ClientPort { get; private set; }
+        public ClientPortBase ClientPort { get; set;}
 
         /// <summary>
         /// Gets the name of a variable that stores a reference to the element within FireFox.
         /// </summary>
-        public string ElementReference { get; private set; }
+        public string ElementReference { get; set;}
 
         public string TextContent
         {
@@ -369,7 +369,7 @@ namespace WatiN.Core.Native
         public string TagName
         {
             get { return GetFromAttributeCache("tagName", () => GetProperty(Find.tagNameAttribute)); }
-            internal set { AddToAttributeCache("tagName", value);}
+            set { AddToAttributeCache("tagName", value);}
         }
 
         public void Select()
@@ -476,7 +476,7 @@ namespace WatiN.Core.Native
             return jsElement != null && IsReferenceEqual(jsElement.ElementReference, ElementReference);
         }
 
-        private bool IsReferenceEqual(string left, string right)
+        public bool IsReferenceEqual(string left, string right)
         {
             return ClientPort.WriteAndReadAsBool("{0}=={1};", left, right);
         }
@@ -492,7 +492,7 @@ namespace WatiN.Core.Native
         /// </summary>
         /// <param name="innerHtml">The value.</param>
         /// <returns></returns>
-        private string InnerHtmlToInnerText(string innerHtml)
+        public string InnerHtmlToInnerText(string innerHtml)
         {
             if (string.IsNullOrEmpty(innerHtml)) return string.Empty;
 
@@ -538,7 +538,7 @@ namespace WatiN.Core.Native
             return returnValue.TrimStart();
         }
 
-        private static string NewLineCleanup(string innerHtml)
+        public static string NewLineCleanup(string innerHtml)
         {
             // remove all \n (newline) and any following spaces
             var newlineSpaces = new Regex("\r\n *");
@@ -550,13 +550,13 @@ namespace WatiN.Core.Native
             return returnValue;
         }
 
-        private T GetFromAttributeCache<T>(string key, DoFunc<T> function)
+        public T GetFromAttributeCache<T>(string key, DoFunc<T> function)
         {
             AddToAttributeCache(key, function);
             return (T)AttributeCache[key];
         }
 
-        private void AddToAttributeCache<T>(string key, DoFunc<T> function)
+        public void AddToAttributeCache<T>(string key, DoFunc<T> function)
         {
             if (!AttributeCache.ContainsKey(key))
             {
@@ -564,7 +564,7 @@ namespace WatiN.Core.Native
             }
         }
 
-        private void AddToAttributeCache(string key, object value)
+        public void AddToAttributeCache(string key, object value)
         {
             if (!AttributeCache.ContainsKey(key))
             {
@@ -572,7 +572,7 @@ namespace WatiN.Core.Native
             }
         }
 
-        protected Dictionary<string, object> AttributeCache
+        public Dictionary<string, object> AttributeCache
         {
             get
             {
@@ -587,7 +587,7 @@ namespace WatiN.Core.Native
         /// <param name="eventName">Name of the event to fire.</param>
         /// <param name="eventProperties"></param>
         /// <param name="WaitForEventToComplete"></param>
-        private void ExecuteEvent(string eventName, NameValueCollection eventProperties, bool WaitForEventToComplete)
+        public void ExecuteEvent(string eventName, NameValueCollection eventProperties, bool WaitForEventToComplete)
         {
             var creator = new JSEventCreator(ElementReference, ClientPort);
             var command = creator.CreateEvent(eventName, eventProperties, WaitForEventToComplete);
@@ -622,8 +622,8 @@ namespace WatiN.Core.Native
 
     public class JSEventCreator
     {
-        private readonly string _elementReference;
-        private readonly ClientPortBase _clientPortBase;
+        public readonly string _elementReference;
+        public readonly ClientPortBase _clientPortBase;
 
         public JSEventCreator(string elementReference, ClientPortBase clientPortBase)
         {
@@ -661,7 +661,7 @@ namespace WatiN.Core.Native
             return command;
         }
 
-        private static string CleanupEventName(string eventName)
+        public static string CleanupEventName(string eventName)
         {
             var eventname = eventName.ToLowerInvariant();
 
@@ -702,7 +702,7 @@ namespace WatiN.Core.Native
 
         }
 
-        private string CreateKeyEventCommand(string eventname, NameValueCollection eventProperties)
+        public string CreateKeyEventCommand(string eventname, NameValueCollection eventProperties)
         {
             switch (_clientPortBase.JavaScriptEngine)
             {
@@ -715,7 +715,7 @@ namespace WatiN.Core.Native
             }
         }
 
-        private string CreateKeyEventForWebkit(NameValueCollection eventProperties, string eventname)
+        public string CreateKeyEventForWebkit(NameValueCollection eventProperties, string eventname)
         {
             // HACK: Webkit doesn't seem to support manually firing keyboard events, 
             // event listeners will get fired for the key events, but the event target seems to ignore it.
@@ -759,7 +759,7 @@ namespace WatiN.Core.Native
                    "event.initKeyEvent('" + eventname + "'," + eventParams + ");";
         }
 
-        private static string GetEventPropertyValue(NameValueCollection eventProperties, string propertyName, string defaultValue)
+        public static string GetEventPropertyValue(NameValueCollection eventProperties, string propertyName, string defaultValue)
         {
             if (eventProperties != null)
             {

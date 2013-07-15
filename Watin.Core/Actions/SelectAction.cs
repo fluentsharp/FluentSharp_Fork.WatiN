@@ -22,7 +22,7 @@ namespace WatiN.Core.Actions
 {
     public class SelectAction : ISelectAction
     {
-        private Option _option;
+        public Option _option;
         public SelectAction(Option option)
 	    {
             _option = option;
@@ -37,7 +37,7 @@ namespace WatiN.Core.Actions
             Select(true, waitForComplete);
         }
 
-        private void Select(bool value, bool waitForComplete)
+        public void Select(bool value, bool waitForComplete)
         {
             _option.SetAttributeValue("selected", value.ToString().ToLowerInvariant());
             if (waitForComplete)

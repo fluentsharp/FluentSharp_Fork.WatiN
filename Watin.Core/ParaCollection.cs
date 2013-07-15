@@ -32,7 +32,7 @@ namespace WatiN.Core
         public ParaCollection(DomContainer domContainer, ElementFinder finder) : base(domContainer, finder) { }
 
         /// <inheritdoc />
-        protected override ParaCollection CreateFilteredCollection(ElementFinder elementFinder)
+        public override ParaCollection CreateFilteredCollection(ElementFinder elementFinder)
         {
             return new ParaCollection(DomContainer, elementFinder);
         }

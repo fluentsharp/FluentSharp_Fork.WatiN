@@ -53,22 +53,22 @@ namespace WatiN.Core.Native.Mozilla
         /// <summary>
         /// <c>true</c> if the <see cref="Dispose()"/> method has been called to release resources.
         /// </summary>
-        private bool _disposed;
+        public bool _disposed;
 
         /// <summary>
         /// Underlying socket used to create a <see cref="NetworkStream"/>.
         /// </summary>
-        private Socket _telnetSocket;
+        public Socket _telnetSocket;
 
         /// <summary>
         /// mozrepl prompt name
         /// </summary>
-        private string _prompt;
+        public string _prompt;
 
-        private const string _promptSuffix = "> ";
+        public const string _promptSuffix = "> ";
 
-        private bool _emulateActiveElement;
-        private bool _emulateActiveElementChecked;
+        public bool _emulateActiveElement;
+        public bool _emulateActiveElementChecked;
 
         public FireFoxClientPort(string ipAdress, int port)
         {
@@ -95,7 +95,7 @@ namespace WatiN.Core.Native.Mozilla
         /// Gets a value indicating whether this <see cref="FireFoxClientPort"/> is connected.
         /// </summary>
         /// <value><c>true</c> if connected; otherwise, <c>false</c>.</value>
-        public bool Connected { get; private set; }
+        public bool Connected { get; set;}
 
         /// <summary>
         /// Gets the name of the javascript variable that references the DOM:document object.
@@ -131,7 +131,7 @@ namespace WatiN.Core.Native.Mozilla
         /// main FireFox window is not visible if a previous shutdown didn't complete correctly
         /// in which case the restore / resume previous session dialog may be visible.
         /// </summary>
-        private bool IsMainWindowVisible
+        public bool IsMainWindowVisible
         {
             get
             {
@@ -146,7 +146,7 @@ namespace WatiN.Core.Native.Mozilla
         /// <value>
         /// The is restore session dialog visible.
         /// </value>
-        private bool IsRestoreSessionDialogVisible
+        public bool IsRestoreSessionDialogVisible
         {
             get
             {
@@ -176,7 +176,7 @@ namespace WatiN.Core.Native.Mozilla
             Connect(null, false);
         }
 
-        private void Connect(string url, bool createNewFireFoxInstance)
+        public void Connect(string url, bool createNewFireFoxInstance)
         {
             ThrowExceptionIfConnected();
 
@@ -197,7 +197,7 @@ namespace WatiN.Core.Native.Mozilla
             DefineDefaultJSVariablesForWindow(0);
         }
 
-        private void ConnectToMozReplServer()
+        public void ConnectToMozReplServer()
         {
             _telnetSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp) {Blocking = true};
 
@@ -213,7 +213,7 @@ namespace WatiN.Core.Native.Mozilla
             }
         }
 
-        internal override System.Diagnostics.Process Process
+        public override System.Diagnostics.Process Process
         {
             get
             {
@@ -225,7 +225,7 @@ namespace WatiN.Core.Native.Mozilla
             }
         }
 
-        private void CreateNewFireFoxInstance(string url)
+        public void CreateNewFireFoxInstance(string url)
         {
             Logger.LogDebug("Starting a new Firefox instance.");
 
@@ -244,7 +244,7 @@ namespace WatiN.Core.Native.Mozilla
             SendKeys.SendWait("{ENTER}");
         }
 
-        private void ThrowExceptionIfConnected()
+        public void ThrowExceptionIfConnected()
         {
             if (Connected)
             {
@@ -285,7 +285,7 @@ namespace WatiN.Core.Native.Mozilla
                        DocumentVariableName + ".activeElement = event.target;}, false);}");
         }
 
-        private bool EmulateActiveElement()
+        public bool EmulateActiveElement()
         {
             if (!_emulateActiveElementChecked)
             {
@@ -301,7 +301,7 @@ namespace WatiN.Core.Native.Mozilla
         /// <param name="disposing">
         /// <c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.
         /// </param>
-        protected void Dispose(bool disposing)
+        public void Dispose(bool disposing)
         {
             // Check to see if Dispose has already been called.
             if (!_disposed)
@@ -343,7 +343,7 @@ namespace WatiN.Core.Native.Mozilla
             Connected = false;
         }
 
-        private void CloseFireFoxProcess()
+        public void CloseFireFoxProcess()
         {
             //if (Process == null) return;
             
@@ -400,7 +400,7 @@ namespace WatiN.Core.Native.Mozilla
         /// </param>
         /// <param name="args">
         /// </param>
-        protected override void SendAndRead(string data, bool resultExpected, bool checkForErrors, params object[] args)
+        public override void SendAndRead(string data, bool resultExpected, bool checkForErrors, params object[] args)
         {
             var command = UtilityClass.StringFormat(data, args);
 
@@ -415,7 +415,7 @@ namespace WatiN.Core.Native.Mozilla
         /// </param>
         /// <exception cref="FireFoxException">
         /// </exception>
-        private static void CheckForError(string response)
+        public static void CheckForError(string response)
         {
             if (string.IsNullOrEmpty(response))
             {
@@ -440,7 +440,7 @@ namespace WatiN.Core.Native.Mozilla
         /// <returns>
         /// Response from FireFox with out any of the telnet UI characters
         /// </returns>
-        private string CleanTelnetResponse(string response)
+        public string CleanTelnetResponse(string response)
         {
             // HACK refactor in the future, should find a cleaner way of doing 
             if (!string.IsNullOrEmpty(response))
@@ -516,7 +516,7 @@ namespace WatiN.Core.Native.Mozilla
         /// Defines the default JS variables used to automate this FireFox window.
         /// </summary>
         /// <param name="windowIndex">Index of the window.</param>
-        internal void DefineDefaultJSVariablesForWindow(int windowIndex)
+        public void DefineDefaultJSVariablesForWindow(int windowIndex)
         {
             Write("{0}.home();", PromptName);
             
@@ -529,12 +529,12 @@ namespace WatiN.Core.Native.Mozilla
             Write("var {0} = w0.getBrowser();", BrowserVariableName);
         }
 
-        private string GetWindowsFunction()
+        public string GetWindowsFunction()
         {
             return "function() { var windowEnum = Cc['@mozilla.org/appshell/window-mediator;1'].getService(Ci.nsIWindowMediator).getEnumerator(''); var windows = []; while(windowEnum.hasMoreElements()) windows.push(windowEnum.getNext()); return windows; }";
         }
 
-        private static string GetChildElementsFunction()
+        public static string GetChildElementsFunction()
         {
             return "function(node){var a=[];var tags=node.childNodes;for (var i=0;i<tags.length;++i){if (tags[i].nodeType!=3) a.push(tags[i]);} return a;}";
         }
@@ -545,7 +545,7 @@ namespace WatiN.Core.Native.Mozilla
         /// <param name="checkForErrors">
         /// The check For Errors.
         /// </param>
-        private void ReadResponse(bool checkForErrors)
+        public void ReadResponse(bool checkForErrors)
         {
             var stream = new NetworkStream(_telnetSocket);
             
@@ -603,7 +603,7 @@ namespace WatiN.Core.Native.Mozilla
         /// The data to send.
         /// </param>
         /// <exception cref="FireFoxException">When not connected.</exception>
-        private void SendCommand(string data)
+        public void SendCommand(string data)
         {
             if (!Connected)
             {
@@ -624,7 +624,7 @@ namespace WatiN.Core.Native.Mozilla
         /// </summary>
         /// <exception cref="FireFoxException">
         /// </exception>
-        private void CloseExistingFireFoxInstances()
+        public void CloseExistingFireFoxInstances()
         {
             System.Diagnostics.Process firefoxProcess = FireFox.CurrentProcess;
             if (firefoxProcess != null && !Settings.CloseExistingFireFoxInstances)
@@ -642,7 +642,7 @@ namespace WatiN.Core.Native.Mozilla
         /// <summary>
         /// Writes a line to the mozrepl server.
         /// </summary>
-        private void WaitForConnectionEstablished()
+        public void WaitForConnectionEstablished()
         {
             var rawResponse = string.Empty;
             var responseToWaitFor = "Welcome to MozRepl"; // .Replace("\n", Environment.NewLine);

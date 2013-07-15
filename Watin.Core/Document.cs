@@ -55,10 +55,10 @@ namespace WatiN.Core
 	/// </example>
 	public abstract class Document : Component, IElementContainer, IDisposable
 	{
-	    private const string RESULT_PROPERTY_NAME = "watinExpressionResult";
+	    public const string RESULT_PROPERTY_NAME = "watinExpressionResult";
         public const string ERROR_PROPERTY_NAME = "watinExpressionError";
 
-        private DomContainer domContainer;
+        public DomContainer domContainer;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Document"/> class.
@@ -66,14 +66,14 @@ namespace WatiN.Core
 		/// and set DomContainer before accessing any method or property of 
 		/// this class.
 		/// </summary>
-		protected Document() {}
+		public Document() {}
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Document"/> class.
 		/// Mainly used by WatiN internally.
 		/// </summary>
 		/// <param name="domContainer">The DOM container.</param>
-		protected Document(DomContainer domContainer)
+		public Document(DomContainer domContainer)
 		{
             if (domContainer == null)
                 throw new ArgumentNullException("domContainer");
@@ -96,7 +96,7 @@ namespace WatiN.Core
             GC.SuppressFinalize(this);
 		}
 
-		protected virtual void Dispose(bool disposing)
+		public virtual void Dispose(bool disposing)
 		{
 			DomContainer = null;
 		}
@@ -457,12 +457,12 @@ namespace WatiN.Core
             return Core.Page.CreatePage<TPage>(this);
         }
 
-        private NativeElementCollectionAdapter AllElements
+        public NativeElementCollectionAdapter AllElements
         {
             get { return new NativeElementCollectionAdapter(DomContainer, () => NativeDocument.AllElements); }
         }
 
-        private IElementContainer ChildElements
+        public IElementContainer ChildElements
         {
             get { return new NativeElementCollectionAdapter(DomContainer, () => NativeDocument.Body.Children); }
         }

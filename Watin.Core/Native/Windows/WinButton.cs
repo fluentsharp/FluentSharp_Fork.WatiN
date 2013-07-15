@@ -23,7 +23,7 @@ namespace WatiN.Core.Native.Windows
 {
     public class WinButton
     {
-        private readonly IHwnd _hWnd;
+        public readonly IHwnd _hWnd;
 
         public WinButton(IntPtr Hwnd) : this(new Hwnd(Hwnd))
         {}

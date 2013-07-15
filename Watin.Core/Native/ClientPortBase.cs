@@ -32,18 +32,18 @@ namespace WatiN.Core.Native
         /// <summary>
         /// Used by CreateElementVariableName
         /// </summary>
-        private static readonly VariableNameHelper VariableNameHelper = new VariableNameHelper();
-        private bool? _javaSriptSupportsQuerySelector = null;
+        public static readonly VariableNameHelper VariableNameHelper = new VariableNameHelper();
+        public bool? _javaSriptSupportsQuerySelector = null;
 
         /// <summary>
         /// Gets the last response recieved from the mozrepl server
         /// </summary>
-        private string _lastResponse;
+        public string _lastResponse;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ClientPortBase"/> class.
         /// </summary>
-        protected ClientPortBase()
+        public ClientPortBase()
         {
             Response = new StringBuilder();
         }
@@ -85,24 +85,24 @@ namespace WatiN.Core.Native
         /// Gets or sets the browser process.
         /// </summary>
         /// <value>The browser process.</value>
-        internal virtual Process Process { get; set; }
+        public virtual Process Process { get; set; }
 
         /// <summary>
         /// Gets or sets the last response without any cleaning applied to it.
         /// </summary>
         /// <value>The last response raw.</value>
-        internal string LastResponseRaw { get; set; }
+        public string LastResponseRaw { get; set; }
 
         /// <summary>
         /// Gets or sets the entire response from the remote server so far.
         /// </summary>
         /// <value>The response from the remote server so far.</value>
-        protected StringBuilder Response { get; set; }
+        public StringBuilder Response { get; set; }
 
         /// <summary>
         /// Gets or sets the last reponse recieved from the mozrepl server
         /// </summary>
-        protected string LastResponse
+        public string LastResponse
         {
             get
             {
@@ -118,7 +118,7 @@ namespace WatiN.Core.Native
         /// <summary>
         /// Gets a value indicating whether the last response was <c>true</c>.
         /// </summary>
-        protected bool LastResponseAsBool
+        public bool LastResponseAsBool
         {
             get
             {
@@ -132,7 +132,7 @@ namespace WatiN.Core.Native
         /// Gets a value indicating whether last response is null.
         /// </summary>
         /// <value><c>true</c> if last response is null; otherwise, <c>false</c>.</value>
-        private bool LastResponseIsNull
+        public bool LastResponseIsNull
         {
             get
             {
@@ -146,7 +146,7 @@ namespace WatiN.Core.Native
         /// <value>
         /// The last response as int.
         /// </value>
-        private int LastResponseAsInt
+        public int LastResponseAsInt
         {
             get { return string.IsNullOrEmpty(LastResponse) ? 0 : int.Parse(_lastResponse.Trim()); }
         }
@@ -255,13 +255,13 @@ namespace WatiN.Core.Native
         /// <param name="resultExpected"><c>true</c> if a result is expected.</param>
         /// <param name="checkForErrors"><c>true</c> if error checking should be applied.</param>
         /// <param name="args">Arguments to format with the data.</param>        
-        protected abstract void SendAndRead(string data, bool resultExpected, bool checkForErrors, params object[] args);
+        public abstract void SendAndRead(string data, bool resultExpected, bool checkForErrors, params object[] args);
 
         /// <summary>
         /// Adds the specified <paramref name="response"/> to the last response field.
         /// </summary>
         /// <param name="response">The response to add.</param>
-        protected void AddToLastResponse(string response)
+        public void AddToLastResponse(string response)
         {
             _lastResponse += response;
         }

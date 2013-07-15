@@ -77,10 +77,10 @@ namespace WatiN.Core
     [DebuggerDisplay("{DebuggerDisplayProxy()}")]
     public class Element : Component
 	{
-        private INativeElement _cachedNativeElement;
-        private ElementFinder _elementFinder;
+        public INativeElement _cachedNativeElement;
+        public ElementFinder _elementFinder;
 
-        private HighlightAction _highlightAction;
+        public HighlightAction _highlightAction;
 
         /// <summary>
 		/// This constructor is mainly used from within WatiN.
@@ -102,7 +102,7 @@ namespace WatiN.Core
             InitElement(domContainer, null, elementFinder);
         }
 
-        private void InitElement(DomContainer domContainer, INativeElement nativeElement, ElementFinder elementFinder)
+        public void InitElement(DomContainer domContainer, INativeElement nativeElement, ElementFinder elementFinder)
         {
             if (domContainer == null) throw new ArgumentNullException("domContainer");
             if (nativeElement == null && elementFinder == null) throw new ArgumentException("Either nativeElement or elementFinder needs to be set");
@@ -345,7 +345,7 @@ namespace WatiN.Core
         }
 
         /// <inheritdoc />
-        protected override string GetAttributeValueImpl(string attributeName)
+        public override string GetAttributeValueImpl(string attributeName)
         {
             if (UtilityClass.IsNullOrEmpty(attributeName))
             {
@@ -387,7 +387,7 @@ namespace WatiN.Core
         /// <summary>
         /// Obtains a default description of the element to be used when <see cref="IHasDescription.Description" /> is null.
         /// </summary>
-        protected virtual string DefaultToString()
+        public virtual string DefaultToString()
         {
             if (!Exists) return string.Empty;
             return UtilityClass.IsNotNullOrEmpty(Title) ? Title : Text;
@@ -415,7 +415,7 @@ namespace WatiN.Core
 		/// <summary>
 		/// Handles the implementation of Click and ClickNoWait
 		/// </summary>
-        protected virtual void ClickImpl(bool waitforComplete)
+        public virtual void ClickImpl(bool waitforComplete)
 		{
 			if (!Enabled)
 			{
@@ -575,7 +575,7 @@ namespace WatiN.Core
             FireEventNoWait("onKeyUp", GetKeyCodeEventProperty(character));
         }
 
-		private static NameValueCollection GetKeyCodeEventProperty(char character)
+		public static NameValueCollection GetKeyCodeEventProperty(char character)
 		{
 		    return new NameValueCollection
 		               {
@@ -667,7 +667,7 @@ namespace WatiN.Core
             FireEvent(eventName, false, eventProperties);
         }
         
-        private void FireEvent(string eventName, bool waitForComplete, NameValueCollection eventProperties)
+        public void FireEvent(string eventName, bool waitForComplete, NameValueCollection eventProperties)
 		{
 			if (!Enabled)
 			{
@@ -729,7 +729,7 @@ namespace WatiN.Core
         /// <summary>
         /// Gets the DomContainer for this element.
         /// </summary>
-        public virtual DomContainer DomContainer { get; private set; }
+        public virtual DomContainer DomContainer { get; set; }
 
 		/// <summary>
 		/// Gets a reference to the wrapper which incapsulates a native element in the browser.
@@ -771,7 +771,7 @@ namespace WatiN.Core
 			}
 		}
 
-        private INativeElement FindNativeElementInternal()
+        public INativeElement FindNativeElementInternal()
         {
             var foundElement = _elementFinder.FindFirst();
 
@@ -902,7 +902,7 @@ namespace WatiN.Core
             tryActionUntilTimeOut.Try(() => Exists && Matches(constraint));
 		}
 
-	    private void WaitUntilExistsOrNot(int timeout, bool waitUntilExists)
+	    public void WaitUntilExistsOrNot(int timeout, bool waitUntilExists)
 	    {
             var tryActionUntilTimeOut = new TryFuncUntilTimeOut(TimeSpan.FromSeconds(timeout))
                 {
@@ -994,7 +994,7 @@ namespace WatiN.Core
         /// <summary>
         /// Clears the cached native element.
         /// </summary>
-        protected void ClearCachedNativeElement()
+        public void ClearCachedNativeElement()
         {
             _cachedNativeElement = null;
         }
@@ -1003,7 +1003,7 @@ namespace WatiN.Core
         /// Gets the cached native element immediately.
         /// </summary>
         /// <returns></returns>
-        internal INativeElement GetCachedNativeElement()
+        public INativeElement GetCachedNativeElement()
         {
             return _cachedNativeElement;
         }
@@ -1239,7 +1239,7 @@ namespace WatiN.Core
         /// <param name="findBy">The constraint, or null if none</param>
         /// <returns>The native element finder</returns>
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="nativeElementCollection"/> is null</exception>
-        protected ElementFinder CreateElementFinder<TElement>(NativeElementCollectionFactory nativeElementCollection, Constraint findBy)
+        public ElementFinder CreateElementFinder<TElement>(NativeElementCollectionFactory nativeElementCollection, Constraint findBy)
             where TElement : Element
         {
             if (nativeElementCollection == null)
@@ -1249,7 +1249,7 @@ namespace WatiN.Core
             return NativeElementFinder.CreateNativeElementFinder<TElement>(factory, DomContainer, findBy);
         }
 
-        protected NativeElementFinder.NativeElementCollectionFactory CreateNativeElementCollectionFactory(NativeElementCollectionFactory factory)
+        public NativeElementFinder.NativeElementCollectionFactory CreateNativeElementCollectionFactory(NativeElementCollectionFactory factory)
         {
             return () =>
                 {
@@ -1258,7 +1258,7 @@ namespace WatiN.Core
                 };
         }
 
-        protected virtual object DebuggerDisplayProxy()
+        public virtual object DebuggerDisplayProxy()
         {
             // Don't display our value if it doesn't exist... it causes the debugger to time out.
             return String.Format(CultureInfo.InvariantCulture, "{0}@{1:X}[Constraint = \"{2}\", Exists = {3}]", 

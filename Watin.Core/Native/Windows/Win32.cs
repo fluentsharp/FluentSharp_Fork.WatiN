@@ -29,19 +29,19 @@ namespace WatiN.Core.Native.Windows
     {
         #region Constants
 
-        internal const int WM_SYSCOMMAND = 0x0112;
-        internal const int WM_CLOSE = 0x0010;
-        internal const UInt32 WM_CHAR = 0x0102;
-        internal const int SC_CLOSE = 0xF060;
+        public const int WM_SYSCOMMAND = 0x0112;
+        public const int WM_CLOSE = 0x0010;
+        public const UInt32 WM_CHAR = 0x0102;
+        public const int SC_CLOSE = 0xF060;
 
-        internal const int KEYEVENTF_EXTENDEDKEY = 0x1;
-        internal const int KEYEVENTF_KEYUP = 0x2;
-        internal const int KEYEVENTF_TAB = 0x09;
+        public const int KEYEVENTF_EXTENDEDKEY = 0x1;
+        public const int KEYEVENTF_KEYUP = 0x2;
+        public const int KEYEVENTF_TAB = 0x09;
 
         public const Int32 SMTO_ABORTIFHUNG = 2;
-        internal const int BM_CLICK = 245;
-        internal const int WM_ACTIVATE = 6;
-        internal const int MA_ACTIVATE = 1;
+        public const int BM_CLICK = 245;
+        public const int WM_ACTIVATE = 6;
+        public const int MA_ACTIVATE = 1;
 
         public const int GW_CHILD = 5;
         public const int GW_HWNDNEXT = 2;
@@ -122,7 +122,7 @@ namespace WatiN.Core.Native.Windows
         }
 
         [Flags]
-        internal enum tagOLECONTF
+        public enum tagOLECONTF
         {
             OLECONTF_EMBEDDINGS = 1,
             OLECONTF_LINKS = 2,
@@ -139,73 +139,73 @@ namespace WatiN.Core.Native.Windows
 //        public static extern bool EnumThreadWindows(int threadId, EnumThreadProc pfnEnum, IntPtr lParam);
 
         [DllImport("user32", EntryPoint = "GetClassNameA", CharSet = CharSet.Ansi, SetLastError = true, ExactSpelling = true)]
-        internal static extern int GetClassName(IntPtr handleToWindow, StringBuilder className, int maxClassNameLength);
+        public static extern int GetClassName(IntPtr handleToWindow, StringBuilder className, int maxClassNameLength);
 
         [DllImport("user32.dll", SetLastError = true)]
-        internal static extern bool GetWindowInfo(IntPtr hwnd, ref WINDOWINFO pwi);
+        public static extern bool GetWindowInfo(IntPtr hwnd, ref WINDOWINFO pwi);
 
         [DllImport("user32.dll", SetLastError = true)]
-        internal static extern IntPtr FindWindowEx(IntPtr parentHandle, IntPtr childAfter, string className, IntPtr windowTitle);
+        public static extern IntPtr FindWindowEx(IntPtr parentHandle, IntPtr childAfter, string className, IntPtr windowTitle);
 
         [DllImport("user32.dll", SetLastError = true)]
-        internal static extern IntPtr SetActiveWindow(IntPtr hWnd);
+        public static extern IntPtr SetActiveWindow(IntPtr hWnd);
 
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
-        internal static extern IntPtr GetDlgItem(IntPtr handleToWindow, int ControlId);
+        public static extern IntPtr GetDlgItem(IntPtr handleToWindow, int ControlId);
 
         /// <summary>
         /// The GetForegroundWindow function returns a handle to the foreground window.
         /// </summary>
         [DllImport("user32.dll", SetLastError = true)]
-        internal static extern IntPtr GetForegroundWindow();
+        public static extern IntPtr GetForegroundWindow();
 
         [DllImport("user32.dll", ExactSpelling = true, CharSet = CharSet.Auto)]
         public static extern IntPtr GetWindow(IntPtr hWnd, int uCmd);
 
         [DllImport("user32.dll")]
-        internal static extern bool PrintWindow(IntPtr hwnd, IntPtr hdcBlt, uint nFlags);
+        public static extern bool PrintWindow(IntPtr hwnd, IntPtr hdcBlt, uint nFlags);
 
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
-        internal static extern int GetWindowText(IntPtr handleToWindow, StringBuilder windowText, int maxTextLength);
+        public static extern int GetWindowText(IntPtr handleToWindow, StringBuilder windowText, int maxTextLength);
 
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
-        internal static extern int GetWindowTextLength(IntPtr hWnd);
+        public static extern int GetWindowTextLength(IntPtr hWnd);
 
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
-        internal static extern bool GetWindowPlacement(IntPtr hWnd, ref WINDOWPLACEMENT lpwndpl);
+        public static extern bool GetWindowPlacement(IntPtr hWnd, ref WINDOWPLACEMENT lpwndpl);
 
         [DllImport("user32.dll")]
-        internal static extern bool IsWindow(IntPtr hWnd);
+        public static extern bool IsWindow(IntPtr hWnd);
 
         [DllImport("user32.dll")]
-        internal static extern bool IsWindowEnabled(IntPtr hWnd);
+        public static extern bool IsWindowEnabled(IntPtr hWnd);
 
         [DllImport("user32.dll")]
-        internal static extern bool IsWindowVisible(IntPtr hWnd);
+        public static extern bool IsWindowVisible(IntPtr hWnd);
 
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
-        internal static extern int SendMessage(IntPtr hWnd, int msg, int wParam, int lParam);
+        public static extern int SendMessage(IntPtr hWnd, int msg, int wParam, int lParam);
 
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        internal static extern IntPtr SendMessage(HandleRef hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
+        public static extern IntPtr SendMessage(HandleRef hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
 
         [DllImport("user32.dll", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static extern bool SetForegroundWindow(IntPtr hWnd);
+        public static extern bool SetForegroundWindow(IntPtr hWnd);
 
         [DllImport("user32.dll")]
-        internal static extern IntPtr SetFocus(IntPtr hWnd);
+        public static extern IntPtr SetFocus(IntPtr hWnd);
 
         [DllImport("user32.dll")]
-        internal static extern IntPtr SetWindowPos(IntPtr hWnd, int hWndInsertAfter, int x, int Y, int cx, int cy, int wFlags);
+        public static extern IntPtr SetWindowPos(IntPtr hWnd, int hWndInsertAfter, int x, int Y, int cx, int cy, int wFlags);
         
         [DllImport("user32", CharSet = CharSet.Ansi, SetLastError = true, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static extern bool EnumWindows(EnumWindowProc lpEnumFunc, IntPtr lParam);
+        public static extern bool EnumWindows(EnumWindowProc lpEnumFunc, IntPtr lParam);
 
         [DllImport("user32", CharSet = CharSet.Ansi, SetLastError = true, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static extern bool EnumChildWindows(IntPtr hWndParent, EnumChildWindowProc lpEnumFunc, IntPtr lParam);
+        public static extern bool EnumChildWindows(IntPtr hWndParent, EnumChildWindowProc lpEnumFunc, IntPtr lParam);
 
         [DllImport("user32", EntryPoint = "RegisterWindowMessageA", CharSet = CharSet.Ansi, SetLastError = true, ExactSpelling = true)]
         public static extern Int32 RegisterWindowMessage(string lpString);
@@ -214,10 +214,10 @@ namespace WatiN.Core.Native.Windows
         public static extern Int32 SendMessageTimeout(IntPtr hWnd, Int32 msg, Int32 wParam, Int32 lParam, Int32 fuFlags, Int32 uTimeout, ref Int32 lpdwResult);
 
         [DllImport("user32.dll")]
-        internal static extern bool AttachThreadInput(int idAttach, int idAttachTo, bool fAttach);
+        public static extern bool AttachThreadInput(int idAttach, int idAttachTo, bool fAttach);
 
         [DllImport("user32.dll")]
-        internal static extern void keybd_event(byte bVk, byte bScan, uint dwFlags, int dwExtraInfo);
+        public static extern void keybd_event(byte bVk, byte bScan, uint dwFlags, int dwExtraInfo);
 
         /// <summary>Shows a Window</summary>
         /// <remarks>
@@ -257,21 +257,21 @@ namespace WatiN.Core.Native.Windows
         /// If the window was previously hidden, the return value is zero.
         /// </returns>
         [DllImport("user32.dll")]
-        internal static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+        public static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
 
         [DllImport("User32.dll")]
-        internal static extern int GetWindowThreadProcessId(IntPtr window, out int processId);
+        public static extern int GetWindowThreadProcessId(IntPtr window, out int processId);
 
         [DllImport("User32.dll")]
-        internal static extern IntPtr GetParent(IntPtr hwnd);
+        public static extern IntPtr GetParent(IntPtr hwnd);
 
         #endregion DllImport User32
 
         [DllImport("kernel32")]
-        internal static extern int GetCurrentThreadId();
+        public static extern int GetCurrentThreadId();
 
         [DllImport("gdi32.dll")]
-        internal static extern bool DeleteObject(IntPtr hObject);
+        public static extern bool DeleteObject(IntPtr hObject);
 
         #region Methods
 
@@ -282,7 +282,7 @@ namespace WatiN.Core.Native.Windows
         /// </summary>
         /// <param name="hwnd">The handle to the window</param>
         /// <returns>Text of the window</returns>
-        internal static string GetWindowText(IntPtr hwnd)
+        public static string GetWindowText(IntPtr hwnd)
         {
             var length = GetWindowTextLength(hwnd) + 1;
             var buffer = new StringBuilder(length);
@@ -308,7 +308,7 @@ namespace WatiN.Core.Native.Windows
             return lRes == 0 ? String.Empty : className.ToString();
         }
 
-        internal static Int64 GetWindowStyle(IntPtr hwnd)
+        public static Int64 GetWindowStyle(IntPtr hwnd)
         {
             var info = new WINDOWINFO();
             info.cbSize = (uint)Marshal.SizeOf(info);
@@ -317,7 +317,7 @@ namespace WatiN.Core.Native.Windows
             return Convert.ToInt64(info.dwStyle);
         }
 
-        internal static void ClickDialogButton(int buttonid, IntPtr parentHwnd)
+        public static void ClickDialogButton(int buttonid, IntPtr parentHwnd)
         {
             var buttonPtr = GetDlgItem(parentHwnd, buttonid);
             SendMessage(buttonPtr, BM_CLICK, 0, 0);

@@ -31,7 +31,7 @@ namespace WatiN.Core.Logging
 	/// </summary>
 	public static class Logger
 	{
-		private static ILogWriter mLogWriter = DefaultLogWriter();
+		public static ILogWriter mLogWriter = DefaultLogWriter();
 
 		/// <summary>
 		/// Logs the action. These should be messages about "user" actions done by WatiN. 
@@ -140,7 +140,7 @@ namespace WatiN.Core.Logging
 			set { mLogWriter = value ?? DefaultLogWriter(); }
 		}
 
-        private static ILogWriter DefaultLogWriter()
+        public static ILogWriter DefaultLogWriter()
         {
             return new NoLog();
         }

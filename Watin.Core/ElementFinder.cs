@@ -28,15 +28,15 @@ namespace WatiN.Core
     /// </summary>
     public abstract class ElementFinder
     {
-        private readonly IList<ElementTag> elementTags;
-        private readonly Constraint findBy;
+        public readonly IList<ElementTag> elementTags;
+        public readonly Constraint findBy;
 
         /// <summary>
         /// Creates an element finder.
         /// </summary>
         /// <param name="elementTags">The element tags considered by the finder, or null if all tags considered</param>
         /// <param name="findBy">The constraint used by the finder to filter elements, or null if no additional constraint</param>
-        protected ElementFinder(IList<ElementTag> elementTags, Constraint findBy)
+        public ElementFinder(IList<ElementTag> elementTags, Constraint findBy)
         {
             this.elementTags = new ReadOnlyCollection<ElementTag>(elementTags ?? new[] { ElementTag.Any });
             this.findBy = findBy ?? Find.Any;
@@ -131,12 +131,12 @@ namespace WatiN.Core
         /// </summary>
         /// <param name="findBy">The additional constraint, not null</param>
         /// <returns>The filtered element finder</returns>
-        protected abstract ElementFinder FilterImpl(Constraint findBy);
+        public abstract ElementFinder FilterImpl(Constraint findBy);
 
         /// <summary>
         /// Finds all elements that match the finder's constraint.
         /// </summary>
         /// <returns>An enumeration of all matching elements</returns>
-        protected abstract IEnumerable<Element> FindAllImpl();
+        public abstract IEnumerable<Element> FindAllImpl();
     }
 }

@@ -99,9 +99,9 @@ namespace WatiN.Core
     /// <code>
     /// public class CalendarControl : Control&lt;Div&gt;
     /// {
-    ///     private SelectList MonthSelectList { get { return Element.Select(Find.ByName("month")); } }
-    ///     private SelectList YearSelectList { get { return Element.Select(Find.ByName("year")); } }
-    ///     private Div DateLabelDiv { get { return Element.Div(Find.ByClass("dateLabel")); } }
+    ///     public SelectList MonthSelectList { get { return Element.Select(Find.ByName("month")); } }
+    ///     public SelectList YearSelectList { get { return Element.Select(Find.ByName("year")); } }
+    ///     public Div DateLabelDiv { get { return Element.Div(Find.ByClass("dateLabel")); } }
     /// 
     ///     /// Gets or sets the date of the calendar control.
     ///     public DateTime Date
@@ -135,13 +135,13 @@ namespace WatiN.Core
     /// public class CalendarControl : Control&lt;Div&gt;
     /// {
     ///     [FindBy(Name = "month"), Description("Month drop down.")]
-    ///     private SelectList MonthSelectList;
+    ///     public SelectList MonthSelectList;
     ///     
     ///     [FindBy(Name = "year"), Description("Year drop down.")]
-    ///     private SelectList YearSelectList;
+    ///     public SelectList YearSelectList;
     ///     
     ///     [FindBy(Name = "dateLabel"), Description("Date label.")]
-    ///     private Div DateLabelDiv;
+    ///     public Div DateLabelDiv;
     ///     
     ///     // etc...
     /// }
@@ -157,7 +157,7 @@ namespace WatiN.Core
     public abstract class Control<TElement> : Control
         where TElement : Element
     {
-        private TElement element;
+        public TElement element;
 
         /// <summary>
         /// Gets the element wrapped by the control.
@@ -206,13 +206,13 @@ namespace WatiN.Core
         /// </remarks>
         /// <param name="element">The element to verify, not null</param>
         /// <exception cref="WatiNException">Thrown if the element's properties fail verification</exception>
-        protected virtual void VerifyElementProperties(TElement element)
+        public virtual void VerifyElementProperties(TElement element)
         {
             if (!element.Matches(ElementConstraint))
                 throw new WatiNException(string.Format("The Element does not match the control's element constraint '{0}'.", ElementConstraint));
         }
 
-        internal sealed override void Initialize(Element untypedElement)
+        public sealed override void Initialize(Element untypedElement)
         {
             if (element != null)
                 throw new InvalidOperationException(Resources.Control_HasAlreadyBeenInitialized);
@@ -226,7 +226,7 @@ namespace WatiN.Core
             InitializeContents();
         }
 
-        internal sealed override void Initialize(IElementContainer elementContainer, Constraint findBy)
+        public sealed override void Initialize(IElementContainer elementContainer, Constraint findBy)
         {
             if (element != null)
                 throw new InvalidOperationException(Resources.Control_HasAlreadyBeenInitialized);
@@ -238,17 +238,17 @@ namespace WatiN.Core
         /// <summary>
         /// Initializes the contents of the control object.
         /// </summary>
-        protected virtual void InitializeContents()
+        public virtual void InitializeContents()
         {
             InitializeContents(element as IElementContainer);
         }
 
-        internal sealed override Element GetUntypedElement()
+        public sealed override Element GetUntypedElement()
         {
             return Element;
         }
 
-        internal sealed override ControlCollection<TControl> CreateControlCollection<TControl>(IElementContainer elementContainer)
+        public sealed override ControlCollection<TControl> CreateControlCollection<TControl>(IElementContainer elementContainer)
         {
             var elementCollection = elementContainer.ElementsOfType<TElement>().Filter(ElementConstraint);
             return ControlCollection<TControl>.CreateControlCollection(elementCollection);
@@ -442,18 +442,18 @@ namespace WatiN.Core
         }
 
         /// <inheritdoc />
-        protected sealed override string GetAttributeValueImpl(string attributeName)
+        public sealed override string GetAttributeValueImpl(string attributeName)
         {
             return Element.GetAttributeValue(attributeName);
         }
 
-        internal abstract Element GetUntypedElement();
+        public abstract Element GetUntypedElement();
 
-        internal abstract void Initialize(Element untypedElement);
+        public abstract void Initialize(Element untypedElement);
 
-        internal abstract void Initialize(IElementContainer elementContainer, Constraint findBy);
+        public abstract void Initialize(IElementContainer elementContainer, Constraint findBy);
 
-        internal abstract ControlCollection<TControl> CreateControlCollection<TControl>(IElementContainer elementContainer)
+        public abstract ControlCollection<TControl> CreateControlCollection<TControl>(IElementContainer elementContainer)
             where TControl : Control, new();
     }
 }

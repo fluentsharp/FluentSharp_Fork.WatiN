@@ -62,7 +62,7 @@ namespace WatiN.Core.Constraints
     /// </remarks>
     public class ProximityTextConstraint : Constraint
     {
-        private readonly string labelText;
+        public readonly string labelText;
 
         // No point in including the whole System.Drawing lib just for this.		
 
@@ -80,7 +80,7 @@ namespace WatiN.Core.Constraints
         }
 
         /// <inheritdoc />
-        protected override bool MatchesImpl(IAttributeBag attributeBag, ConstraintContext context)
+        public override bool MatchesImpl(IAttributeBag attributeBag, ConstraintContext context)
         {
             var element = attributeBag.GetAdapter<Element>();
             if (element == null)
@@ -102,11 +102,11 @@ namespace WatiN.Core.Constraints
             writer.Write("Near Text '{0}'", labelText);
         }
 
-        private sealed class ProximityCache
+        public sealed class ProximityCache
         {
-            private readonly string labelText;
-            private string nearestElementId;
-            private bool populated;
+            public readonly string labelText;
+            public string nearestElementId;
+            public bool populated;
 
             public ProximityCache(string labelText)
             {
@@ -127,7 +127,7 @@ namespace WatiN.Core.Constraints
                 return nearestElementId != null && nearestElementId == element.Id;
             }
 
-            private Element FindNearestElement(Document container)
+            public Element FindNearestElement(Document container)
             {
                 var labelBounds = new List<Rectangle>(container.NativeDocument.GetTextBounds(labelText));
 
@@ -203,7 +203,7 @@ namespace WatiN.Core.Constraints
                 return nearestElement;
             }
 
-            private static void AddElementBounds<TElement>(ICollection<KeyValuePair<Element, Rectangle>> elementBounds, IEnumerable<TElement> elements)
+            public static void AddElementBounds<TElement>(ICollection<KeyValuePair<Element, Rectangle>> elementBounds, IEnumerable<TElement> elements)
                 where TElement : Element
             {
                 foreach (var element in elements)
@@ -218,7 +218,7 @@ namespace WatiN.Core.Constraints
             /// <param name="x2">X-coordinate of the second point</param>
             /// <param name="y2">Y-coordinate of the second point</param>
             /// <returns></returns>
-            private static int CalculateSquaredDistance(int x1, int y1, int x2, int y2)
+            public static int CalculateSquaredDistance(int x1, int y1, int x2, int y2)
             {
                 var width = x1 - x2;
                 var height = y1 - y2;
@@ -231,7 +231,7 @@ namespace WatiN.Core.Constraints
             /// <param name="r1">The first rectangle</param>
             /// <param name="r2">The seconed rectangle</param>
             /// <returns>The shoutest distance between the nearest faces or vetices</returns>
-            private static int DistanceBetweenRectangles(Rectangle r1, Rectangle r2)
+            public static int DistanceBetweenRectangles(Rectangle r1, Rectangle r2)
             {
                 /*
                  * Because the rectangles are right, all faces will either be perpendicular or parallel.

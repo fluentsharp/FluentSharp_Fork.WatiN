@@ -118,7 +118,7 @@ namespace WatiN.Core
 		}
 
         /// <inheritdoc />
-        protected override string DefaultToString()
+        public override string DefaultToString()
         {
 			return Text;
 		}
@@ -132,7 +132,7 @@ namespace WatiN.Core
 			get { return Ancestor<SelectList>(); }
 		}
 
-		private void setSelected(bool value, bool waitForComplete)
+		public void setSelected(bool value, bool waitForComplete)
 		{
 		    if (Selected == value) return;
 

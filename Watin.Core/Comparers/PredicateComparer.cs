@@ -27,7 +27,7 @@ namespace WatiN.Core.Comparers
     public class PredicateComparer<TPredicateValue, TComparerValue> : Comparer<TComparerValue>
         where TPredicateValue : TComparerValue
     {
-        private readonly Predicate<TPredicateValue> predicate;
+        public readonly Predicate<TPredicateValue> predicate;
 
         /// <summary>
         /// Creates a predicate-based comparer.

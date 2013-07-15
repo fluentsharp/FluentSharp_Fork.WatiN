@@ -60,9 +60,9 @@ namespace WatiN.Core
 	/// </example>
 	public class IE : Browser
 	{
-		private bool autoClose = true;
-		private bool isDisposed;
-	    private IEBrowser _ieBrowser;
+		public bool autoClose = true;
+		public bool isDisposed;
+	    public IEBrowser _ieBrowser;
 
 		/// <summary>
 		/// Creates a collection of new IE instances associated with open Internet Explorer windows.
@@ -458,7 +458,7 @@ namespace WatiN.Core
 		{
 		}
 
-	    protected internal IE(object iwebBrowser2, bool finishInitialization)
+	    public IE(object iwebBrowser2, bool finishInitialization)
         {
             CheckThreadApartmentStateIsSTA();
 
@@ -475,12 +475,12 @@ namespace WatiN.Core
                 FinishInitialization(null);
         }
 
-        private IEBrowser CreateIEBrowser(IWebBrowser2 IWebBrowser2Instance)
+        public IEBrowser CreateIEBrowser(IWebBrowser2 IWebBrowser2Instance)
 	    {
 	        return new IEBrowser(IWebBrowser2Instance);
 	    }
 
-	    private void CreateNewIEAndGoToUri(Uri uri, IDialogHandler logonDialogHandler, bool createInNewProcess)
+	    public void CreateNewIEAndGoToUri(Uri uri, IDialogHandler logonDialogHandler, bool createInNewProcess)
 		{
 			CheckThreadApartmentStateIsSTA();
 
@@ -514,7 +514,7 @@ namespace WatiN.Core
             FinishInitialization(uri);
 		}
 
-		private static IEBrowser CreateIEPartiallyInitializedInNewProcess()
+		public static IEBrowser CreateIEPartiallyInitializedInNewProcess()
 		{
 			var m_Proc = CreateIExploreInNewProcess();
 		    var helper = new AttachToIeHelper();
@@ -539,7 +539,7 @@ namespace WatiN.Core
 			throw new BrowserNotFoundException("IE", "Timeout while waiting to attach to newly created instance of IE.", Settings.AttachToBrowserTimeOut);
 		}
 
-	    private static Process CreateIExploreInNewProcess()
+	    public static Process CreateIExploreInNewProcess()
 	    {
             var arguments = "about:blank";
 
@@ -552,7 +552,7 @@ namespace WatiN.Core
 	        return m_Proc;
 	    }
 
-        internal static int GetMajorIEVersion()
+        public static int GetMajorIEVersion()
         {
             var ieKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Internet Explorer");
             if (ieKey == null) return 0;
@@ -562,7 +562,7 @@ namespace WatiN.Core
             return int.Parse(version.Substring(0, version.IndexOf('.')));
         }
 
-	    private static void CheckThreadApartmentStateIsSTA()
+	    public static void CheckThreadApartmentStateIsSTA()
 		{
             var isSTA = (Thread.CurrentThread.GetApartmentState() == ApartmentState.STA);
 			if (!isSTA)
@@ -571,7 +571,7 @@ namespace WatiN.Core
 			}
 		}
 
-	    internal void FinishInitialization(Uri uri)
+	    public void FinishInitialization(Uri uri)
         {
             // Due to UAC in Vista the navigate has to be done
             // before showing the new Internet Explorer instance
@@ -674,13 +674,13 @@ namespace WatiN.Core
             Reopen(new Uri("about:blank"), null, true);
         }
 
-		protected override void Recycle()
+		public override void Recycle()
 		{
 			base.Recycle();
 			isDisposed = false;
 		}
 
-		private void DisposeAndCloseIE(bool closeIE)
+		public void DisposeAndCloseIE(bool closeIE)
 		{
 		    if (isDisposed) return;
 		    
@@ -744,11 +744,11 @@ namespace WatiN.Core
 		/// Clears all browser cookies.
 		/// </summary>
 		/// <remarks>
-		/// Internet Explorer maintains an internal cookie cache that does not immediately
+		/// Internet Explorer maintains an public cookie cache that does not immediately
 		/// expire when cookies are cleared.  This is the case even when the cookies are
 		/// cleared using the Internet Options dialog.  If cookies have been used by
 		/// the current browser session it may be necessary to <see cref="Browser.Reopen()" /> the
-		/// browser to ensure the internal cookie cache is flushed.  Therefore it is
+		/// browser to ensure the public cookie cache is flushed.  Therefore it is
 		/// recommended to clear cookies at the beginning of the test before navigating
 		/// to any pages (other than "about:blank") to avoid having to reopen the browser.
 		/// </remarks>
@@ -776,11 +776,11 @@ namespace WatiN.Core
 		/// any of the site's subdomains.
 		/// </summary>
 		/// <remarks>
-		/// Internet Explorer maintains an internal cookie cache that does not immediately
+		/// Internet Explorer maintains an public cookie cache that does not immediately
 		/// expire when cookies are cleared.  This is the case even when the cookies are
 		/// cleared using the Internet Options dialog.  If cookies have been used by
         /// the current browser session it may be necessary to <see cref="Browser.Reopen()" /> the
-		/// browser to ensure the internal cookie cache is flushed.  Therefore it is
+		/// browser to ensure the public cookie cache is flushed.  Therefore it is
 		/// recommended to clear cookies at the beginning of the test before navigating
 		/// to any pages (other than "about:blank") to avoid having to reopen the browser.
 		/// </remarks>
@@ -834,7 +834,7 @@ namespace WatiN.Core
 		/// Gets the value of a cookie.
 		/// </summary>
 		/// <remarks>
-		/// This method cannot retrieve the value of cookies protected by the <c>httponly</c> security option.
+		/// This method cannot retrieve the value of cookies public by the <c>httponly</c> security option.
 		/// </remarks>
 		/// <param name="url">The site url associated with the cookie.</param>
 		/// <param name="cookieName">The cookie name.</param>
@@ -877,7 +877,7 @@ namespace WatiN.Core
 			WinInet.SetCookie(url, cookieData);
 		}
 
-		private bool IsInternetExplorerStillAvailable()
+		public bool IsInternetExplorerStillAvailable()
 		{
 		    // Call a property of the
             // ie instance to see of it isn't disposed by 
@@ -901,9 +901,9 @@ namespace WatiN.Core
 
 		/// <summary>
 		/// This method must be called by its inheritor to dispose references
-		/// to internal resources.
+		/// to public resources.
 		/// </summary>
-		protected override void Dispose(bool disposing)
+		public override void Dispose(bool disposing)
 		{
 			DisposeAndCloseIE(AutoClose);
 		}
@@ -941,7 +941,7 @@ namespace WatiN.Core
 			get { return GetHtmlDialogs(false); }
 		}
 
-		private HtmlDialogCollection GetHtmlDialogs(bool waitForComplete)
+		public HtmlDialogCollection GetHtmlDialogs(bool waitForComplete)
 		{
 		    return new HtmlDialogCollection(hWnd, waitForComplete);
 		}
@@ -978,7 +978,7 @@ namespace WatiN.Core
             set { _ieBrowser.Visible = value; }
 	    }
 
-		private HtmlDialog FindHtmlDialog(Constraint findBy, int timeout)
+		public HtmlDialog FindHtmlDialog(Constraint findBy, int timeout)
 		{
 			Logger.LogAction((LogFunction log) => { log("Busy finding HTMLDialog matching criteria: {0}", findBy); });
 

@@ -25,7 +25,7 @@ namespace WatiN.Core.Comparers
     /// </summary>
     public class TypeComparer : Comparer<Element>
     {
-        private readonly Type type;
+        public readonly Type type;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TypeComparer"/> class.
@@ -39,7 +39,7 @@ namespace WatiN.Core.Comparers
         /// <summary>
         /// Gets the type to compare against.
         /// </summary>
-        protected Type Type
+        public Type Type
         {
             get { return type; }
         }

@@ -27,11 +27,11 @@ namespace WatiN.Core.UtilityClasses
     /// A lazily populated list that fills itself up gradually from an enumeration on demand.
     /// </summary>
     /// <typeparam name="T">The type of element in the list</typeparam>
-    internal class LazyList<T> : IList<T>
+    public class LazyList<T> : IList<T>
     {
-        private readonly IEnumerable<T> source;
-        private List<T> cache;
-        private IEnumerator<T> enumerator;
+        public readonly IEnumerable<T> source;
+        public List<T> cache;
+        public IEnumerator<T> enumerator;
 
         /// <summary>
         /// Creates a lazily populated list from an enumeration.
@@ -98,12 +98,12 @@ namespace WatiN.Core.UtilityClasses
             return GetEnumerator();
         }
 
-        private int GetCurrentCacheSize()
+        public int GetCurrentCacheSize()
         {
             return cache != null ? cache.Count : 0;
         }
 
-        private bool PopulateCacheUpToIndex(int index)
+        public bool PopulateCacheUpToIndex(int index)
         {
             if (enumerator == null)
                 enumerator = source.GetEnumerator();
@@ -174,12 +174,12 @@ namespace WatiN.Core.UtilityClasses
             return false;
         }
 
-        private static void ThrowCollectionDoesNotSupportSearchingByEquality()
+        public static void ThrowCollectionDoesNotSupportSearchingByEquality()
         {
             throw new NotSupportedException(Resources.BaseComponentCollection_DoesNotSupportSearchingByEquality);
         }
 
-        private static void ThrowCollectionIsReadOnly()
+        public static void ThrowCollectionIsReadOnly()
         {
             throw new NotSupportedException(Resources.BaseComponentCollection_CollectionIsReadonly);
         }

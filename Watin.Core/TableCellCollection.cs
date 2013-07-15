@@ -32,7 +32,7 @@ namespace WatiN.Core
         public TableCellCollection(DomContainer domContainer, ElementFinder finder) : base(domContainer, finder) { }
 
         /// <inheritdoc />
-        protected override TableCellCollection CreateFilteredCollection(ElementFinder elementFinder)
+        public override TableCellCollection CreateFilteredCollection(ElementFinder elementFinder)
         {
             return new TableCellCollection(DomContainer, elementFinder);
         }

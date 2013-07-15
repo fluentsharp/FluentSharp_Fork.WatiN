@@ -33,7 +33,7 @@ namespace WatiN.Core.UtilityClasses
         /// <summary>
         /// Prevent creating an instance of this class (contains only static members)
         /// </summary>
-        private UtilityClass() {}
+        public UtilityClass() {}
 
         /// <summary>
         /// Determines whether the specified <paramref name="value" /> is null or empty.

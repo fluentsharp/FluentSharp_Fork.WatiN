@@ -23,8 +23,8 @@ namespace WatiN.Core.DialogHandlers
 {
 	public class UseDialogOnce : IDisposable
 	{
-		private DialogWatcher dialogWatcher;
-		private IDialogHandler dialogHandler;
+		public DialogWatcher dialogWatcher;
+		public IDialogHandler dialogHandler;
 
 		public UseDialogOnce(DialogWatcher dialogWatcher, IDialogHandler dialogHandler)
 		{
@@ -51,7 +51,7 @@ namespace WatiN.Core.DialogHandlers
 			return;
 		}
 
-		protected virtual void Dispose(bool managedAndNative)
+		public virtual void Dispose(bool managedAndNative)
 		{
 			dialogWatcher.Remove(dialogHandler);
 

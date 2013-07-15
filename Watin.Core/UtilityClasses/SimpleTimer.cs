@@ -42,8 +42,8 @@ namespace WatiN.Core.UtilityClasses
     /// </example>
     public class SimpleTimer
     {
-        private readonly TimeSpan timeout;
-        private Stopwatch stopwatch;
+        public readonly TimeSpan timeout;
+        public Stopwatch stopwatch;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SimpleTimer"/> class.

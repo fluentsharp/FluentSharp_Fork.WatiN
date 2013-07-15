@@ -31,14 +31,14 @@ namespace WatiN.Core
 	/// </summary>
 	public abstract class DomContainer : Document
 	{
-		private INativeDocument _nativeDocument;
+		public INativeDocument _nativeDocument;
 
         /// <summary>
         /// <c>true</c> if the <see cref="Dispose"/> method has been called to release resources.
         /// </summary>
-        protected bool IsDisposed { get; set; }
+        public bool IsDisposed { get; set; }
 
-	    protected DomContainer()
+	    public DomContainer()
 		{
 			DomContainer = this;
 		}
@@ -61,7 +61,7 @@ namespace WatiN.Core
         /// Gets the native document.
         /// </summary>
         /// <returns>The native document.</returns>
-        protected abstract INativeDocument OnGetNativeDocument();
+        public abstract INativeDocument OnGetNativeDocument();
 
 		/// <summary>
 		/// Returns a browser specific <see cref="INativeDocument"/> instance.
@@ -82,7 +82,7 @@ namespace WatiN.Core
 		/// <summary>
 		/// Call this function (from a subclass) as soon as the process is started.
 		/// </summary>
-		protected void StartDialogWatcher()
+		public void StartDialogWatcher()
 		{
 		    if (!Settings.AutoStartDialogWatcher || DialogWatcher != null) return;
 		    
@@ -94,7 +94,7 @@ namespace WatiN.Core
 	    /// Gets the dialog watcher.
 	    /// </summary>
 	    /// <value>The dialog watcher.</value>
-        public virtual DialogWatcher DialogWatcher { get; private set; }
+        public virtual DialogWatcher DialogWatcher { get; set; }
 
 		/// <summary>
 		/// Adds the dialog handler.
@@ -116,9 +116,9 @@ namespace WatiN.Core
 
 		/// <summary>
 		/// This method must be called by its inheritor to dispose references
-		/// to internal resources.
+		/// to public resources.
 		/// </summary>
-		protected override void Dispose(bool disposing)
+		public override void Dispose(bool disposing)
 		{
 		    if (IsDisposed) return;
 		    
@@ -173,7 +173,7 @@ namespace WatiN.Core
 		/// <summary>
 		/// Recycles the DomContainer to its initially created state so that it can be reused.
 		/// </summary>
-		protected virtual void Recycle()
+		public virtual void Recycle()
 		{
 			Dispose(true);
 			DomContainer = this;

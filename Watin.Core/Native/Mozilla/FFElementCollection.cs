@@ -21,7 +21,7 @@ using System.Collections.Generic;
 
 namespace WatiN.Core.Native.Mozilla
 {
-    internal class FFElementCollection : JSElementCollectionBase
+    public class FFElementCollection : JSElementCollectionBase
     {
         public FFElementCollection(ClientPortBase clientPort, string containerReference)
             : base(clientPort, containerReference)

@@ -35,7 +35,7 @@ namespace WatiN.Core.Logging
 	/// </example>
     public class FileLogWriter : BaseLogWriter, IDisposable
     {
-        private readonly StreamWriter LogStream;
+        public readonly StreamWriter LogStream;
 
         /// <summary>
         /// Constructor method creating a text file for writing
@@ -57,22 +57,22 @@ namespace WatiN.Core.Logging
         public bool IncludeTimestamp { get; set; }
 
         /// <summary>
-        /// private method to write the log line
+        /// public method to write the log line
         /// </summary>
         /// <param name="message">message to write</param>
-        private void WriteLogLine(string message)
+        public void WriteLogLine(string message)
         {
             var line = IncludeTimestamp ? DateTime.Now.ToString("s") + " " + message : message;
             LogStream.WriteLine(line);
             LogStream.Flush();
         }
 
-        protected override void LogActionImpl(string message)
+        public override void LogActionImpl(string message)
         {
             WriteLogLine("[Action]: " + message);
         }
 
-        protected override void LogDebugImpl(string message)
+        public override void LogDebugImpl(string message)
         {
             WriteLogLine("[Debug ]: " + message);
         }

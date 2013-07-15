@@ -29,7 +29,7 @@ namespace WatiN.Core.Constraints
 	public class PredicateConstraint<T> : Constraint
         where T : class
 	{
-		private readonly Predicate<T> predicate;
+		public readonly Predicate<T> predicate;
 
         /// <summary>
         /// Creates a predicate constraint.
@@ -45,7 +45,7 @@ namespace WatiN.Core.Constraints
 		}
 
         /// <inheritdoc />
-        protected override bool MatchesImpl(IAttributeBag attributeBag, ConstraintContext context)
+        public override bool MatchesImpl(IAttributeBag attributeBag, ConstraintContext context)
         {
             var typeToConvertTo = typeof(T);
             if (typeToConvertTo.IsSubclassOf(typeof(Control)))

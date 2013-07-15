@@ -26,8 +26,8 @@ namespace WatiN.Core.Comparers
 	/// </summary>
 	public class StringComparer : Comparer<string>
 	{
-		private readonly bool _ignoreCase;
-		private readonly string _comparisonValue;
+		public readonly bool _ignoreCase;
+		public readonly string _comparisonValue;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="StringComparer"/> class.

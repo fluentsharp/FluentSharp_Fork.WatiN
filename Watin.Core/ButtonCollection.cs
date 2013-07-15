@@ -32,7 +32,7 @@ namespace WatiN.Core
         public ButtonCollection(DomContainer domContainer, ElementFinder finder) : base(domContainer, finder) { }
 
         /// <inheritdoc />
-        protected override ButtonCollection CreateFilteredCollection(ElementFinder elementFinder)
+        public override ButtonCollection CreateFilteredCollection(ElementFinder elementFinder)
         {
             return new ButtonCollection(DomContainer, elementFinder);
         }

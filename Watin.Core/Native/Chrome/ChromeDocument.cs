@@ -43,7 +43,7 @@ namespace WatiN.Core.Native.Chrome
         /// <summary>
         /// Gets the FireFox client port.
         /// </summary>
-        public ClientPortBase ClientPort { get; private set; }
+        public ClientPortBase ClientPort { get; set;}
 
         /// <summary>
         /// Gets the collection of all elements in the document.
@@ -146,7 +146,7 @@ namespace WatiN.Core.Native.Chrome
         /// Gets or sets the document reference.
         /// </summary>
         /// <value>The document reference.</value>
-        private string DocumentReference
+        public string DocumentReference
         {
             get; set;
         }

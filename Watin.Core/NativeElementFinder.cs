@@ -33,8 +33,8 @@ namespace WatiN.Core
 
   		public delegate INativeElementCollection NativeElementCollectionFactory();
 
-        private readonly DomContainer domContainer;
-        private readonly NativeElementCollectionFactory factory;
+        public readonly DomContainer domContainer;
+        public readonly NativeElementCollectionFactory factory;
 
         /// <summary>
         /// Creates an element finder.
@@ -56,7 +56,7 @@ namespace WatiN.Core
         }
 
         /// <inheritdoc />
-        protected override ElementFinder FilterImpl(Constraint findBy)
+        public override ElementFinder FilterImpl(Constraint findBy)
         {
             var finder = new NativeElementFinder(factory, domContainer, ElementTags, Constraint & findBy);
             finder.WrapNativeElementFactory = WrapNativeElementFactory;
@@ -65,7 +65,7 @@ namespace WatiN.Core
         }
 
         /// <inheritdoc />
-        protected override IEnumerable<Element> FindAllImpl()
+        public override IEnumerable<Element> FindAllImpl()
         {
             var selector = GetSelector(Constraint);
             if (selector != null) return FindElementsUsingQuerySelector(selector);
@@ -76,13 +76,13 @@ namespace WatiN.Core
             return FindElementByTags();
         }
 
-        private IEnumerable<Element> FindElementsUsingQuerySelector(ICssSelector selector)
+        public IEnumerable<Element> FindElementsUsingQuerySelector(ICssSelector selector)
         {
             var nativeElementCollection2 = (INativeElementCollection2)GetNativeElementCollection();
             return WrapMatchingElements(nativeElementCollection2.GetElementsWithQuerySelector(selector, domContainer));
         }
 
-        private IEnumerable<Element> FindElementByTags()
+        public IEnumerable<Element> FindElementByTags()
         {
             foreach (var elementTag in ElementTagNames)
             {
@@ -91,19 +91,19 @@ namespace WatiN.Core
             }
         }
 
-        private IEnumerable<Element> FindElementsByTag(string tagName)
+        public IEnumerable<Element> FindElementsByTag(string tagName)
         {
             return WrapMatchingElements(tagName == null
                 ? GetNativeElementCollection().GetElements()
                 : GetNativeElementCollection().GetElementsByTag(tagName));
         }
 
-        private IEnumerable<Element> FindElementsById(string id)
+        public IEnumerable<Element> FindElementsById(string id)
         {
             return WrapMatchingElements(GetNativeElementCollection().GetElementsById(id));
         }
 
-        private IEnumerable<Element> WrapMatchingElements(IEnumerable<INativeElement> nativeElements)
+        public IEnumerable<Element> WrapMatchingElements(IEnumerable<INativeElement> nativeElements)
         {
             var context = new ConstraintContext();
             foreach (var nativeElement in nativeElements)
@@ -115,7 +115,7 @@ namespace WatiN.Core
             }
         }
 
-        private Element WrapElementIfMatch(INativeElement nativeElement, ConstraintContext context)
+        public Element WrapElementIfMatch(INativeElement nativeElement, ConstraintContext context)
         {
             nativeElement.WaitUntilReady();
 
@@ -134,22 +134,22 @@ namespace WatiN.Core
             return null;
         }
 
-        private Element WrapElement(INativeElement nativeElement)
+        public Element WrapElement(INativeElement nativeElement)
         {
         	return WrapNativeElementFactory(domContainer, nativeElement);
         }
 
-        private bool IsMatchByTag(INativeElement nativeElement)
+        public bool IsMatchByTag(INativeElement nativeElement)
         {
             return ElementTag.IsMatch(ElementTags, nativeElement);
         }
 
-        private bool IsMatchByConstraint(Component element, ConstraintContext context)
+        public bool IsMatchByConstraint(Component element, ConstraintContext context)
         {
             return element.Matches(Constraint, context);
         }
 
-        private INativeElementCollection GetNativeElementCollection()
+        public INativeElementCollection GetNativeElementCollection()
         {
             var nativeElementCollection = factory.Invoke();
             return nativeElementCollection ?? EmptyElementCollection.Empty;
@@ -160,12 +160,12 @@ namespace WatiN.Core
         /// otherwise returns null.
         /// </summary>
         /// <returns>The id or null if the constraint could match elements with no particular id</returns>
-        protected virtual string GetElementIdHint(Constraint constraint)
+        public virtual string GetElementIdHint(Constraint constraint)
         {
             return IdHinter.GetIdHint(constraint);
         }
 
-        protected virtual ICssSelector GetSelector(Constraint constraint)
+        public virtual ICssSelector GetSelector(Constraint constraint)
         {
             return new QuerySelectorHinter(constraint).GetSelector();
         }

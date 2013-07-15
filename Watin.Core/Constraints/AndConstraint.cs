@@ -27,8 +27,8 @@ namespace WatiN.Core.Constraints
     /// </summary>
 	public sealed class AndConstraint : Constraint
 	{
-        private readonly Constraint first;
-        private readonly Constraint second;
+        public readonly Constraint first;
+        public readonly Constraint second;
 
         /// <summary>
         /// Creates a new AND constraint.
@@ -76,7 +76,7 @@ namespace WatiN.Core.Constraints
         }
 
         /// <inheritdoc />
-        protected override bool MatchesImpl(IAttributeBag attributeBag, ConstraintContext context)
+        public override bool MatchesImpl(IAttributeBag attributeBag, ConstraintContext context)
         {
             return first.Matches(attributeBag, context)
                 && second.Matches(attributeBag, context);

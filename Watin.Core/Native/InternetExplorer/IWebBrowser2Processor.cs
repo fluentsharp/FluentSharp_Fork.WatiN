@@ -21,7 +21,7 @@ using SHDocVw;
 
 namespace WatiN.Core.Native.InternetExplorer
 {
-    internal interface IWebBrowser2Processor
+    public interface IWebBrowser2Processor
     {
         HTMLDocument HTMLDocument();
         void Process(IWebBrowser2 webBrowser2);

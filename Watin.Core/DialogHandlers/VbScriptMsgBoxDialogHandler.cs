@@ -33,7 +33,7 @@ namespace WatiN.Core.DialogHandlers
 			No = 7
 		}
 
-		private readonly Button _button = Button.Yes;
+		public readonly Button _button = Button.Yes;
 
 		public VbScriptMsgBoxDialogHandler(Button button)
 		{
@@ -66,7 +66,7 @@ namespace WatiN.Core.DialogHandlers
 			return window.StyleInHex == "94C803C5";
 		}
 
-		private WinButton ButtonToPush(Window window)
+		public WinButton ButtonToPush(Window window)
 		{
 			var button = IfOKButtonThenGetTheRightButtonId(window, _button);
 
@@ -81,7 +81,7 @@ namespace WatiN.Core.DialogHandlers
 		/// <param name="window"></param>
 		/// <param name="button"></param>
 		/// <returns></returns>
-		private Button IfOKButtonThenGetTheRightButtonId(Window window, Button button) 
+		public Button IfOKButtonThenGetTheRightButtonId(Window window, Button button) 
 		{
 			if (button == Button.OK)
 			{
@@ -94,7 +94,7 @@ namespace WatiN.Core.DialogHandlers
 			return button;
 		}
 
-		private static WinButton GetButton(Window window, Button button) 
+		public static WinButton GetButton(Window window, Button button) 
 		{
 			return new WinButton((int)button, window.Hwnd);
 		}

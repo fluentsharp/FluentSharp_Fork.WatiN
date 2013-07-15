@@ -273,7 +273,7 @@ namespace WatiN.Core
 			get { return SelectedOption != null; }
 		}
 
-		private void SelectByTextOrValue(Constraint findBy)
+		public void SelectByTextOrValue(Constraint findBy)
 		{
             if (Multiple)
             {
@@ -285,7 +285,7 @@ namespace WatiN.Core
             }
 		}
 
-	    private void SelectSingle(Constraint findBy)
+	    public void SelectSingle(Constraint findBy)
 	    {
 	        try
 	        {
@@ -297,7 +297,7 @@ namespace WatiN.Core
 	        }
 	    }
 
-	    private void SelectMultiple(Constraint findBy)
+	    public void SelectMultiple(Constraint findBy)
 	    {
 	        var options = Options.Filter(findBy);
 
@@ -317,12 +317,12 @@ namespace WatiN.Core
 	        FireEvent("onchange");
 	    }
 
-	    private static AttributeConstraint IsSelectedConstraint()
+	    public static AttributeConstraint IsSelectedConstraint()
         {
             return new AttributeConstraint("selected", new StringEqualsAndCaseInsensitiveComparer(true.ToString()));
         }
         
-        private static AttributeConstraint TextCaseInsensitiveConstraint(string text)
+        public static AttributeConstraint TextCaseInsensitiveConstraint(string text)
 		{
 			return Find.ByText(new StringEqualsAndCaseInsensitiveComparer(text));
 		}

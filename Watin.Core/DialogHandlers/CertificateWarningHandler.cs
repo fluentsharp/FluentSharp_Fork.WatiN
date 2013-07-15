@@ -28,9 +28,9 @@ namespace WatiN.Core.DialogHandlers
 			No = 2
 		}
 
-		private const string certificateWarningDialogStyle = "94C808C4";
+		public const string certificateWarningDialogStyle = "94C808C4";
 
-		private readonly ButtonsEnum buttonToPush;
+		public readonly ButtonsEnum buttonToPush;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="CertificateWarningHandler"/> class.
@@ -78,7 +78,7 @@ namespace WatiN.Core.DialogHandlers
 	        return window.StyleInHex == certificateWarningDialogStyle;
 	    }
 
-	    private WinButton ButtonToPush(Window window)
+	    public WinButton ButtonToPush(Window window)
 		{
 			return new WinButton((int) buttonToPush, window.Hwnd);
 		}

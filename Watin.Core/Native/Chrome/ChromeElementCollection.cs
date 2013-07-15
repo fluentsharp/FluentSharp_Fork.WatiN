@@ -26,7 +26,7 @@ namespace WatiN.Core.Native.Chrome
     /// <summary>
     /// Chrome implementation of the <see cref="INativeElementCollection"/>.
     /// </summary>
-    internal class ChromeElementCollection : JSElementCollectionBase
+    public class ChromeElementCollection : JSElementCollectionBase
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ChromeElementCollection"/> class.

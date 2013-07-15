@@ -28,7 +28,7 @@ namespace WatiN.Core.Actions
         /// <summary>
         /// The <see cref="TextField"/> wrapped by this <see cref="TypeTextAction"/> instance.
         /// </summary>
-        protected TextField TextField { get; private set; }
+        public TextField TextField { get; set; }
 
         public TypeTextAction(TextField textField)
         {
@@ -50,7 +50,7 @@ namespace WatiN.Core.Actions
             TypeAppendClearText(null, false, true);
         }
 
-        private void TypeAppendClearText(string value, bool append, bool clear)
+        public void TypeAppendClearText(string value, bool append, bool clear)
         {
             CheckIfTypingIsPossibleInThisTextField();
 
@@ -68,7 +68,7 @@ namespace WatiN.Core.Actions
             TextField.Highlight(false);
         }
 
-        private void CheckIfTypingIsPossibleInThisTextField()
+        public void CheckIfTypingIsPossibleInThisTextField()
         {
             if (!TextField.Enabled)
             {
@@ -80,7 +80,7 @@ namespace WatiN.Core.Actions
             }
         }
 
-        private static string ReplaceNewLineWithCorrectCharacters(string value)
+        public static string ReplaceNewLineWithCorrectCharacters(string value)
         {
             if (value != null)
             {
@@ -89,7 +89,7 @@ namespace WatiN.Core.Actions
             return value;
         }
 
-        protected virtual void SendKeyPresses(string value)
+        public virtual void SendKeyPresses(string value)
         {
             var length = value != null ? value.Length : 0;
 
@@ -112,17 +112,17 @@ namespace WatiN.Core.Actions
             }
         }
 
-        protected virtual void FireKeyUp(char character)
+        public virtual void FireKeyUp(char character)
         {
             TextField.KeyUp(character);
         }
 
-        protected virtual void FireKeyPress(char character)
+        public virtual void FireKeyPress(char character)
         {
             TextField.KeyPress(character);
         }
 
-        protected virtual void FireKeyDown(char character)
+        public virtual void FireKeyDown(char character)
         {
             TextField.KeyDown(character);
         }

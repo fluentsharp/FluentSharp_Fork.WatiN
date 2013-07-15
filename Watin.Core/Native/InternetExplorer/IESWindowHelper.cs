@@ -24,8 +24,8 @@ namespace WatiN.Core.Native.InternetExplorer
 {
     public class IESWindowHelper
     {
-        private readonly IntPtr _mainIeHwnd;
-        private int _ieVersion;
+        public readonly IntPtr _mainIeHwnd;
+        public int _ieVersion;
 
         public IESWindowHelper(IntPtr mainIeHwnd)
         {
@@ -41,12 +41,12 @@ namespace WatiN.Core.Native.InternetExplorer
                                                                                                     DialogBelongsToIEWindowForIe8AndHigher(window, mainWindow);
         }
 
-        private static bool DialogBelongsToIEWindowForIe7AndLower(Window dialog, Window mainWindow)
+        public static bool DialogBelongsToIEWindowForIe7AndLower(Window dialog, Window mainWindow)
         {
             return dialog.ToplevelWindow.Equals(mainWindow);
         }
 
-        private static bool DialogBelongsToIEWindowForIe8AndHigher(Window dialog, Window mainWindow)
+        public static bool DialogBelongsToIEWindowForIe8AndHigher(Window dialog, Window mainWindow)
         {
             Logger.LogDebug("Main: " + mainWindow.Hwnd + ", " + mainWindow.Title + ", " + mainWindow.ProcessID);
 

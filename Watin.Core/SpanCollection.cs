@@ -32,7 +32,7 @@ namespace WatiN.Core
         public SpanCollection(DomContainer domContainer, ElementFinder finder) : base(domContainer, finder) { }
 
         /// <inheritdoc />
-        protected override SpanCollection CreateFilteredCollection(ElementFinder elementFinder)
+        public override SpanCollection CreateFilteredCollection(ElementFinder elementFinder)
         {
             return new SpanCollection(DomContainer, elementFinder);
         }

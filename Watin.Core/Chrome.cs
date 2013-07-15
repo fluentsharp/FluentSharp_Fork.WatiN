@@ -43,7 +43,7 @@ namespace WatiN.Core
         /// <summary>
         /// Path to the chrome executable.
         /// </summary>
-        private static string pathToExe;
+        public static string pathToExe;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Chrome"/> class.
@@ -141,13 +141,13 @@ namespace WatiN.Core
             get { return ChromeBrowser; }
         }
 
-        private ChromeBrowser ChromeBrowser { get; set; }
+        public ChromeBrowser ChromeBrowser { get; set; }
 
         /// <summary>
         /// Gets the current Chrome process.
         /// </summary>
         /// <value>The current Chrome process or null if none is found.</value>
-        internal static Process CurrentProcess
+        public static Process CurrentProcess
         {
             get
             {
@@ -190,7 +190,7 @@ namespace WatiN.Core
         /// <param name="arguments">The arguments.</param>
         /// <param name="waitForMainWindow">if set to <c>true</c> [wait for main window].</param>
         /// <returns>Chrome process.</returns>
-        internal static Process CreateProcess(string arguments, bool waitForMainWindow)
+        public static Process CreateProcess(string arguments, bool waitForMainWindow)
         {
             var chromeProcess = new Process { StartInfo = { FileName = PathToExe, Arguments = arguments } };
 
@@ -230,7 +230,7 @@ namespace WatiN.Core
         /// Releases unmanaged and - optionally - managed resources
         /// </summary>
         /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
-        protected override void Dispose(bool disposing)
+        public override void Dispose(bool disposing)
         {
             // Check to see if Dispose has already been called.
             if (IsDisposed)
@@ -255,7 +255,7 @@ namespace WatiN.Core
         /// Initalizes the chrome executable path.
         /// </summary>
         /// <returns>The chrome executable path</returns>
-        private static string GetExecutablePath()
+        public static string GetExecutablePath()
         {
             string path;
             var chromeKey = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Uninstall\Google Chrome\");
@@ -280,7 +280,7 @@ namespace WatiN.Core
         /// Creates the chrome instance.
         /// </summary>
         /// <param name="url">The URL to navigate to.</param>
-        private void CreateChromeInstance(string url)
+        public void CreateChromeInstance(string url)
         {
             Logger.LogAction("Creating Chrome instance");
 

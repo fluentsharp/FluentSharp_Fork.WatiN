@@ -27,7 +27,7 @@ namespace WatiN.Core.Native.InternetExplorer
 {
     public class IEFireEventHandler
     {
-        private readonly IEElement _ieElement;
+        public readonly IEElement _ieElement;
 
         public IEFireEventHandler(IEElement ieElement)
         {
@@ -54,7 +54,7 @@ namespace WatiN.Core.Native.InternetExplorer
             FireEvent(eventName, eventProperties, false);
         }
 
-        private void FireEvent(string eventName, NameValueCollection eventProperties, bool noWait)
+        public void FireEvent(string eventName, NameValueCollection eventProperties, bool noWait)
         {
             if (HandledOnClick(eventName, noWait)) return;
 
@@ -80,7 +80,7 @@ namespace WatiN.Core.Native.InternetExplorer
             }
         }
 
-        private bool HandledOnClick(string eventname, bool noWait)
+        public bool HandledOnClick(string eventname, bool noWait)
         {
             if (eventname.ToLower() == "onclick")
             {
@@ -94,7 +94,7 @@ namespace WatiN.Core.Native.InternetExplorer
             return false;
         }
 
-        private object CreateCOMEventObject(NameValueCollection eventProperties)
+        public object CreateCOMEventObject(NameValueCollection eventProperties)
         {
             object prototypeEvent = null;
             object eventObj = ((IHTMLDocument4)_ieElement.AsHtmlElement.document).CreateEventObject(ref prototypeEvent);
@@ -112,7 +112,7 @@ namespace WatiN.Core.Native.InternetExplorer
             return eventObj;
         }
 
-        private string CreateJavaScriptFireEventCode(NameValueCollection eventObjectProperties, string eventName)
+        public string CreateJavaScriptFireEventCode(NameValueCollection eventObjectProperties, string eventName)
         {
             var scriptCode = new StringBuilder();
             scriptCode.Append("var newEvt = document.createEventObject();");
@@ -125,13 +125,13 @@ namespace WatiN.Core.Native.InternetExplorer
             return scriptCode.ToString();
         }
 
-        private void ExecuteScript(string code)
+        public void ExecuteScript(string code)
         {
             var window = _ieElement.ParentWindow;
             IEUtils.RunScript(code, window);
         }
 
-        private static void CreateJavaScriptEventObject(StringBuilder scriptCode, NameValueCollection eventObjectProperties)
+        public static void CreateJavaScriptEventObject(StringBuilder scriptCode, NameValueCollection eventObjectProperties)
         {
             if (eventObjectProperties == null) return;
 
@@ -147,7 +147,7 @@ namespace WatiN.Core.Native.InternetExplorer
             }
         }
 
-        private void SetValueWhenOnKeyPress(string eventName, NameValueCollection eventProperties)
+        public void SetValueWhenOnKeyPress(string eventName, NameValueCollection eventProperties)
         {
             if (eventName != "onKeyPress" || eventProperties == null) return;
             

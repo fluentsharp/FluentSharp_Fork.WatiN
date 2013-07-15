@@ -33,11 +33,11 @@ namespace WatiN.Core
     /// </example>
     public class IdHinter
     {
-        private readonly Constraint _constraint;
-        private string _idValue;
-        private bool _hasAlreadyBeenCalled;
+        public readonly Constraint _constraint;
+        public string _idValue;
+        public bool _hasAlreadyBeenCalled;
 
-        private AttributeConstraint AsAttributeConstraint { get; set; }
+        public AttributeConstraint AsAttributeConstraint { get; set; }
 
         /// <summary>
         /// Gets the id hint. Only returns an Id if <paramref name="constraint"/> is an <see cref="AttributeConstraint"/> on an exact Id or
@@ -60,13 +60,13 @@ namespace WatiN.Core
             return new IdHinter(constraint).GetIdHint();
         }
 
-        private IdHinter(Constraint constraint)
+        public IdHinter(Constraint constraint)
         {
             _constraint = constraint ?? Find.Any;
             AsAttributeConstraint = constraint as AttributeConstraint;
         }
 
-        private string GetIdHint(IdHinter second)
+        public string GetIdHint(IdHinter second)
         {
             if (ShouldReturnIdHint(second, this))
                 return second.GetIdHint();
@@ -74,7 +74,7 @@ namespace WatiN.Core
             return ShouldReturnIdHint(this, second) ? GetIdHint() : null;
         }
 
-        private string GetIdHint()
+        public string GetIdHint()
         {
             if (_hasAlreadyBeenCalled) return _idValue;
 
@@ -93,7 +93,7 @@ namespace WatiN.Core
             return _idValue;
         }
 
-        private bool IsIdAttributeConstraint
+        public bool IsIdAttributeConstraint
         {
             get
             {
@@ -102,17 +102,17 @@ namespace WatiN.Core
             }
         }
 
-        private bool HasId
+        public bool HasId
         {
             get { return GetIdHint() != null;}
         }
 
-        private bool IsAllowedConstraint
+        public bool IsAllowedConstraint
         {
             get { return AsAttributeConstraint != null || _constraint.Equals(AnyConstraint.Instance); }
         }
 
-        private static bool ShouldReturnIdHint(IdHinter of, IdHinter constraint)
+        public static bool ShouldReturnIdHint(IdHinter of, IdHinter constraint)
         {
             return of.HasId && (constraint.IsAllowedConstraint & !constraint.HasId);
         }
@@ -120,7 +120,7 @@ namespace WatiN.Core
 
     public class QuerySelectorHinter
     {
-        private readonly Constraint _constraint;
+        public readonly Constraint _constraint;
 
         public QuerySelectorHinter(Constraint constraint)
         {
@@ -142,7 +142,7 @@ namespace WatiN.Core
             return null;
         }
 
-        private static ICssSelector GetSelector(Constraint constraint)
+        public static ICssSelector GetSelector(Constraint constraint)
         {
             return constraint as QuerySelectorConstraint;
         }

@@ -132,19 +132,19 @@ namespace WatiN.Core
     /// <seealso cref="PageAttribute"/>
     public abstract class Page : Composite
     {
-        private PageMetadata _metadata;
-        private Document _document;
+        public PageMetadata _metadata;
+        public Document _document;
 
         /// <summary>
         /// Reports an error message.
         /// </summary>
         /// <param name="errorMessage">The error message to report.</param>
-        protected delegate void ErrorReporter(string errorMessage);
+        public delegate void ErrorReporter(string errorMessage);
  
         /// <summary>
         /// Creates an uninitialized page instance.
         /// </summary>
-        protected Page()
+        public Page()
         {
         }
 
@@ -184,14 +184,14 @@ namespace WatiN.Core
             }
         }
 
-        protected Document UnverifiedDocument
+        public Document UnverifiedDocument
         {
             get { return _document; }
         }
 
         /// <summary>
         /// Returns true if the current document represents this page (has the correct Url, etc.).
-        /// The actual check(s) is done by the protected method <see cref="VerifyDocumentProperties"/>
+        /// The actual check(s) is done by the public method <see cref="VerifyDocumentProperties"/>
         /// </summary>
         public virtual bool IsCurrentDocument
         {
@@ -216,7 +216,7 @@ namespace WatiN.Core
         /// </remarks>
         /// <param name="document">The document to verify, not null</param>
         /// <param name="errorReporter">The error reporter to invoke is the document's properties fail verification</param>
-        protected virtual void VerifyDocumentProperties(Document document, ErrorReporter errorReporter)
+        public virtual void VerifyDocumentProperties(Document document, ErrorReporter errorReporter)
         {
             VerifyDocumentUrl(document.Url, errorReporter);
             VerifyDocumentIsSecure(document.Url, errorReporter);
@@ -236,7 +236,7 @@ namespace WatiN.Core
         /// </remarks>
         /// <param name="url">The document url to verify, not null</param>
         /// <param name="errorReporter">The error reporter to invoke is the document's properties fail verification</param>
-        protected virtual void VerifyDocumentUrl(string url, ErrorReporter errorReporter)
+        public virtual void VerifyDocumentUrl(string url, ErrorReporter errorReporter)
         {
             if (Metadata.UrlRegex != null && !Metadata.UrlRegex.IsMatch(url))
             {
@@ -258,7 +258,7 @@ namespace WatiN.Core
         /// </remarks>
         /// <param name="url">The document url to verify, not null</param>
         /// <param name="errorReporter">The error reporter to invoke is the document's properties fail verification</param>
-        protected virtual void VerifyDocumentIsSecure(string url, ErrorReporter errorReporter)
+        public virtual void VerifyDocumentIsSecure(string url, ErrorReporter errorReporter)
         {
             if (Metadata.IsSecure && !url.StartsWith("https:", StringComparison.InvariantCultureIgnoreCase))
             {
@@ -341,7 +341,7 @@ namespace WatiN.Core
         }
 
         /// <inheritdoc />
-        protected sealed override string GetAttributeValueImpl(string attributeName)
+        public sealed override string GetAttributeValueImpl(string attributeName)
         {
             return Document.GetAttributeValue(attributeName);
         }
@@ -349,12 +349,12 @@ namespace WatiN.Core
         /// <summary>
         /// Initializes the contents of the page object.
         /// </summary>
-        protected virtual void InitializeContents()
+        public virtual void InitializeContents()
         {
             InitializeContents(_document);
         }
 
-        private void Initialize(Document document)
+        public void Initialize(Document document)
         {
             if (_document != null)
                 throw new InvalidOperationException("The page has already been initialized.");

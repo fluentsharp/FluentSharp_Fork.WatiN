@@ -30,7 +30,7 @@ namespace WatiN.Core.Native
         /// Initializes a new instance of the <see cref="JSBrowserBase"/> class.
         /// </summary>
         /// <param name="clientPort">The client port.</param>
-        protected JSBrowserBase(ClientPortBase clientPort)
+        public JSBrowserBase(ClientPortBase clientPort)
         {
             ClientPort = clientPort;
         }
@@ -39,7 +39,7 @@ namespace WatiN.Core.Native
         /// Gets the client port used to communicate with the instance of FireFox.
         /// </summary>
         /// <value>The client port.</value>
-        public ClientPortBase ClientPort { get; private set; }
+        public ClientPortBase ClientPort { get; set;}
 
         /// <summary>
         /// Gets the name of the browser variable.
@@ -99,7 +99,7 @@ namespace WatiN.Core.Native
         /// </summary>
         /// <param name="forceGet">When it is <c>true</c>, causes the page to always be reloaded from the server. 
         /// If it is <c>false</c>, the browser may reload the page from its cache.</param>
-        private void Reload(bool forceGet)
+        public void Reload(bool forceGet)
         {
             ClientPort.Write("{0}.location.reload({1});", FireFoxClientPort.WindowVariableName, forceGet.ToString().ToLower());
         }
@@ -140,7 +140,7 @@ namespace WatiN.Core.Native
             return loading;
         }
 
-        protected void Reopen(Uri url)
+        public void Reopen(Uri url)
         {
             ClientPort.Dispose();
             ClientPort.Connect(url == null ? string.Empty : url.ToString());
@@ -151,7 +151,7 @@ namespace WatiN.Core.Native
         /// </summary>
         /// <param name="url">The URL to laod.</param>
         /// <param name="waitForComplete">If false, makes to execution of LoadUri asynchronous.</param>
-        protected abstract void LoadUri(Uri url, bool waitForComplete);
+        public abstract void LoadUri(Uri url, bool waitForComplete);
 
         public int WindowCount
         {
@@ -165,7 +165,7 @@ namespace WatiN.Core.Native
             }
         }
 
-        private bool Navigate(string action)
+        public bool Navigate(string action)
         {
             var ticks = Guid.NewGuid().ToString();
             ClientPort.Write("{0}.WatiNGoBackCheck='{1}';",ClientPort.DocumentVariableName, ticks);

@@ -38,7 +38,7 @@ namespace WatiN.Core.Native.Mozilla
         /// </summary>
         /// <param name="url">The URL to laod.</param>
         /// <param name="waitForComplete">If false, makes to execution of LoadUri asynchronous.</param>
-        protected override void LoadUri(Uri url, bool waitForComplete)
+        public override void LoadUri(Uri url, bool waitForComplete)
         {
             var command = string.Format("{0}.loadURI(\"{1}\");", ClientPort.PromptName, url.AbsoluteUri);
 

@@ -37,7 +37,7 @@ namespace WatiN.Core.Exceptions
 
         public ElementNotFoundException(SerializationInfo info, StreamingContext context) : base(info, context) {}
 
-		private static string CreateMessage(string tagName, string criteria, string url, string innerException)
+		public static string CreateMessage(string tagName, string criteria, string url, string innerException)
 		{
             var builder = new StringBuilder();
             builder.AppendFormat("Could not find {0} element tag", tagName ?? string.Empty);

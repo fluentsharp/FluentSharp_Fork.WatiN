@@ -44,14 +44,14 @@ namespace WatiN.Core.DialogHandlers
     /// </example>
     public class DialogHandlerHelper : BaseDialogHandler
     {
-        private readonly IEnumerable<IDialogHandler> _dialogHandlers;
+        public readonly IEnumerable<IDialogHandler> _dialogHandlers;
 
         /// <summary>
         /// Returns a list of type names of dialoghandlers which can handle this dialog, 
         /// bases on calling their <see cref="IDialogHandler.CanHandleDialog"/> method.
         /// </summary>
         /// <value>The candidate dialog handlers.</value>
-        public List<string> CandidateDialogHandlers { get; private set; }
+        public List<string> CandidateDialogHandlers { get; set;}
 
         public DialogHandlerHelper()
         {
@@ -69,7 +69,7 @@ namespace WatiN.Core.DialogHandlers
             return false;
         }
 
-        internal void HandlePossibleCandidate(IDialogHandler dialogHandler, Window window, IntPtr mainWindowHwnd)
+        public void HandlePossibleCandidate(IDialogHandler dialogHandler, Window window, IntPtr mainWindowHwnd)
         {
             UtilityClass.TryActionIgnoreException(() =>
                                                       {
@@ -91,7 +91,7 @@ namespace WatiN.Core.DialogHandlers
             return false;
         }
 
-        internal static IEnumerable<IDialogHandler> GetDialogHandlers()
+        public static IEnumerable<IDialogHandler> GetDialogHandlers()
         {
             var assembly = Assembly.GetAssembly(typeof(BaseDialogHandler));
 

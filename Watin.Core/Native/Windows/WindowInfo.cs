@@ -21,7 +21,7 @@ using System.Runtime.InteropServices;
 namespace WatiN.Core.Native.Windows
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal struct WINDOWINFO
+    public struct WINDOWINFO
     {
         public uint cbSize;
         public RECT rcWindow;

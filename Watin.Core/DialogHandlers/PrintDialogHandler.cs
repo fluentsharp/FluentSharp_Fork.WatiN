@@ -44,11 +44,11 @@ namespace WatiN.Core.DialogHandlers
 
 		// need to be checked whether this is valid for other operating systems 
         // for WinXP and Win2003
-		private const string printDialogStyle = "96C820C4";
+		public const string printDialogStyle = "96C820C4";
         // for Vista and Win2008
-        private const string printDialogStyleVista = "96C800C4";
+        public const string printDialogStyleVista = "96C800C4";
 
-        private ButtonsEnum buttonToPush;
+        public ButtonsEnum buttonToPush;
 
 		public PrintDialogHandler(ButtonsEnum buttonToPush)
 		{
@@ -70,7 +70,7 @@ namespace WatiN.Core.DialogHandlers
 			return false;
 		}
 
-		private WinButton ButtonToPush(Window window)
+		public WinButton ButtonToPush(Window window)
 		{
 			return new WinButton((int) buttonToPush, window.Hwnd);
 		}

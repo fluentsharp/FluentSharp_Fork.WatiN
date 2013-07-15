@@ -43,10 +43,10 @@ namespace WatiN.Core
             return new ElementCollectionWrapper<TElement>(elements);
         }
 
-        private sealed class ElementCollectionWrapper<TElement> : ControlCollection<TControl>
+        public sealed class ElementCollectionWrapper<TElement> : ControlCollection<TControl>
             where TElement : Element
         {
-            private readonly IElementCollection<TElement> _elements;
+            public readonly IElementCollection<TElement> _elements;
 
             public ElementCollectionWrapper(IElementCollection<TElement> elements)
             {
@@ -56,12 +56,12 @@ namespace WatiN.Core
                 _elements = elements;
             }
 
-            protected override ControlCollection<TControl> CreateFilteredCollection(Constraint findBy)
+            public override ControlCollection<TControl> CreateFilteredCollection(Constraint findBy)
             {
                 return new ControlCollectionWrapper(GetComponents()).Filter(findBy);
             }
 
-            protected override IEnumerable<TControl> GetComponents()
+            public override IEnumerable<TControl> GetComponents()
             {
                 var elementConstraint = GetControlElementConstraint();
 
@@ -72,33 +72,33 @@ namespace WatiN.Core
                 }
             }
 
-            private static Constraint GetControlElementConstraint()
+            public static Constraint GetControlElementConstraint()
             {
                 var dummyControl = new TControl();
                 return dummyControl.ElementConstraint;
             }
         }
 
-        private sealed class ControlCollectionWrapper : ControlCollection<TControl>
+        public sealed class ControlCollectionWrapper : ControlCollection<TControl>
         {
-            private readonly IEnumerable<TControl> _controls;
+            public readonly IEnumerable<TControl> _controls;
 
             public ControlCollectionWrapper(IEnumerable<TControl> controls)
             {
                 _controls = controls;
             }
 
-            protected override ControlCollection<TControl> CreateFilteredCollection(Constraint findBy)
+            public override ControlCollection<TControl> CreateFilteredCollection(Constraint findBy)
             {
                 return new ControlCollectionWrapper(GetControls(findBy));
             }
 
-            protected override IEnumerable<TControl> GetComponents()
+            public override IEnumerable<TControl> GetComponents()
             {
                 return GetControls(Find.Any);
             }
 
-            private IEnumerable<TControl> GetControls(Constraint findBy)
+            public IEnumerable<TControl> GetControls(Constraint findBy)
             {
                 foreach (var control in _controls)
                 {

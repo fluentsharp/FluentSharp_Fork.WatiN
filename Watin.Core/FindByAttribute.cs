@@ -188,7 +188,7 @@ namespace WatiN.Core
         /// Gets the constraint expressed by this attribute.
         /// </summary>
         /// <returns>The constraint</returns>
-        protected virtual Constraint GetConstraint()
+        public virtual Constraint GetConstraint()
         {
             Constraint constraint = null;
 
@@ -219,20 +219,20 @@ namespace WatiN.Core
             return constraint ?? Find.Any;
         }
 
-        private delegate Constraint StringConstraintFactory(string value);
-        private delegate Constraint RegexConstraintFactory(Regex value);
+        public delegate Constraint StringConstraintFactory(string value);
+        public delegate Constraint RegexConstraintFactory(Regex value);
 
-        private static Constraint CreateStringConstraint(StringConstraintFactory factory, string value)
+        public static Constraint CreateStringConstraint(StringConstraintFactory factory, string value)
         {
             return value != null ? factory(value) : null;
         }
 
-        private static Constraint CreateRegexConstraint(RegexConstraintFactory factory, string value)
+        public static Constraint CreateRegexConstraint(RegexConstraintFactory factory, string value)
         {
             return value != null ? factory(new Regex(value)) : null;
         }
 
-        private static void Combine(ref Constraint constraint, Constraint otherConstraint)
+        public static void Combine(ref Constraint constraint, Constraint otherConstraint)
         {
             if (otherConstraint != null)
             {

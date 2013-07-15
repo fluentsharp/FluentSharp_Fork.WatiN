@@ -24,7 +24,7 @@ namespace WatiN.Core
 {
     public class EmptyElementCollection : INativeElementCollection
     {
-        private readonly ReadOnlyCollection<INativeElement> _empty =new ReadOnlyCollection<INativeElement>(new List<INativeElement>());
+        public readonly ReadOnlyCollection<INativeElement> _empty =new ReadOnlyCollection<INativeElement>(new List<INativeElement>());
 
         public static EmptyElementCollection Empty = new EmptyElementCollection();
 

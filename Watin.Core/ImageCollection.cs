@@ -32,7 +32,7 @@ namespace WatiN.Core
         public ImageCollection(DomContainer domContainer, ElementFinder finder) : base(domContainer, finder) { }
 
         /// <inheritdoc />
-        protected override ImageCollection CreateFilteredCollection(ElementFinder elementFinder)
+        public override ImageCollection CreateFilteredCollection(ElementFinder elementFinder)
         {
             return new ImageCollection(DomContainer, elementFinder);
         }

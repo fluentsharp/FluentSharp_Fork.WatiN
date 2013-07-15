@@ -30,18 +30,18 @@ namespace WatiN.Core
 	/// </summary>
 	public class Find
 	{
-		internal const string altAttribute = "alt";
-		internal const string idAttribute = "id";
-		internal const string forAttribute = "htmlFor";
-		internal const string nameAttribute = "name";
-		internal const string srcAttribute = "src";
-		internal const string styleBaseAttribute = "style.";
-		internal const string innerTextAttribute = "innertext";
-		internal const string titleAttribute = "title";
-		internal const string tagNameAttribute = "tagName";
-		internal const string valueAttribute = "value";
-		internal const string hrefAttribute = "href";
-		internal const string classNameAttribute = "className";
+		public const string altAttribute = "alt";
+		public const string idAttribute = "id";
+		public const string forAttribute = "htmlFor";
+		public const string nameAttribute = "name";
+		public const string srcAttribute = "src";
+		public const string styleBaseAttribute = "style.";
+		public const string innerTextAttribute = "innertext";
+		public const string titleAttribute = "title";
+		public const string tagNameAttribute = "tagName";
+		public const string valueAttribute = "value";
+		public const string hrefAttribute = "href";
+		public const string classNameAttribute = "className";
 
         /// <summary>
         /// Finds anything.
@@ -864,7 +864,7 @@ namespace WatiN.Core
             return ByElement<T>(element => IsNotNullAndExists(selector(element)));
         }
 
-        private static bool IsNotNullAndExists(Element element)
+        public static bool IsNotNullAndExists(Element element)
         {
             return element != null && element.Exists;
         }

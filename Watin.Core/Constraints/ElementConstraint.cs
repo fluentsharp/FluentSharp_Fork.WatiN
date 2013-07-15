@@ -29,7 +29,7 @@ namespace WatiN.Core.Constraints
     /// </summary>
 	public class ElementConstraint : Constraint 
 	{
-		private readonly Comparer<Element> comparer;
+		public readonly Comparer<Element> comparer;
 
         /// <summary>
         /// Creates an element constraint.
@@ -53,7 +53,7 @@ namespace WatiN.Core.Constraints
         }
 
         /// <inheritdoc />
-        protected override bool MatchesImpl(IAttributeBag attributeBag, ConstraintContext context)
+        public override bool MatchesImpl(IAttributeBag attributeBag, ConstraintContext context)
         {
             Element element = attributeBag.GetAdapter<Element>();
             if (element == null)

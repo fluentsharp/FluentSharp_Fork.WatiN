@@ -30,9 +30,9 @@ namespace WatiN.Core
 	public class HtmlDialogCollection : BaseComponentCollection<HtmlDialog, HtmlDialogCollection>
 	{
         // TODO: earlier implementation had an optimization to only wait for complete of returned instances
-		private readonly List<HtmlDialog> htmlDialogs;
-        private readonly Constraint findBy;
-        private readonly bool waitForComplete;
+		public readonly List<HtmlDialog> htmlDialogs;
+        public readonly Constraint findBy;
+        public readonly bool waitForComplete;
 
 	    public HtmlDialogCollection(IntPtr hWnd, bool waitForComplete)
 	    {
@@ -53,7 +53,7 @@ namespace WatiN.Core
             }
 	    }
 
-	    private HtmlDialogCollection(Constraint findBy, List<HtmlDialog> htmlDialogs, bool waitForComplete)
+	    public HtmlDialogCollection(Constraint findBy, List<HtmlDialog> htmlDialogs, bool waitForComplete)
         {
             this.findBy = findBy;
             this.htmlDialogs = htmlDialogs;
@@ -70,13 +70,13 @@ namespace WatiN.Core
         }
 
 	    /// <inheritdoc />
-        protected override HtmlDialogCollection CreateFilteredCollection(Constraint findBy)
+        public override HtmlDialogCollection CreateFilteredCollection(Constraint findBy)
         {
             return new HtmlDialogCollection(this.findBy & findBy, htmlDialogs, waitForComplete);
         }
 
         /// <inheritdoc />
-        protected override IEnumerable<HtmlDialog> GetComponents()
+        public override IEnumerable<HtmlDialog> GetComponents()
         {
             var context = new ConstraintContext();
             foreach (var htmlDialog in htmlDialogs)

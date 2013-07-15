@@ -26,7 +26,7 @@ namespace WatiN.Core.Native.Mozilla
 {
     public class FFDocument : INativeDocument
     {
-        private readonly JSElement _containingFrameElement;
+        public readonly JSElement _containingFrameElement;
 
         public FFDocument(ClientPortBase clientPort)
             : this(clientPort, clientPort.DocumentVariableName)
@@ -49,12 +49,12 @@ namespace WatiN.Core.Native.Mozilla
         /// <summary>
         /// Gets the FireFox client port.
         /// </summary>
-        public ClientPortBase ClientPort { get; private set; }
+        public ClientPortBase ClientPort { get; set;}
 
         /// <summary>
         /// Gets the name of a variable that stores a reference to the document within FireFox.
         /// </summary>
-        public string DocumentReference { get; private set; }
+        public string DocumentReference { get; set;}
 
         /// <inheritdoc />
         public INativeElementCollection AllElements
@@ -135,7 +135,7 @@ namespace WatiN.Core.Native.Mozilla
             }
         }
 
-        private void PopulateFrames(IList<INativeDocument> frames, string tagName)
+        public void PopulateFrames(IList<INativeDocument> frames, string tagName)
         {
             foreach (JSElement frameElement in AllElements.GetElementsByTag(tagName))
             {

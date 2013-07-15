@@ -22,10 +22,10 @@ namespace WatiN.Core.DialogHandlers
 {
     public class CloseIEDialogHandler : BaseDialogHandler
     {
-        private const int okButtonId = 6;
-        private const int cancelButtonId = 7;
+        public const int okButtonId = 6;
+        public const int cancelButtonId = 7;
         
-        private readonly bool _clickOnOK;
+        public readonly bool _clickOnOK;
        
         /// <summary>
         /// Initializes a new instance of the <see cref="CloseIEDialogHandler"/> class.

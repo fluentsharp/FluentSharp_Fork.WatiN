@@ -32,7 +32,7 @@ namespace WatiN.Core
         public FileUploadCollection(DomContainer domContainer, ElementFinder finder) : base(domContainer, finder) { }
 
         /// <inheritdoc />
-        protected override FileUploadCollection CreateFilteredCollection(ElementFinder elementFinder)
+        public override FileUploadCollection CreateFilteredCollection(ElementFinder elementFinder)
         {
             return new FileUploadCollection(DomContainer, elementFinder);
         }

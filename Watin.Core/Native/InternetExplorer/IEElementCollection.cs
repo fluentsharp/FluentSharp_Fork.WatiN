@@ -24,10 +24,10 @@ using WatiN.Core.UtilityClasses;
 
 namespace WatiN.Core.Native.InternetExplorer
 {
-    internal class IEElementCollection : INativeElementCollection2
+    public class IEElementCollection : INativeElementCollection2
     {
-        private readonly IEnumerable _htmlElementCollection;
-        private readonly IEElement _element;
+        public readonly IEnumerable _htmlElementCollection;
+        public readonly IEElement _element;
 
         public IEElementCollection(IEnumerable htmlElementCollection, IEElement element)
         {
@@ -120,7 +120,7 @@ namespace WatiN.Core.Native.InternetExplorer
             return new JScriptElementArrayEnumerator((IEDocument) domContainer.NativeDocument, "___WATINRESULT");
         }
 
-        private string CreateArray()
+        public string CreateArray()
         {
             var elements = "[";
 
@@ -135,7 +135,7 @@ namespace WatiN.Core.Native.InternetExplorer
 
         }
 
-        private static IEnumerable<INativeElement> AsNative(IEnumerable htmlElementCollection)
+        public static IEnumerable<INativeElement> AsNative(IEnumerable htmlElementCollection)
         {
             foreach (IHTMLElement htmlElement in htmlElementCollection)
                 yield return new IEElement(htmlElement);

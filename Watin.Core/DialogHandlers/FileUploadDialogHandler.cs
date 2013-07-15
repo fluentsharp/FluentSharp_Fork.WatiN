@@ -22,7 +22,7 @@ namespace WatiN.Core.DialogHandlers
 {
 	public class FileUploadDialogHandler : BaseDialogHandler
 	{
-		private readonly string fileName;
+		public readonly string fileName;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FileUploadDialogHandler"/> class.

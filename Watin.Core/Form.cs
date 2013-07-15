@@ -41,7 +41,7 @@ namespace WatiN.Core
 		}
 
         /// <inheritdoc />
-        protected override string DefaultToString()
+        public override string DefaultToString()
         {
 			if (UtilityClass.IsNotNullOrEmpty(Title))
 			{

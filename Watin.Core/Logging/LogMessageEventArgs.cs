@@ -31,7 +31,7 @@ namespace WatiN.Core.Logging
             Message = message;
         }
 
-        public LogMessageType LogMessageType { get; private set; }
-        public string Message { get; private set; }
+        public LogMessageType LogMessageType { get; set;}
+        public string Message { get; set;}
     }
 }

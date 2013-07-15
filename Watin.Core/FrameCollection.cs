@@ -27,8 +27,8 @@ namespace WatiN.Core
     /// </summary>
     public class FrameCollection : BaseComponentCollection<Frame, FrameCollection>
     {
-        private readonly Constraint findBy;
-        private readonly List<Frame> frames;
+        public readonly Constraint findBy;
+        public readonly List<Frame> frames;
 
         public FrameCollection(DomContainer domContainer, INativeDocument htmlDocument, Document document)
         {
@@ -40,20 +40,20 @@ namespace WatiN.Core
                 frames.Add(new Frame(domContainer, frameDocument, document as Frame));
         }
 
-        private FrameCollection(Constraint findBy, List<Frame> frames)
+        public FrameCollection(Constraint findBy, List<Frame> frames)
         {
             this.findBy = findBy;
             this.frames = frames;
         }
 
         /// <inheritdoc />
-        protected override FrameCollection CreateFilteredCollection(Constraint findBy)
+        public override FrameCollection CreateFilteredCollection(Constraint findBy)
         {
             return new FrameCollection(this.findBy & findBy, frames);
         }
 
         /// <inheritdoc />
-        protected override IEnumerable<Frame> GetComponents()
+        public override IEnumerable<Frame> GetComponents()
         {
             var context = new ConstraintContext();
             foreach (Frame frame in frames)

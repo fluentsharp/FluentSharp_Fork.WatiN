@@ -35,8 +35,8 @@ namespace WatiN.Core.Constraints
 	/// </example>
 	public class AttributeConstraint : Constraint
 	{
-		private readonly string attributeName;
-        private readonly Comparer<string> comparer;
+		public readonly string attributeName;
+        public readonly Comparer<string> comparer;
 
 	    /// <summary>
 		/// Creates an attribute constraint to search for an exact match by string value.
@@ -105,7 +105,7 @@ namespace WatiN.Core.Constraints
         }
 
         /// <inheritdoc />
-        protected override bool MatchesImpl(IAttributeBag attributeBag, ConstraintContext context)
+        public override bool MatchesImpl(IAttributeBag attributeBag, ConstraintContext context)
         {
             var attributeValue = attributeBag.GetAttributeValue(attributeName);
             return comparer.Compare(attributeValue);

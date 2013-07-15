@@ -23,13 +23,13 @@ using WatiN.Core.Exceptions;
 
 namespace WatiN.Core.Native.InternetExplorer
 {
-    internal class AllFramesProcessor : IWebBrowser2Processor
+    public class AllFramesProcessor : IWebBrowser2Processor
     {
-        public List<INativeDocument> Elements { get; private set; }
+        public List<INativeDocument> Elements { get; set;}
 
-        private readonly HTMLDocument _htmlDocument;
-        private readonly IHTMLElementCollection _iFrameElements;
-        private int _index;
+        public readonly HTMLDocument _htmlDocument;
+        public readonly IHTMLElementCollection _iFrameElements;
+        public int _index;
 
         public AllFramesProcessor(HTMLDocument htmlDocument)
         {
@@ -71,7 +71,7 @@ namespace WatiN.Core.Native.InternetExplorer
             return new IEElement(frameElement);
         }
 
-        private string RetrieveUniqueIdOfFrameElement()
+        public string RetrieveUniqueIdOfFrameElement()
         {
             var frame = _iFrameElements.length == 0 ? 
                         FrameByIndexProcessor.GetFrameFromHTMLDocument(_index, _htmlDocument) :
@@ -82,7 +82,7 @@ namespace WatiN.Core.Native.InternetExplorer
 
         // This is lookup in htmldocument is needed to bridge between 
         // two different "memory" representations of document and its frame elements.
-        private IHTMLElement2 RetrieveSameFrameFromHtmlDocument(string frameElementUniqueId)
+        public IHTMLElement2 RetrieveSameFrameFromHtmlDocument(string frameElementUniqueId)
         {
             var frame = _htmlDocument.getElementById(frameElementUniqueId) as IHTMLElement2;
             if (frame == null)

@@ -20,24 +20,24 @@ namespace WatiN.Core.Native
 {
     public class JSWaitForComplete : WaitForCompleteBase
     {
-        private readonly JSBrowserBase _nativeBrowser;
+        public readonly JSBrowserBase _nativeBrowser;
 
         public JSWaitForComplete(JSBrowserBase nativeBrowser, int waitForCompleteTimeOut) : base(waitForCompleteTimeOut)
         {
             _nativeBrowser = nativeBrowser;
         }
 
-        protected override void InitialSleep()
+        public override void InitialSleep()
         {
             // Seems like this is not needed
         }
 
-        protected override void WaitForCompleteOrTimeout()
+        public override void WaitForCompleteOrTimeout()
         {
             WaitWhileDocumentNotAvailable();
         }
 
-        protected virtual void WaitWhileDocumentNotAvailable()
+        public virtual void WaitWhileDocumentNotAvailable()
         {
             WaitUntil(() => !_nativeBrowser.IsLoading(),
                       () => "waiting for main document becoming available");

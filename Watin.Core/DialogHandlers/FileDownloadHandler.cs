@@ -26,9 +26,9 @@ namespace WatiN.Core.DialogHandlers
 {
 	public class FileDownloadHandler : BaseDialogHandler
 	{
-		private Window downloadProgressDialog;
-	    private readonly FileDownloadOptionEnum _optionEnum;
-		private readonly string saveAsFilename = String.Empty;
+		public Window downloadProgressDialog;
+	    public readonly FileDownloadOptionEnum _optionEnum;
+		public readonly string saveAsFilename = String.Empty;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="FileDownloadHandler"/> class.
@@ -67,7 +67,7 @@ namespace WatiN.Core.DialogHandlers
 	    /// <value>
 	    /// 	<c>true</c> if this instance has handled a file download dialog; otherwise, <c>false</c>.
 	    /// </value>
-	    public bool HasHandledFileDownloadDialog { get; private set; }
+	    public bool HasHandledFileDownloadDialog { get; set;}
 
 	    /// <summary>
 		/// Gets the full save as filename used when the downloaded file will be saved to disk.
@@ -101,7 +101,7 @@ namespace WatiN.Core.DialogHandlers
 	        return IsFileDownloadDialog(window) || IsDownloadProgressDialog(window) || IsFileSaveDialog(window);
 	    }
 
-	    private bool HandledFileSaveDialog(Window window)
+	    public bool HandledFileSaveDialog(Window window)
 	    {
 	        if (IsFileSaveDialog(window))
 	        {
@@ -116,7 +116,7 @@ namespace WatiN.Core.DialogHandlers
 	        return false;
 	    }
 
-	    private bool HandledDownloadProgressDialog(Window window)
+	    public bool HandledDownloadProgressDialog(Window window)
 	    {
 	        if (IsDownloadProgressDialog(window))
 	        {
@@ -140,7 +140,7 @@ namespace WatiN.Core.DialogHandlers
 	        return false;
 	    }
 
-	    private bool HandledFileDownloadDialog(Window window)
+	    public bool HandledFileDownloadDialog(Window window)
 	    {
 	        if (!HasHandledFileDownloadDialog && IsFileDownloadDialog(window))
 	        {
@@ -165,7 +165,7 @@ namespace WatiN.Core.DialogHandlers
 	        return false;
 	    }
 
-	    private WinButton GetButtonToPress(Window window)
+	    public WinButton GetButtonToPress(Window window)
 		{
 			WinButton btn = null;
 
@@ -295,7 +295,7 @@ namespace WatiN.Core.DialogHandlers
 			Logger.LogAction("Download complete at {0}", DateTime.Now.ToLongTimeString());
 		}
 
-		private Window DownloadProgressDialog
+		public Window DownloadProgressDialog
 		{
 			get { return downloadProgressDialog; }
 			set
@@ -318,7 +318,7 @@ namespace WatiN.Core.DialogHandlers
 			}
 		}
 
-		private void HandleFileSaveDialog(Window window)
+		public void HandleFileSaveDialog(Window window)
 		{
             var fileNameHandle = NativeMethods.GetChildWindowHwnd(window.Hwnd, "Edit");
             var fileNameHwnd = new Hwnd(fileNameHandle);

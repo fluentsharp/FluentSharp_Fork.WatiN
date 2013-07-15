@@ -26,8 +26,8 @@ namespace WatiN.Core.Native.InternetExplorer
 {
     public class IEDocument : INativeDocument
     {
-        private readonly IHTMLDocument2 htmlDocument;
-        private readonly IEElement containingFrameElement;
+        public readonly IHTMLDocument2 htmlDocument;
+        public readonly IEElement containingFrameElement;
 
         public IEDocument(IHTMLDocument2 htmlDocument)
             : this(htmlDocument, null)
@@ -155,7 +155,7 @@ namespace WatiN.Core.Native.InternetExplorer
             return innertext.IndexOf(text) >= 0 ;
         }
 
-        private static Rectangle GetTextBoundsByInsertingElement(IHTMLTxtRange textRange, IHTMLDocument2 document)
+        public static Rectangle GetTextBoundsByInsertingElement(IHTMLTxtRange textRange, IHTMLDocument2 document)
         {
             // A bit of a hack: create an HTML element around the selected
             // text and get the location of that element from document.all[].

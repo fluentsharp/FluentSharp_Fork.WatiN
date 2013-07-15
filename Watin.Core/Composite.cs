@@ -29,14 +29,14 @@ namespace WatiN.Core
     /// </summary>
     public abstract class Composite : Component
     {
-        private static readonly Dictionary<Type, InitializedMember[]> cachedMembersByCompositeType = new Dictionary<Type, InitializedMember[]>();
+        public static readonly Dictionary<Type, InitializedMember[]> cachedMembersByCompositeType = new Dictionary<Type, InitializedMember[]>();
 
         /// <summary>
         /// Initializes the fields and properties of the composite using reflection to
         /// find elements within the container.
         /// </summary>
         /// <param name="container">The element container within which to find elements, or null if not available</param>
-        protected void InitializeContents(IElementContainer container)
+        public void InitializeContents(IElementContainer container)
         {
             InitializedMember[] members = GetInitializedMembers(GetType());
 
@@ -44,7 +44,7 @@ namespace WatiN.Core
                 member.Initialize(this, container);
         }
 
-        private static InitializedMember[] GetInitializedMembers(Type compositeType)
+        public static InitializedMember[] GetInitializedMembers(Type compositeType)
         {
             lock (cachedMembersByCompositeType)
             {
@@ -59,7 +59,7 @@ namespace WatiN.Core
             }
         }
 
-        private static InitializedMember[] GetInitializedMembersNonCached(Type compositeType)
+        public static InitializedMember[] GetInitializedMembersNonCached(Type compositeType)
         {
             List<InitializedMember> members = new List<InitializedMember>();
 
@@ -72,9 +72,9 @@ namespace WatiN.Core
             return members.ToArray();
         }
 
-        private delegate InitializedMember InitializedMemberFactory(ComponentFinderAttribute finder, ComponentDecoratorAttribute[] decorators);
+        public delegate InitializedMember InitializedMemberFactory(ComponentFinderAttribute finder, ComponentDecoratorAttribute[] decorators);
 
-        private static void BuildInitializedMember(List<InitializedMember> members, ICustomAttributeProvider attributeProvider, InitializedMemberFactory factory)
+        public static void BuildInitializedMember(List<InitializedMember> members, ICustomAttributeProvider attributeProvider, InitializedMemberFactory factory)
         {
             var finders = (ComponentFinderAttribute[]) attributeProvider.GetCustomAttributes(typeof(ComponentFinderAttribute), true);
             if (finders.Length == 0)
@@ -89,10 +89,10 @@ namespace WatiN.Core
             members.Add(member);
         }
 
-        private abstract class InitializedMember
+        public abstract class InitializedMember
         {
-            private readonly ComponentFinderAttribute finder;
-            private readonly ComponentDecoratorAttribute[] decorators;
+            public readonly ComponentFinderAttribute finder;
+            public readonly ComponentDecoratorAttribute[] decorators;
 
             public InitializedMember(ComponentFinderAttribute finder, ComponentDecoratorAttribute[] decorators)
             {
@@ -120,13 +120,13 @@ namespace WatiN.Core
                 }
             }
 
-            protected abstract Type ValueType { get; }
-            protected abstract void SetValue(object instance, object value);
+            public abstract Type ValueType { get; }
+            public abstract void SetValue(object instance, object value);
         }
 
-        private sealed class InitializedProperty : InitializedMember
+        public sealed class InitializedProperty : InitializedMember
         {
-            private readonly PropertyInfo property;
+            public readonly PropertyInfo property;
 
             public InitializedProperty(PropertyInfo property,
                 ComponentFinderAttribute finder, ComponentDecoratorAttribute[] decorators)
@@ -135,20 +135,20 @@ namespace WatiN.Core
                 this.property = property;
             }
 
-            protected override Type ValueType
+            public override Type ValueType
             {
                 get { return property.PropertyType; }
             }
 
-            protected override void SetValue(object instance, object value)
+            public override void SetValue(object instance, object value)
             {
                 property.SetValue(instance, value, null);
             }
         }
 
-        private sealed class InitializedField : InitializedMember
+        public sealed class InitializedField : InitializedMember
         {
-            private readonly FieldInfo field;
+            public readonly FieldInfo field;
 
             public InitializedField(FieldInfo field,
                 ComponentFinderAttribute finder, ComponentDecoratorAttribute[] decorators)
@@ -157,12 +157,12 @@ namespace WatiN.Core
                 this.field = field;
             }
 
-            protected override Type ValueType
+            public override Type ValueType
             {
                 get { return field.FieldType; }
             }
 
-            protected override void SetValue(object instance, object value)
+            public override void SetValue(object instance, object value)
             {
                 field.SetValue(instance, value);
             }

@@ -30,8 +30,8 @@ namespace WatiN.Core
 	/// </summary>
 	public struct ElementTag : IEquatable<ElementTag>, IComparable<ElementTag>
 	{
-        private readonly string tagName;
-        private readonly string inputType;
+        public readonly string tagName;
+        public readonly string inputType;
 
         /// <summary>
         /// Creates an element tag.
@@ -246,12 +246,12 @@ namespace WatiN.Core
 			return elementTagsString;
 		}
 
-        private static string GetInputType(INativeElement nativeElement)
+        public static string GetInputType(INativeElement nativeElement)
         {
             return IsAnInputElement(nativeElement.TagName) ? nativeElement.GetAttributeValue("type") : null;
         }
 
-        private static bool IsAnInputElement(string tagName)
+        public static bool IsAnInputElement(string tagName)
         {
             return string.Compare(tagName, "input", StringComparison.InvariantCultureIgnoreCase) == 0;
         }

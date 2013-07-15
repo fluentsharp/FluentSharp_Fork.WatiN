@@ -24,7 +24,7 @@ namespace WatiN.Core.Native.Windows
 {
     public class Hwnd : IHwnd
     {
-        private readonly IntPtr _hwnd = IntPtr.Zero;
+        public readonly IntPtr _hwnd = IntPtr.Zero;
 
         public Hwnd(IntPtr Hwnd)
         {
@@ -89,7 +89,7 @@ namespace WatiN.Core.Native.Windows
             NativeMethods.SetFocus(_hwnd);
         }
 
-        private static void SendChar(char c, IntPtr handle)
+        public static void SendChar(char c, IntPtr handle)
         {
             NativeMethods.SendMessage(new HandleRef(null, handle), NativeMethods.WM_CHAR, new IntPtr(Convert.ToInt64(c)), IntPtr.Zero);
         }

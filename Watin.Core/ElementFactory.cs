@@ -29,15 +29,15 @@ namespace WatiN.Core
     /// </summary>
 	public static class ElementFactory
 	{
-        private delegate Element NativeElementBasedFactory(DomContainer domContainer, INativeElement nativeElement);
-        private delegate Element ElementFinderBasedFactory(DomContainer domContainer, ElementFinder elementFinder);
+        public delegate Element NativeElementBasedFactory(DomContainer domContainer, INativeElement nativeElement);
+        public delegate Element ElementFinderBasedFactory(DomContainer domContainer, ElementFinder elementFinder);
 
-        private static readonly Dictionary<Type, IList<ElementTag>> elementTagsByType;
-        private static readonly Dictionary<ElementTag, Type> elementTypeByTag;
-        private static readonly Dictionary<Type, NativeElementBasedFactory> nativeElementBasedFactoriesByType;
-        private static readonly Dictionary<Type, ElementFinderBasedFactory> elementFinderBasedFactoriesByType;
+        public static readonly Dictionary<Type, IList<ElementTag>> elementTagsByType;
+        public static readonly Dictionary<ElementTag, Type> elementTypeByTag;
+        public static readonly Dictionary<Type, NativeElementBasedFactory> nativeElementBasedFactoriesByType;
+        public static readonly Dictionary<Type, ElementFinderBasedFactory> elementFinderBasedFactoriesByType;
 
-        internal static readonly string ElementNameSpace;
+        public static readonly string ElementNameSpace;
 
         static ElementFactory()
         {
@@ -119,7 +119,7 @@ namespace WatiN.Core
             RegisterElementType(elementType, false);
         }
 
-        private static void RegisterElementType(Type elementType, bool ignoreInvalidTypes)
+        public static void RegisterElementType(Type elementType, bool ignoreInvalidTypes)
         {
             if (elementType == null)
                 throw new ArgumentNullException("elementType");
@@ -147,12 +147,12 @@ namespace WatiN.Core
             RegisterElementFinderBasedFactories(elementType);
         }
 
-        private static bool IsValidElementSubClass(Type type)
+        public static bool IsValidElementSubClass(Type type)
         {
             return type.IsSubclassOf(typeof(Element)) && ! type.IsAbstract;
         }
 
-        private static IList<ElementTag> CreateElementTagsFromElementTagAttributes(Type elementType)
+        public static IList<ElementTag> CreateElementTagsFromElementTagAttributes(Type elementType)
         {
         	if (elementType.Equals(typeof(Element))) return new[] { ElementTag.Any };
         	var tagAttributes = (ElementTagAttribute[])elementType.GetCustomAttributes(typeof(ElementTagAttribute), false);
@@ -169,14 +169,14 @@ namespace WatiN.Core
             return elementTagAttributes.ConvertAll(x => x.ToElementTag());
         }
         
-        private static bool RegisterElementTags(Type elementType)
+        public static bool RegisterElementTags(Type elementType)
         {
         	var tags = CreateElementTagsFromElementTagAttributes(elementType);
         	if (tags.Count == 0) return false;
             return RegisterElementTags(elementType, tags);
         }
 
-        private static bool RegisterElementTags(Type elementType, IList<ElementTag> tags)
+        public static bool RegisterElementTags(Type elementType, IList<ElementTag> tags)
         {
             elementTagsByType.Add(elementType, tags);
 
@@ -206,7 +206,7 @@ namespace WatiN.Core
             return true;
         }
 
-        private static void RegisterNativeElementBasedFactories(Type elementType)
+        public static void RegisterNativeElementBasedFactories(Type elementType)
         {
         	var nativeElementBasedFactory = CreateNativeElementBasedFactory(elementType);
             if (nativeElementBasedFactory == null)
@@ -214,7 +214,7 @@ namespace WatiN.Core
             nativeElementBasedFactoriesByType.Add(elementType, nativeElementBasedFactory);
         }
 
-        private static NativeElementBasedFactory CreateNativeElementBasedFactory(Type elementType)
+        public static NativeElementBasedFactory CreateNativeElementBasedFactory(Type elementType)
         {
         	var nativeElementBasedConstructor = elementType.GetConstructor(new[] { typeof(DomContainer), typeof(INativeElement) });
             if (nativeElementBasedConstructor == null) return null;
@@ -222,7 +222,7 @@ namespace WatiN.Core
             return (container, nativeElement) => (Element)nativeElementBasedConstructor.Invoke(new object[] { container, nativeElement });
         }
 
-        private static void RegisterElementFinderBasedFactories(Type elementType)
+        public static void RegisterElementFinderBasedFactories(Type elementType)
         {
         	ElementFinderBasedFactory elementFinderBasedFactory = CreateElementFinderBasedFactory(elementType);
             if (elementFinderBasedFactory == null)
@@ -230,7 +230,7 @@ namespace WatiN.Core
             elementFinderBasedFactoriesByType.Add(elementType, elementFinderBasedFactory);
         }
         
-        private static ElementFinderBasedFactory CreateElementFinderBasedFactory(Type elementType)
+        public static ElementFinderBasedFactory CreateElementFinderBasedFactory(Type elementType)
         {
         	var elementFinderBasedConstructor = elementType.GetConstructor(new[] { typeof(DomContainer), typeof(ElementFinder) });
             if (elementFinderBasedConstructor == null) return null;
@@ -368,7 +368,7 @@ namespace WatiN.Core
             return GetElementTags(typeof(TElement));
         }
 
-        private static NativeElementBasedFactory GetNativeElementBasedFactory(ElementTag tag)
+        public static NativeElementBasedFactory GetNativeElementBasedFactory(ElementTag tag)
         {
             Type elementType;
             if (elementTypeByTag.TryGetValue(tag, out elementType))
@@ -379,7 +379,7 @@ namespace WatiN.Core
             return CreateUntypedElement;
         }
 
-        private static NativeElementBasedFactory GetNativeElementBasedfactory(Type elementType)
+        public static NativeElementBasedFactory GetNativeElementBasedfactory(Type elementType)
         {
         	NativeElementBasedFactory factory;
             if (nativeElementBasedFactoriesByType.TryGetValue(elementType, out factory)) return factory;
@@ -387,7 +387,7 @@ namespace WatiN.Core
             return factory != null ? factory : CreateUntypedElement;
         }
 
-        private static ElementFinderBasedFactory GetElementFinderBasedFactory(Type elementType)
+        public static ElementFinderBasedFactory GetElementFinderBasedFactory(Type elementType)
         {
             ElementFinderBasedFactory factory;
             if (elementFinderBasedFactoriesByType.TryGetValue(elementType, out factory)) return factory;

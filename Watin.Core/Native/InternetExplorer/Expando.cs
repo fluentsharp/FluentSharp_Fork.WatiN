@@ -24,8 +24,8 @@ namespace WatiN.Core.Native.InternetExplorer
 {
     public class Expando
     {
-        public object Object { get; private set; }
-        public IExpando AsExpando { get; private set; }
+        public object Object { get; set;}
+        public IExpando AsExpando { get; set;}
 
         public Expando(object expando)
         {

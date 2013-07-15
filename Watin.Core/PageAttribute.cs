@@ -27,8 +27,8 @@ namespace WatiN.Core
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
     public sealed class PageAttribute : Attribute
     {
-        private string urlRegex;
-        private bool isSecure;
+        public string urlRegex;
+        public bool isSecure;
 
         /// <summary>
         /// Gets or sets a regular expression that is expected to match the Url of the page.

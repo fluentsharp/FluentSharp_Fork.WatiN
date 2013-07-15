@@ -25,10 +25,10 @@ namespace WatiN.Core
 {
     public abstract class WaitForCompleteBase : IWait
     {
-        private SimpleTimer _timer;
-        private readonly int _waitForCompleteTimeOut;
+        public SimpleTimer _timer;
+        public readonly int _waitForCompleteTimeOut;
 
-        protected WaitForCompleteBase(int waitForCompleteTimeOut)
+        public WaitForCompleteBase(int waitForCompleteTimeOut)
         {
             _waitForCompleteTimeOut = waitForCompleteTimeOut;
         }
@@ -63,21 +63,21 @@ namespace WatiN.Core
         /// time to perform any immediately pending asynchronous operations that might
         /// cause it to enter a busy state.
         /// </summary>
-        protected abstract void InitialSleep();
+        public abstract void InitialSleep();
 
         /// <summary>
         /// This method waits till IE is ready processing 
         /// or the timeout period has expired. You should
         /// call InitTimeout prior to calling this method.
         /// </summary>
-        protected abstract void WaitForCompleteOrTimeout();
+        public abstract void WaitForCompleteOrTimeout();
 
         /// <summary>
         /// This method is called to initialise the start time for
         /// determining a time out. It's set to the current time.
         /// </summary>
         /// <returns></returns>
-        protected virtual SimpleTimer InitTimeout()
+        public virtual SimpleTimer InitTimeout()
         {
             _timer = null;
             return Timer;
@@ -90,7 +90,7 @@ namespace WatiN.Core
         /// </summary>
         /// <returns>If the timespan is more than 30 seconds, the
         /// return value will be true</returns>
-        protected virtual bool IsTimedOut()
+        public virtual bool IsTimedOut()
         {
             return Timer.Elapsed;
         }
@@ -100,7 +100,7 @@ namespace WatiN.Core
         /// throw a TimeoutException with the timeoutMessage param as message.
         /// </summary>
         /// <param name="timeoutMessage">The message to present when the TimeoutException is thrown</param>
-        protected virtual void ThrowExceptionWhenTimeout(string timeoutMessage)
+        public virtual void ThrowExceptionWhenTimeout(string timeoutMessage)
         {
             if (IsTimedOut())
             {
@@ -108,7 +108,7 @@ namespace WatiN.Core
             }
         }
 
-        protected virtual void WaitUntil(DoFunc<bool> waitWhile, BuildTimeOutExceptionMessage exceptionMessage)
+        public virtual void WaitUntil(DoFunc<bool> waitWhile, BuildTimeOutExceptionMessage exceptionMessage)
         {
             if (Timer == null)
                 throw new WatiNException("_waitForCompleteTimer not initialized");

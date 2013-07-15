@@ -34,7 +34,7 @@ namespace WatiN.Core
 
         public ElementContainer(DomContainer domContainer, ElementFinder finder) : base(domContainer, finder) { }
 
-        private NativeElementCollectionAdapter AllElements
+        public NativeElementCollectionAdapter AllElements
         {
             get
             {
@@ -44,7 +44,7 @@ namespace WatiN.Core
             }
         }
 
-        private IElementContainer ChildElements
+        public IElementContainer ChildElements
         {
             get
             {

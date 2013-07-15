@@ -26,7 +26,7 @@ namespace WatiN.Core.Comparers
 	/// </summary>
 	public class RegexComparer : Comparer<string>
 	{
-		private readonly Regex regex;
+		public readonly Regex regex;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RegexComparer"/> class.
@@ -44,7 +44,7 @@ namespace WatiN.Core.Comparers
         /// <summary>
         /// Gets the regular expression to compare against.
         /// </summary>
-        protected Regex Regex
+        public Regex Regex
         {
             get { return regex; }
         }

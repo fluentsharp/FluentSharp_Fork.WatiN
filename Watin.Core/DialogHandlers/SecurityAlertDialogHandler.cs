@@ -26,8 +26,8 @@ namespace WatiN.Core.DialogHandlers
 	/// </summary>
 	public class SecurityAlertDialogHandler : BaseDialogHandler
 	{
-		private const string securityAlertDialogStyleWithOkButton = "94C80AC4";
-        private const string securityAlertDialogStyleWithYesButton = "94C808C4";
+		public const string securityAlertDialogStyleWithOkButton = "94C80AC4";
+        public const string securityAlertDialogStyleWithYesButton = "94C808C4";
 
 		/// <summary>
 		/// Handles the dialog if the <paramref name="window" /> is a

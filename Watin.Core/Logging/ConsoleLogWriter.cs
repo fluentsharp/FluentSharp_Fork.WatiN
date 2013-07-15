@@ -33,12 +33,12 @@ namespace WatiN.Core.Logging
 	/// </example>
 	public class ConsoleLogWriter : BaseLogWriter
 	{
-		protected override void LogActionImpl(string message)
+		public override void LogActionImpl(string message)
 		{
 			System.Console.WriteLine("[Action]: " + message);
 		}
 
-	    protected override void LogDebugImpl(string message)
+	    public override void LogDebugImpl(string message)
 	    {
             System.Console.WriteLine("[Debug] : " + message);
         }

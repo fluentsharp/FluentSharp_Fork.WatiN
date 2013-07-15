@@ -34,7 +34,7 @@ namespace WatiN.Core.UtilityClasses
     /// </summary>
     public class CaptureWebPage
     {
-        private readonly DomContainer _domContainer;
+        public readonly DomContainer _domContainer;
 
         public CaptureWebPage(DomContainer domContainer)
         {
@@ -67,14 +67,14 @@ namespace WatiN.Core.UtilityClasses
             stream.Close();
         }
 
-        internal virtual Stream CreateFileStream(string filename)
+        public virtual Stream CreateFileStream(string filename)
         {
         	return new FileStream(filename, FileMode.Create);
         }
         
         public enum ImageCodecs { Jpeg, Tiff, Gif, Png, Bmp }
 
-        private static ImageCodecs GetImagetype(string filename)
+        public static ImageCodecs GetImagetype(string filename)
         {
             var extension = Path.GetExtension(filename);
             var codec = ImageCodecs.Jpeg;
@@ -106,7 +106,7 @@ namespace WatiN.Core.UtilityClasses
             SaveImage(finalImage, stream, ici, eps);
         }
 
-        protected virtual void SaveImage(System.Drawing.Image finalImage, Stream stream, ImageCodecInfo ici, EncoderParameters eps)
+        public virtual void SaveImage(System.Drawing.Image finalImage, Stream stream, ImageCodecInfo ici, EncoderParameters eps)
         {
             finalImage.Save(stream, ici, eps);
         }
@@ -116,7 +116,7 @@ namespace WatiN.Core.UtilityClasses
             return CaptureWebPageImage2(_domContainer.hWnd, _domContainer, writeUrl, showGuides, scalePercentage);
         }
 
-        private static System.Drawing.Image CaptureWebPageImage2(IntPtr browserHWND, Document myDoc, bool writeUrl, bool showGuides, int scalePercentage)
+        public static System.Drawing.Image CaptureWebPageImage2(IntPtr browserHWND, Document myDoc, bool writeUrl, bool showGuides, int scalePercentage)
         {
             var isIE = myDoc.NativeDocument as IEDocument != null;
 
@@ -258,7 +258,7 @@ namespace WatiN.Core.UtilityClasses
             return finalImage;
         }
 
-        private static IntPtr GetHwndContainingAShellDocObjectView(IntPtr browserHWND)
+        public static IntPtr GetHwndContainingAShellDocObjectView(IntPtr browserHWND)
         {
             // If window is a HtmlDialog then return.
             var hwnd = browserHWND;
@@ -302,7 +302,7 @@ namespace WatiN.Core.UtilityClasses
             return hwnd;
         }
 
-        private static IntPtr GetHwndForInternetExplorerServer(IntPtr hwnd)
+        public static IntPtr GetHwndForInternetExplorerServer(IntPtr hwnd)
         {
             //Get Browser "Document" Handle
             while (hwnd != IntPtr.Zero)
@@ -318,7 +318,7 @@ namespace WatiN.Core.UtilityClasses
             return hwnd;
         }
 
-        private static void DrawResolutionGuidesOnImage(Graphics g2, int URLExtraHeight, int URLExtraLeft)
+        public static void DrawResolutionGuidesOnImage(Graphics g2, int URLExtraHeight, int URLExtraLeft)
         {
             // Create pen.
             var myWidth = 1;
@@ -360,7 +360,7 @@ namespace WatiN.Core.UtilityClasses
             g2.DrawString("1280 x 1024", drawFont, drawBrush, 5, y1024 - 20 + URLExtraHeight, drawFormat);
         }
 
-        private static void WriteUrlOnImage(Graphics g2, string myLocalLink, int URLExtraHeight, int widthsize)
+        public static void WriteUrlOnImage(Graphics g2, string myLocalLink, int URLExtraHeight, int widthsize)
         {
             // Backfill URL paint location
             var whiteBrush = new SolidBrush(Color.White);
@@ -375,7 +375,7 @@ namespace WatiN.Core.UtilityClasses
             g2.DrawString(myLocalLink, drawFont, drawBrushURL, 0, 0, drawFormat);
         }
 
-        private static EncoderParameters GetEncoderParams(int quality)
+        public static EncoderParameters GetEncoderParams(int quality)
         {
             var eps = new EncoderParameters(1);
             var myQuality = Convert.ToInt64(quality);
@@ -384,7 +384,7 @@ namespace WatiN.Core.UtilityClasses
         }
 
 
-        private static ImageCodecInfo GetCodec(ImageCodecs imagetype)
+        public static ImageCodecInfo GetCodec(ImageCodecs imagetype)
         {
             ImageCodecInfo ici = GetEncoderInfo("image/jpeg");
 
@@ -410,7 +410,7 @@ namespace WatiN.Core.UtilityClasses
             return ici;
         }
 
-        private static object getDocumentAttribute(Document document, string theAttributeName)
+        public static object getDocumentAttribute(Document document, string theAttributeName)
         {
             if (document.NativeDocument as IEDocument != null)
             {
@@ -425,13 +425,13 @@ namespace WatiN.Core.UtilityClasses
             return int.Parse(results);
         }
 
-        private static object getDocumentAttribute(IHTMLDocument2 theHTMLDocument, string theAttributeName)
+        public static object getDocumentAttribute(IHTMLDocument2 theHTMLDocument, string theAttributeName)
         {
             var doc = getDocumentElement(theHTMLDocument);
             return doc.getAttribute(theAttributeName, 0);
         }
 
-        private static void setDocumentAttribute(Document document, string theAttributeName,
+        public static void setDocumentAttribute(Document document, string theAttributeName,
                                                  object theAttributeValue)
         {
             if (document.NativeDocument as IEDocument != null)
@@ -448,14 +448,14 @@ namespace WatiN.Core.UtilityClasses
             }
         }
 
-        private static void setDocumentAttribute(IHTMLDocument2 theHTMLDocument, string theAttributeName,
+        public static void setDocumentAttribute(IHTMLDocument2 theHTMLDocument, string theAttributeName,
                                                  object theAttributeValue)
         {
             var doc = getDocumentElement(theHTMLDocument);
             doc.setAttribute(theAttributeName, theAttributeValue, 0);
         }
 
-        private static IHTMLElement getDocumentElement(IHTMLDocument2 theHTMLDocument)
+        public static IHTMLElement getDocumentElement(IHTMLDocument2 theHTMLDocument)
         {
             var doc5 = (IHTMLDocument5) theHTMLDocument;
             var doc3 = (IHTMLDocument3) theHTMLDocument;
@@ -467,7 +467,7 @@ namespace WatiN.Core.UtilityClasses
             return theHTMLDocument.body;
         }
 
-        private static ImageCodecInfo GetEncoderInfo(String mimeType)
+        public static ImageCodecInfo GetEncoderInfo(String mimeType)
         {
             var encoders = ImageCodecInfo.GetImageEncoders();
             for (var j = 0; j < encoders.Length; ++j)

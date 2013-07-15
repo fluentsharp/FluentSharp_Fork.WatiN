@@ -28,7 +28,7 @@ namespace WatiN.Core.Native.InternetExplorer
 {
     public class AttachToIeHelper : IAttachTo
     {
-        internal IE FindIEPartiallyInitialized(Constraint findBy)
+        public IE FindIEPartiallyInitialized(Constraint findBy)
         {
             var allBrowsers = new ShellWindows2();
 
@@ -43,7 +43,7 @@ namespace WatiN.Core.Native.InternetExplorer
             return null;
         }
 
-        protected virtual IE CreateBrowserInstance(IEBrowser browser)
+        public virtual IE CreateBrowserInstance(IEBrowser browser)
         {
             return new IE(browser.WebBrowser, false);
         }
@@ -64,7 +64,7 @@ namespace WatiN.Core.Native.InternetExplorer
             throw new BrowserNotFoundException("IE", findBy.ToString(), timeout);
         }
 
-        private Browser FinishInitializationAndWaitForComplete(IE ie, SimpleTimer timer, bool waitForComplete)
+        public Browser FinishInitializationAndWaitForComplete(IE ie, SimpleTimer timer, bool waitForComplete)
         {
             ie.FinishInitialization(null);
 
@@ -77,7 +77,7 @@ namespace WatiN.Core.Native.InternetExplorer
             return ie;
         }
 
-        private IE TryFindIe(Constraint findBy, SimpleTimer timer)
+        public IE TryFindIe(Constraint findBy, SimpleTimer timer)
         {
             var action = new TryFuncUntilTimeOut(timer)
             {

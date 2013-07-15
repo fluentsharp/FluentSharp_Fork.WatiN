@@ -27,8 +27,8 @@ namespace WatiN.Core.DialogHandlers
     /// </summary>
     public class RefreshWarningDialogHandler : BaseDialogHandler
     {
-        private readonly bool _pressReTry;
-        private IntPtr _hwnd;
+        public readonly bool _pressReTry;
+        public IntPtr _hwnd;
 
         public RefreshWarningDialogHandler(bool pressReTry)
         {
@@ -69,12 +69,12 @@ namespace WatiN.Core.DialogHandlers
             return window.StyleInHex == "94C801C5";
         }
 
-        private WinButton ReTry
+        public WinButton ReTry
         {
             get { return new WinButton(4, _hwnd); }
         }
 
-        private WinButton Cancel
+        public WinButton Cancel
         {
             get { return new WinButton(2, _hwnd); }
         }

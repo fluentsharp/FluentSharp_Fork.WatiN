@@ -37,7 +37,7 @@ namespace WatiN.Core.DialogHandlers
 			return ((window.StyleInHex == "94C801C5" || window.StyleInHex == "94C803C5") && ButtonWithId1Exists(window.Hwnd));
 		}
 
-		protected override int getOKButtonID()
+		public override int getOKButtonID()
 		{
 			return 1;
 		}

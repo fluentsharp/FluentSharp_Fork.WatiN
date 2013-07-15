@@ -22,21 +22,21 @@ namespace WatiN.Core.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
-        private static global::System.Resources.ResourceManager resourceMan;
+        public static global::System.Resources.ResourceManager resourceMan;
         
-        private static global::System.Globalization.CultureInfo resourceCulture;
+        public static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources() {
+        public Resources() {
         }
         
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WatiN.Core.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace WatiN.Core.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace WatiN.Core.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Collection is read-only.
         /// </summary>
-        internal static string BaseComponentCollection_CollectionIsReadonly {
+        public static string BaseComponentCollection_CollectionIsReadonly {
             get {
                 return ResourceManager.GetString("BaseComponentCollection_CollectionIsReadonly", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace WatiN.Core.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Collection does not support searching by equality..
         /// </summary>
-        internal static string BaseComponentCollection_DoesNotSupportSearchingByEquality {
+        public static string BaseComponentCollection_DoesNotSupportSearchingByEquality {
             get {
                 return ResourceManager.GetString("BaseComponentCollection_DoesNotSupportSearchingByEquality", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace WatiN.Core.Properties {
         /// <summary>
         ///   Looks up a localized string similar to The control has already been initialized..
         /// </summary>
-        internal static string Control_HasAlreadyBeenInitialized {
+        public static string Control_HasAlreadyBeenInitialized {
             get {
                 return ResourceManager.GetString("Control_HasAlreadyBeenInitialized", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace WatiN.Core.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Closing IE instance.
         /// </summary>
-        internal static string IE_Dispose {
+        public static string IE_Dispose {
             get {
                 return ResourceManager.GetString("IE_Dispose", resourceCulture);
             }
@@ -99,7 +99,7 @@ namespace WatiN.Core.Properties {
         /// <summary>
         ///   Looks up a localized string similar to The page type is expected to be a subclass of Page..
         /// </summary>
-        internal static string PageMetadata_PageTypeIsExpectedToBeASubclassOfPage {
+        public static string PageMetadata_PageTypeIsExpectedToBeASubclassOfPage {
             get {
                 return ResourceManager.GetString("PageMetadata_PageTypeIsExpectedToBeASubclassOfPage", resourceCulture);
             }
@@ -108,7 +108,7 @@ namespace WatiN.Core.Properties {
         /// <summary>
         ///   Looks up a localized string similar to A match operation has been aborted because it appeared to be re-entrant.  The exception occurred in an instance of &apos;{0}&apos; with constraint: {1}..
         /// </summary>
-        internal static string ReEntryException_MessageFormat {
+        public static string ReEntryException_MessageFormat {
             get {
                 return ResourceManager.GetString("ReEntryException_MessageFormat", resourceCulture);
             }
@@ -117,7 +117,7 @@ namespace WatiN.Core.Properties {
         /// <summary>
         ///   Looks up a localized string similar to (function(){var n=/((?:\((?:\([^()]+\)|[^()]+)+\)|\[(?:\[[^\[\]]*\]|[&apos;&quot;][^&apos;&quot;]*[&apos;&quot;]|[^\[\]&apos;&quot;]+)+\]|\\.|[^ &gt;+~,(\[\\]+)+|[&gt;+~])(\s*,\s*)?((?:.|\r|\n)*)/g,i=&quot;sizcache&quot;+(Math.random()+&quot;&quot;).replace(&quot;.&quot;,&quot;&quot;),o=0,r=Object.prototype.toString,h=false,g=true,p=/\\/g,v=/\W/;[0,0].sort(function(){g=false;return 0});var d=function(A,e,D,E){D=D||[];e=e||document;var G=e;if(e.nodeType!==1&amp;&amp;e.nodeType!==9){return[]}if(!A||typeof A!==&quot;string&quot;){return D}var x,I,L,w,H,K,J,C,z=true,y=d.isXML(e),B=[],F=A;do{n.exec(&quot;&quot;);x=n.exec(F) [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string sizzle {
+        public static string sizzle {
             get {
                 return ResourceManager.GetString("sizzle", resourceCulture);
             }

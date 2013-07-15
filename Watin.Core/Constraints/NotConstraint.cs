@@ -27,7 +27,7 @@ namespace WatiN.Core.Constraints
     /// </summary>
 	public sealed class NotConstraint : Constraint
 	{
-        private readonly Constraint inner;
+        public readonly Constraint inner;
 
         /// <summary>
         /// Creates a new NOT constraint.
@@ -51,7 +51,7 @@ namespace WatiN.Core.Constraints
         }
 
         /// <inheritdoc />
-        protected override bool MatchesImpl(IAttributeBag attributeBag, ConstraintContext context)
+        public override bool MatchesImpl(IAttributeBag attributeBag, ConstraintContext context)
         {
             return ! inner.Matches(attributeBag, context);
         }

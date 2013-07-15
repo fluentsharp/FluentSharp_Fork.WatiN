@@ -26,9 +26,9 @@ namespace WatiN.Core.Comparers
     /// </summary>
 	public sealed class AlwaysTrueComparer<T> : Comparer<T>
 	{
-        private static readonly AlwaysTrueComparer<T> instance = new AlwaysTrueComparer<T>();
+        public static readonly AlwaysTrueComparer<T> instance = new AlwaysTrueComparer<T>();
 
-        private AlwaysTrueComparer()
+        public AlwaysTrueComparer()
         {
         }
 

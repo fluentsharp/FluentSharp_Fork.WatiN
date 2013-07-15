@@ -29,7 +29,7 @@ namespace WatiN.Core.Exceptions
 		public ReEntryException(Constraint constraint) : base(CreateMessage(constraint)) {}
         public ReEntryException(SerializationInfo info, StreamingContext context) : base(info, context) {}
 
-		private static string CreateMessage(Constraint constraint)
+		public static string CreateMessage(Constraint constraint)
 		{
 			return string.Format(Resources.ReEntryException_MessageFormat, constraint.GetType(), constraint);
 		}

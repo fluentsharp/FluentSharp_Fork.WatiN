@@ -40,8 +40,8 @@ namespace WatiN.Core.DialogHandlers
 	/// </example>
 	public class LogonDialogHandler : BaseDialogHandler
 	{
-		private readonly string userName;
-		private readonly string password;
+		public readonly string userName;
+		public readonly string password;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="LogonDialogHandler"/> class.
@@ -111,7 +111,7 @@ namespace WatiN.Core.DialogHandlers
 			return GetSystemCredentialsHwnd(window) != IntPtr.Zero;
 		}
 
-		private IntPtr GetSystemCredentialsHwnd(Window window)
+		public IntPtr GetSystemCredentialsHwnd(Window window)
 		{
 			var hwnd = NativeMethods.GetChildWindowHwnd(window.Hwnd, "SysCredential");
 			
@@ -122,7 +122,7 @@ namespace WatiN.Core.DialogHandlers
 			return hwnd;
 		}
 		
-		private static void checkArgument(string message, string parameter, string parameterName)
+		public static void checkArgument(string message, string parameter, string parameterName)
 		{
 			if (UtilityClass.IsNullOrEmpty(parameter))
 			{

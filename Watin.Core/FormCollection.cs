@@ -37,7 +37,7 @@ namespace WatiN.Core
         public FormCollection(DomContainer domContainer, ElementFinder finder) : base(domContainer, finder) { }
 
         /// <inheritdoc />
-        protected override FormCollection CreateFilteredCollection(ElementFinder elementFinder)
+        public override FormCollection CreateFilteredCollection(ElementFinder elementFinder)
         {
             return new FormCollection(DomContainer, elementFinder);
         }

@@ -27,7 +27,7 @@ namespace WatiN.Core.Native.InternetExplorer
 {
 	public class IEBrowser : INativeBrowser 
 	{
-	    private readonly IWebBrowser2 webBrowser;
+	    public readonly IWebBrowser2 webBrowser;
 
 	    public IEBrowser(IWebBrowser2 webBrowser2)
 	    {
@@ -57,7 +57,7 @@ namespace WatiN.Core.Native.InternetExplorer
         }
 
         [STAThread]
-        private void GoToNoWaitInternal(object uriIn)
+        public void GoToNoWaitInternal(object uriIn)
         {
             var uri = (Uri)uriIn;
             NavigateTo(uri);

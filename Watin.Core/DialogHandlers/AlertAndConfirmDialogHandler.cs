@@ -25,7 +25,7 @@ namespace WatiN.Core.DialogHandlers
 {
 	public class AlertAndConfirmDialogHandler : BaseDialogHandler
 	{
-		private readonly Queue alertQueue;
+		public readonly Queue alertQueue;
 
 		public AlertAndConfirmDialogHandler()
 		{
@@ -111,7 +111,7 @@ namespace WatiN.Core.DialogHandlers
 			return false;
 		}
 
-	    private static IntPtr GetMessageBoxHandle(Window window)
+	    public static IntPtr GetMessageBoxHandle(Window window)
 	    {
 	        return NativeMethods.GetDlgItem(window.Hwnd, 0xFFFF);
 	    }

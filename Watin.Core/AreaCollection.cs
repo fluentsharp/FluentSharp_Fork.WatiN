@@ -32,7 +32,7 @@ namespace WatiN.Core
 		public AreaCollection(DomContainer domContainer, ElementFinder finder) : base(domContainer, finder) {}
 
         /// <inheritdoc />
-        protected override AreaCollection CreateFilteredCollection(ElementFinder elementFinder)
+        public override AreaCollection CreateFilteredCollection(ElementFinder elementFinder)
         {
             return new AreaCollection(DomContainer, elementFinder);
         }

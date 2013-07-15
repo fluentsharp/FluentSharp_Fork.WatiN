@@ -26,9 +26,9 @@ namespace WatiN.Core.Constraints
     /// </summary>
     public sealed class AnyConstraint : Constraint
     {
-        private static readonly AnyConstraint instance = new AnyConstraint();
+        public static readonly AnyConstraint instance = new AnyConstraint();
 
-        private AnyConstraint()
+        public AnyConstraint()
         {
         }
 
@@ -47,7 +47,7 @@ namespace WatiN.Core.Constraints
         }
 
         /// <inheritdoc />
-        protected override bool MatchesImpl(IAttributeBag attributeBag, ConstraintContext context)
+        public override bool MatchesImpl(IAttributeBag attributeBag, ConstraintContext context)
         {
             return true;
         }

@@ -37,8 +37,8 @@ namespace WatiN.Core.UtilityClasses
     /// </summary>
     public class TryFuncUntilTimeOut
     {
-        private readonly SimpleTimer _timer;
-        private readonly TimeSpan _timeout;
+        public readonly SimpleTimer _timer;
+        public readonly TimeSpan _timeout;
 
         /// <summary>
         /// Gets or sets the maximum interval between retries of the action.
@@ -58,13 +58,13 @@ namespace WatiN.Core.UtilityClasses
         /// Returns the last exception (thrown by the action) before the time out occured.
         /// </summary>
         /// <value>The last exception.</value>
-        public Exception LastException { get; private set; }
+        public Exception LastException { get; set;}
         
         /// <summary>
         /// Returns a value indicating whether a time out occured.
         /// </summary>
         /// <value><c>true</c> if did time out; otherwise, <c>false</c>.</value>
-        public bool DidTimeOut { get; private set; }
+        public bool DidTimeOut { get; set;}
         
         /// <summary>
         /// Gets or sets the exception message. If set a <see cref="TimeoutException"/> will be thrown
@@ -93,7 +93,7 @@ namespace WatiN.Core.UtilityClasses
             _timer = timer;
         }
 
-        private TryFuncUntilTimeOut()
+        public TryFuncUntilTimeOut()
         {
             SleepTime = TimeSpan.FromMilliseconds(Settings.SleepTime);
         }
@@ -145,17 +145,17 @@ namespace WatiN.Core.UtilityClasses
             return default(T);
         }
 
-        protected virtual void Sleep(TimeSpan sleepTime)
+        public virtual void Sleep(TimeSpan sleepTime)
         {
             Thread.Sleep(sleepTime);
         }
 
-        private SimpleTimer GetTimer()
+        public SimpleTimer GetTimer()
         {
             return _timer ?? new SimpleTimer(Timeout);
         }
 
-        private void HandleTimeOut()
+        public void HandleTimeOut()
         {
             DidTimeOut = true;
 
@@ -165,7 +165,7 @@ namespace WatiN.Core.UtilityClasses
             }
         }
 
-        private static void ThrowTimeOutException(Exception lastException, string message)
+        public static void ThrowTimeOutException(Exception lastException, string message)
         {
             if (lastException != null)
             {

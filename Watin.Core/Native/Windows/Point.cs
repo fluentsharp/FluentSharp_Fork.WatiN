@@ -21,7 +21,7 @@ using System.Runtime.InteropServices;
 namespace WatiN.Core.Native.Windows
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal struct POINT
+    public struct POINT
     {
         public int X;
         public int Y;

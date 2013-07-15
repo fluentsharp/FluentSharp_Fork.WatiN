@@ -21,12 +21,12 @@ using SHDocVw;
 
 namespace WatiN.Core.Native.InternetExplorer
 {
-    internal class FrameByIndexProcessor : IWebBrowser2Processor
+    public class FrameByIndexProcessor : IWebBrowser2Processor
     {
-        private readonly HTMLDocument htmlDocument;
-        private readonly int index;
-        private int counter;
-        private IWebBrowser2 iWebBrowser2;
+        public readonly HTMLDocument htmlDocument;
+        public readonly int index;
+        public int counter;
+        public IWebBrowser2 iWebBrowser2;
 
         public FrameByIndexProcessor(int index, HTMLDocument htmlDocument)
         {
@@ -58,7 +58,7 @@ namespace WatiN.Core.Native.InternetExplorer
             return iWebBrowser2;
         }
 
-        internal static IWebBrowser2 GetFrameFromHTMLDocument(int frameIndex, HTMLDocument htmlDocument)
+        public static IWebBrowser2 GetFrameFromHTMLDocument(int frameIndex, HTMLDocument htmlDocument)
         {
             var processor = new FrameByIndexProcessor(frameIndex, htmlDocument);
 

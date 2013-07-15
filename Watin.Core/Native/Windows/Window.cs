@@ -23,7 +23,7 @@ namespace WatiN.Core.Native.Windows
 {
     public class Window
     {
-        private readonly IntPtr hwnd;
+        public readonly IntPtr hwnd;
 
         public Window(IntPtr hwnd)
         {

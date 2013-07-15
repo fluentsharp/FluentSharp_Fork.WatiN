@@ -32,7 +32,7 @@ namespace WatiN.Core
         public DivCollection(DomContainer domContainer, ElementFinder finder) : base(domContainer, finder) { }
 
         /// <inheritdoc />
-        protected override DivCollection CreateFilteredCollection(ElementFinder elementFinder)
+        public override DivCollection CreateFilteredCollection(ElementFinder elementFinder)
         {
             return new DivCollection(DomContainer, elementFinder);
         }

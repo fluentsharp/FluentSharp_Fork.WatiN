@@ -36,7 +36,7 @@ namespace WatiN.Core
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
     public sealed class DescriptionAttribute : ComponentDecoratorAttribute
     {
-        private readonly string description;
+        public readonly string description;
 
         /// <summary>
         /// Associates a description with a component.
