@@ -2,20 +2,15 @@
 using System;
 using System.Threading;
 using System.Windows.Forms;
-using FluentSharp.BCL;
+using FluentSharp.WinForms;
 using Form_Control = System.Windows.Forms.Control;
 using System.Collections.Generic;
 using System.Linq;
-using FluentSharp.BCL.Controls;
+using FluentSharp.WinForms.Controls;
 using FluentSharp.CoreLib;
 using FluentSharp.CoreLib.API;
 using WatiN.Core;
 using SHDocVw;
-
-//O2Ref:WatiN.Core.1x.dll
-//O2Ref:Interop.SHDocVw.dll
-//O2Ref:System.Xml.Linq.dll
-//O2Ref:System.Xml.dll
 
 namespace FluentSharp.Watin
 {
@@ -69,7 +64,7 @@ namespace FluentSharp.Watin
 		public WatiN_IE attachTo(System.Windows.Forms.WebBrowser webBrowser)
 		{
 			// need to do this or the attach is not going to work 						
-			WatiN.Core.Settings.AutoStartDialogWatcher = false;  
+			Settings.AutoStartDialogWatcher = false;  
 			attachTo(webBrowser.ActiveXInstance as InternetExplorer);						
 			return this;
 		}
@@ -126,7 +121,7 @@ namespace FluentSharp.Watin
 			   				url = "about:blank";
 				   		Settings.MakeNewIeInstanceVisible = false;
 							IE = new IE(url);										
-							InternetExplorer = (SHDocVw.InternetExplorerClass)IE.InternetExplorer;
+							InternetExplorer = (InternetExplorerClass)IE.InternetExplorer;
 							InternetExplorer.Top= top;
 							InternetExplorer.Left= left;
 							InternetExplorer.Width= width;
@@ -191,28 +186,23 @@ namespace FluentSharp.Watin
  
 		public T execute<T>(Func<T> callback)
 		{
-			object returnData = null;
+			var returnData = default(T);
 			var executionComplete = new AutoResetEvent(false);
-//			IEThread.invoke(
-			//WebBrowser.invokeOnThread(
-			//	()=>{
-						try
-						{	
-							returnData = callback();						
-						}
-						catch(Exception ex)
-						{
-							ex.log("in WatiN_IE execute<T>");
-						}
-						executionComplete.Set();
-			//		});
+
+			try
+			{	
+				returnData = callback();						
+			}
+			catch(Exception ex)
+			{
+				ex.log("in WatiN_IE execute<T>");
+			}
+			executionComplete.Set();
+			
 			if (executionComplete.WaitOne(maxExecutionWaitTime).isFalse())
 				"in WatiN_IE executeOnThread, maxExecutionWaitTime ({0} ms} was reached for action".error(maxExecutionWaitTime);
  
-			if (returnData is T)
-				return (T)returnData;
- 
-			return default(T);			
+			return returnData;		
 		}	
  
 		public static List<InternetExplorer> ieInstances()
@@ -245,7 +235,7 @@ namespace FluentSharp.Watin
 		
 		public WatiN_IE setWebBrowserObject(System.Windows.Forms.WebBrowser webBrowser)
 		{
-			this.WebBrowser = webBrowser;			 
+			WebBrowser = webBrowser;			 
 			return this;
 		}
 		
@@ -301,12 +291,12 @@ namespace FluentSharp.Watin
 	      
 	        public object getJsObject()
 	    	{    		
-	    		return this._jsObject;// ?? ie.invokeScript("jQuery");;
+	    		return _jsObject;// ?? ie.invokeScript("jQuery");;
 	    	}	    		    	
 	    	
 	    	public void setJsObject(object jsObject)
 	    	{    		
-	    		this._jsObject = jsObject;
+	    		_jsObject = jsObject;
 	    	} 
 	        
 	        public string filter(string data)
@@ -341,11 +331,9 @@ namespace FluentSharp.Watin
 	        	 	"Error, OnAjaxCall is not set".info();
 	        	 	return null;
 	        	 }
-	        	 else
-	        	 {
-	        	 	"invoking OnAjaxCall method".info();
-	            	return OnAjaxCall(id,open,body);
-	        	 }
+	        	 
+	        	"invoking OnAjaxCall method".info();
+	            return OnAjaxCall(id,open,body);	        	 
 			}
 	    }
 	}
