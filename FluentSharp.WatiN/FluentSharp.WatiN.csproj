@@ -31,12 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FluentSharp.CoreLib, Version=5.3.0.0, Culture=neutral, PublicKeyToken=55a0f9bf4256d533, processorArchitecture=MSIL">
-      <HintPath>..\packages\FluentSharp.CoreLib.5.3.111\lib\net35\FluentSharp.CoreLib.dll</HintPath>
-    </Reference>
-    <Reference Include="FluentSharp.WinForms">
-      <HintPath>..\packages\FluentSharp.WinForms.5.3.111\lib\net35\FluentSharp.WinForms.dll</HintPath>
-    </Reference>
     <Reference Include="Interop.SHDocVw">
       <HintPath>_Embedded_Dlls\Interop.SHDocVw.dll</HintPath>
       <EmbedInteropTypes>False</EmbedInteropTypes>
@@ -99,7 +93,14 @@
     <EmbeddedResource Include="_Embedded_Dlls\WatiN.Core.dll" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <ProjectReference Include="..\..\FluentSharp\FluentSharp.CoreLib\FluentSharp.CoreLib.csproj">
+      <Project>{0A7CE0E0-B092-43B5-AB80-99BA909019C9}</Project>
+      <Name>FluentSharp.CoreLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\FluentSharp\FluentSharp.WinForms\FluentSharp.WinForms.csproj">
+      <Project>{DF7E73CB-02AC-4689-BB8C-AC21FFCCDDC5}</Project>
+      <Name>FluentSharp.WinForms</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -17,7 +17,7 @@ namespace FluentSharp.Watin
                                         var _jsObject = ie.getJsObject(objRef);							
                                         if (_jsObject is IEnumerable)
                                             foreach(var item in _jsObject as IEnumerable)
-                                                treeNode.add_Node(item.comTypeName(), item, true); 
+                                                treeNode.add_Node(item.comObject_TypeName(), item, true); 
                                         else
                                             treeNode.add_Node(_jsObject); 								
                 }; 
@@ -26,7 +26,7 @@ namespace FluentSharp.Watin
                 (treeNode, _object) => {
                                            if (_object is IEnumerable)
                                                foreach(var item in _object as IEnumerable)
-                                                   treeNode.add_Node(item.comTypeName(), item, true); 
+                                                   treeNode.add_Node(item.comObject_TypeName(), item, true); 
                                            else
                                            {
                                                ie.setJsObject(_object);

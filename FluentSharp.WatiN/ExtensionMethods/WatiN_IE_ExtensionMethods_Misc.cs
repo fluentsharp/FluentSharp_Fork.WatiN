@@ -72,7 +72,7 @@ namespace FluentSharp.Watin
                 if (htmlDocument.notNull())
                 {
                     var htmlDocumentElement  = htmlDocument.documentElement;
-                    var comTypeName = htmlDocumentElement.comTypeName();
+                    var comTypeName = htmlDocumentElement.comObject_TypeName();
                     if (htmlDocumentElement.notNull())
                     {
                         /* in an previous version it was HTMLHtmlElementClass

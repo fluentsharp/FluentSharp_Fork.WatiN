@@ -62,7 +62,7 @@ namespace FluentSharp.Watin
             "formating Javascript with size: {0}".info(codeToFormat.size()); 						
             ie.setJsObject(codeToFormat);						
             ie.eval("window.external.setJsObject(js_beautify(_jsObject))"); 
-            var result = ie.getJsObject().str().fixCRLF();					
+            var result = ie.getJsObject().str().fix_CRLF();					
 //			"formated Javascript has size: {0}".info(result.size()); 			
             return result;
         }						
