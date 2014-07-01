@@ -35,7 +35,7 @@ namespace FluentSharp.Watin
         }
         // uri & url
  
-        public static string html (this HTMLHtmlElementClass htmlElementClass)
+        public static string outerHtml(this HTMLHtmlElementClass htmlElementClass)
         {
             if (htmlElementClass.notNull())
                 return htmlElementClass.outerHTML;
@@ -92,17 +92,19 @@ namespace FluentSharp.Watin
             }
             return null;
         } 		
+        /// <summary>
+        /// Returns the rendered HTML code of the current page
+        /// 
+        /// This is done using <code>ie.element("HTML").outherHTML()</code> 
+        /// because Watin's HTML value (via <code>ie.IE.HTML</code>) was actually the
+        /// html of the BODY element
+        /// </summary>
+        /// <param name="ie"></param>
+        /// <returns></returns>
         public static string html(this WatiN_IE ie)
-        {
-            try
-    		{    	
-                return ie.IE.Html;
-            }
-            catch(Exception ex)
-    		{
-    			ex.log("in WatiN_IE html()");
-                return null;
-    		}
+        {            
+            return ie.element("HTML").outerHtml();
+            
             //return ie.documentElement().html();
             /*
 			try

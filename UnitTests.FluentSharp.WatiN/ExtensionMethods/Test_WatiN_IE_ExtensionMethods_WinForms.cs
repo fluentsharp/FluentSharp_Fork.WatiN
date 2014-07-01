@@ -40,9 +40,39 @@ namespace UnitTests.FluentSharp_WatiN.ExtensionMethods
             assert_Is_Empty(panel.parentForm().controls<TextBox>(true));
             panel.parentForm().close();
         }
+        [Test] public void popupWindow_With_IE()
+        {
+            var title = "IE title".add_5_RandomLetters();
+            var ie    = title.popupWindow_With_IE(); 
+
+            assert_Not_Null(ie);
+            assert_Are_Equal(ie.parentForm().title(), title);
+            ie.parentForm().close();
+        }        
+        [Test] public void popupWindow_Hidden_With_IE()
+        {
+            var title = "IE title".add_5_RandomLetters();
+            var ie    = title.popupWindow_Hidden_With_IE(); 
+
+            assert_Not_Null(ie);
+            assert_Are_Equal(ie.parentForm().opacity(), 0);
+            assert_Are_Equal(ie.parentForm().title(), title);
+            ie.parentForm().close();
+        }
+        [Test] public void add_IE_Hidden_PopupWindow()
+        {
+            var title = "IE title".add_5_RandomLetters();
+            var ie    = title.add_IE_Hidden_PopupWindow();
+            ie.parentForm().assert_Not_Null     ()
+                           .assert_Are_Equal    ((form)=>form.opacity(), 0)
+                           .assert_Are_Equal    ((form)=>form.title()  , title)
+                           .assert_Are_Not_Equal((form)=>form.title()  , "title")
+                           .close();            
+        }
         [Test] public void add_IE_with_NavigationBar()
         {
-            var panel = "IE in PopupWindow with navigation bar".popupWindow();
+            this.ignore_If_Offline();
+            var panel = "IE in PopupWindow with navigation bar".popupWindow_Hidden();
             var ie = panel.add_IE_with_NavigationBar();
             ie.open("about:blank").waitForComplete();
             assert_Are_Equal(ie.url(), "about:blank");
@@ -51,14 +81,20 @@ namespace UnitTests.FluentSharp_WatiN.ExtensionMethods
             var textBox =  panel.parentForm().control<TextBox>(true);            
             
             assert_Are_Equal(textBox.get_Text(), "about:blank");
-
-            panel.parentForm().show().bringToFront();
-            
+                        
             textBox.set_Text("http://o2platform.com".line());
             
             ie.waitForComplete();
     
             assert_Are_Equal(ie.url(), "http://o2platform.com/");
+        }
+        [Test] public void parentForm()
+        {
+            var ie = "test".popupWindow_Hidden_With_IE();
+            var parentForm = ie.parentForm();
+            assert_Not_Null (parentForm);
+            assert_Are_Equal(parentForm,ie.HostControl.parentForm());
+            parentForm.close();
         }
     }
 }

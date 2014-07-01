@@ -10,8 +10,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>UnitTests.FluentSharp_WatiN</RootNamespace>
     <AssemblyName>UnitTests.FluentSharp.WatiN</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,13 +31,15 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.mshtml, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
-    <Reference Include="nunit.framework">
-      <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
+    <Reference Include="nunit.framework, Version=2.6.3.13283, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -52,12 +56,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExtensionMethods\Test_WatiN_IE_ExtensionMethods_Elements.cs" />
+    <Compile Include="ExtensionMethods\Test_WatiN_IE_ExtensionMethods_Inject_Html.cs" />
     <Compile Include="ExtensionMethods\Test_WatiN_IE_ExtensionMethods_Link.cs" />
+    <Compile Include="ExtensionMethods\Test_WatiN_IE_ExtensionMethods_Misc.cs" />
     <Compile Include="ExtensionMethods\Test_WatiN_IE_ExtensionMethods_WinForms.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
+    <Compile Include="_Test_Helpers\Extra_Watin_ExtensionMethods.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\FluentSharp.CoreLib\FluentSharp.CoreLib.csproj">
@@ -80,10 +85,17 @@
       <Project>{e76bce43-8511-4ce8-a965-c0150f713ce9}</Project>
       <Name>FluentSharp_Fork.SharpDevelopEditor</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\UnitTests\UnitTests.FluentSharp.Web\UnitTests.FluentSharp.Web.csproj">
+      <Project>{62f1c85f-0991-42ee-9b71-90d82ee7cd0b}</Project>
+      <Name>UnitTests.FluentSharp.Web</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FluentSharp.WatiN\FluentSharp.WatiN.csproj">
       <Project>{95399705-D70E-44FD-9D48-F71C33E2D9D1}</Project>
       <Name>FluentSharp.WatiN</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -12,21 +12,35 @@ namespace FluentSharp.Watin
  
         public static List<Element> elements(this WatiN_IE watinIe, string tagName)
         {
-            return (from element in watinIe.IE.Elements
-                    where element.TagName == tagName
-                    select element).toList();
+            return watinIe.elements().elements(tagName);            
         }
  
+        /// <summary>
+        /// Returns a list of all Html Elements in the page (note that there could be quite a lot of them).
+        /// 
+        /// Note: this is a recursive search
+        /// </summary>
+        /// <param name="watinIe"></param>
+        /// <returns>List of WatiN.Core.Element</returns>
         public static List<Element> elements(this WatiN_IE watinIe)
         {
             return (from element in watinIe.IE.Elements
                     select element).toList();
         } 		 		
  		
+        /// <summary>
+        /// returns the elements that match the provided tag
+        /// </summary>
+        /// <param name="elements"></param>
+        /// <param name="tagName"></param>
+        /// <returns></returns>
         public static List<Element> elements(this List<Element> elements, string tagName)
         {
+            tagName = tagName.trim().lower();       //normalize the data
+            if (tagName.notValid())
+                return new List<Element>();
             return (from element in elements
-                    where element.TagName == tagName
+                    where element.TagName.lower().trim() == tagName
                     select element).toList();
         }
         public static List<string> tagNames(this List<Element> elements)
@@ -51,7 +65,9 @@ namespace FluentSharp.Watin
   
         public static string tagName(this Element element)
         {
-            return element.TagName.trim();
+            if (element.notNull())
+                return element.TagName.trim();
+            return null;
         }
     	
         public static string id(this Element element)
@@ -82,6 +98,12 @@ namespace FluentSharp.Watin
                        : "";
         }
  
+        public static string innerText(this Element element)
+        {
+            return (element != null)
+                       ? element.Text.trim()
+                       : "";
+        }
         public static string innerHtml(this Element element)
         {
             return (element != null)
@@ -220,18 +242,67 @@ namespace FluentSharp.Watin
         public static T element<T>(this WatiN_IE watinIe, string id)
             where T : Element
         {
-            return watinIe.elements().id<T>(id);
+            return watinIe.elements().with_Id<T>(id);
         }
  
-        public static Element element(this WatiN_IE watinIe, string id)
-        {
-            return watinIe.elements().id(id);
+        /// <summary>
+        /// Searches all elements for the an element that matches the provided value.
+        /// 
+        /// The value returned is the first match, and the search order is:
+        ///     - Html Tag name
+        ///     - id attribute 
+        ///     - innerHtml       
+        /// </summary>
+        /// <param name="watinIe"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static Element element(this WatiN_IE watinIe, string value)
+        {            
+            if (watinIe.isNull() || value.notValid())
+                return null;
+            var element_by_Tag = watinIe.elements().with_TagName(value);
+            if (element_by_Tag.notNull())
+                return element_by_Tag;
+
+            var element_by_Id = watinIe.elements().with_Id(value);
+            if (element_by_Id.notNull())
+                return element_by_Id;
+
+            var element_by_InnerText = watinIe.elements().with_InnerText(value);
+            if (element_by_InnerText.notNull())
+                return element_by_InnerText;
+            return  null;
         }
  
-        public static Element id(this List<Element> elements, string id)
+        public static Element with_TagName(this List<Element> elements, string tagName)
         {
+            tagName = tagName.lower().trim();
             foreach(var element in elements)
-                if (element.Id != null && element.Id == id)
+                if (element.tagName().lower() == tagName)
+                    return element;
+            return null;
+        }
+        public static T with_Id<T>(this List<Element> elements, string id)
+            where T : Element
+        {
+            var element = elements.with_Id(id);
+            if (element is T)
+                return (T)element;
+            return null;			
+        }
+        public static Element with_Id(this List<Element> elements, string idValue)
+        {
+            idValue = idValue.lower().trim();
+            foreach(var element in elements)
+                if (element.id().lower() == idValue)
+                    return element;
+            return null;
+        }
+        public static Element with_InnerText(this List<Element> elements, string innerText)
+        {
+            innerText = innerText.lower().trim();
+            foreach(var element in elements)
+                if (element.innerText().lower() == innerText)
                     return element;
             return null;
         }
@@ -261,15 +332,6 @@ namespace FluentSharp.Watin
             return null;
         }
  
-        public static T id<T>(this List<Element> elements, string id)
-            where T : Element
-        {
-            var element = elements.id(id);
-            if (element is T)
-                return (T)element;
-            return null;			
-        }
-
         public static List<string> strs(this List<Element> elements)
         {
             return (from element in elements
@@ -311,10 +373,21 @@ namespace FluentSharp.Watin
 		
         public static string attribute(this Element element, string attributeName)
         {
-            var attributes = element.attributes();
-            if (attributes.hasKey(attributeName))
-                return attributes[attributeName];
+            if (element.notNull() && attributeName.notNull())
+            { 
+                var attributes = element.attributes();
+                if (attributes.hasKey(attributeName))
+                    return attributes[attributeName];
+            }
             return "";
+        }
+        public static Element body(this WatiN_IE  watinIe)
+        {
+            return watinIe.element("body");
+        }
+        public static Element head(this WatiN_IE  watinIe)
+        {
+            return watinIe.element("head");
         }
     }
 }

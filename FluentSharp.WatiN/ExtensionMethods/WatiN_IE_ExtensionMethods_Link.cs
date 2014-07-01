@@ -8,16 +8,32 @@ namespace FluentSharp.Watin
 {
     public static class WatiN_IE_ExtensionMethods_Link
     { 	
- 
-        public static Link link(this WatiN_IE watinIe, string name)
+        /// <summary>
+        /// Finds a link in the current page
+        /// 
+        /// The value is normalized (ie. converted to lowercase + trimmed) and the search order is
+        ///   1) id
+        ///   2) name
+        ///   2) innerText
+        /// </summary>
+        /// <param name="watinIe"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static Link link(this WatiN_IE watinIe, string value)
         {
+            value = value.lower().trim();
             foreach(var link in watinIe.links())
-                if (link.id() == name || link.text() == name)
+                if (link.id().lower() == value ||link.text().lower() == value)
                     return link;
-            "in WatiN_IE could not find Link with name:{0}".error(name ?? "[null value]");
+            "in WatiN_IE could not find Link with name:{0}".error(value ?? "[null value]");
             return null;    				
         }
  
+        /// <summary>
+        /// Returns a list with the links that exist in the current page
+        /// </summary>
+        /// <param name="watinIe"></param>
+        /// <returns>List of Watin.Core.Link objects</returns>
         public static List<Link> links(this WatiN_IE watinIe)
         {
             if (watinIe.notNull() && watinIe.IE.notNull())
@@ -73,13 +89,9 @@ namespace FluentSharp.Watin
                     select link.Id).toList();
         }
  
-        public static bool hasLink(this WatiN_IE watinIe, string nameOrId)
+        public static bool hasLink(this WatiN_IE watinIe, string value)
         {			
-            foreach(var link in watinIe.links())
-                if (link.id() == nameOrId || link.text() == nameOrId)
-                    return true;
-            return false;
-            //return watinIe.links().ids().Contains(id);
+            return watinIe.link(value).notNull();                        
         }
 		
         public static Link waitForLink(this WatiN_IE watinIe, string nameOrId)
@@ -99,6 +111,9 @@ namespace FluentSharp.Watin
             }
             return watinIe.link(nameOrId);
         }
-
+        public static string href(this Link link)
+        {
+            return link.attribute("href");
+        }
     }
 }
