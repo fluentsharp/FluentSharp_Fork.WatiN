@@ -31,18 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FluentSharp.CoreLib, Version=5.3.0.0, Culture=neutral, PublicKeyToken=55a0f9bf4256d533, processorArchitecture=MSIL">
-      <HintPath>..\packages\FluentSharp.CoreLib.5.3.111\lib\net35\FluentSharp.CoreLib.dll</HintPath>
-    </Reference>
-    <Reference Include="FluentSharp.REPL">
-      <HintPath>..\packages\FluentSharp.REPL.5.3.111\lib\net35\FluentSharp.REPL.exe</HintPath>
-    </Reference>
-    <Reference Include="FluentSharp.SharpDevelopEditor">
-      <HintPath>..\packages\FluentSharp.SharpDevelopEditor.5.3.111\lib\net35\FluentSharp.SharpDevelopEditor.dll</HintPath>
-    </Reference>
-    <Reference Include="FluentSharp.WinForms">
-      <HintPath>..\packages\FluentSharp.WinForms.5.3.111\lib\net35\FluentSharp.WinForms.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.mshtml, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
@@ -64,13 +52,34 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Test_Ie_PopupWindow.cs" />
+    <Compile Include="ExtensionMethods\Test_WatiN_IE_ExtensionMethods_Link.cs" />
+    <Compile Include="ExtensionMethods\Test_WatiN_IE_ExtensionMethods_WinForms.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\FluentSharp.CoreLib\FluentSharp.CoreLib.csproj">
+      <Project>{0a7ce0e0-b092-43b5-ab80-99ba909019c9}</Project>
+      <Name>FluentSharp.CoreLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\FluentSharp.NUnit\FluentSharp.NUnit.csproj">
+      <Project>{0da6b6b3-5be3-4610-bb7b-ea9a4baf27af}</Project>
+      <Name>FluentSharp.NUnit</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\FluentSharp.REPL\FluentSharp.REPL.csproj">
+      <Project>{d742bbef-bfdc-477f-9880-5e0e2c89b6b2}</Project>
+      <Name>FluentSharp.REPL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\FluentSharp.WinForms\FluentSharp.WinForms.csproj">
+      <Project>{df7e73cb-02ac-4689-bb8c-ac21ffccddc5}</Project>
+      <Name>FluentSharp.WinForms</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\FluentSharp_Fork.SharpDevelopEditor\FluentSharp_Fork.SharpDevelopEditor.csproj">
+      <Project>{e76bce43-8511-4ce8-a965-c0150f713ce9}</Project>
+      <Name>FluentSharp_Fork.SharpDevelopEditor</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FluentSharp.WatiN\FluentSharp.WatiN.csproj">
       <Project>{95399705-D70E-44FD-9D48-F71C33E2D9D1}</Project>
       <Name>FluentSharp.WatiN</Name>

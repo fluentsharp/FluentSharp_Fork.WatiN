@@ -60,20 +60,26 @@ namespace FluentSharp.Watin
                 return watinIe;
             var urlTextBox = control.insert_Above(20)
                                     .add_TextBox("Url:","")
-                                    .onEnter((text)=> watinIe.open_ASync(text));
+                                    .onEnter((text)=> watinIe.open_ASync(text))
+                                    .onTextChange((text)=>
+                                        {
+                                            if (text.contains("".line()))
+                                                watinIe.open_ASync(text);
+                                        });
+
             watinIe.onNavigate((url)=> urlTextBox.set_Text(url));
             return watinIe;
         }
  
         public static WatiN_IE minimized(this WatiN_IE watinIe)
         {
-            watinIe.HostControl.minimized();
+            watinIe.HostControl.minimize();
             return watinIe;
         }
  		
         public static WatiN_IE maximized(this WatiN_IE watinIe)
         {
-            watinIe.HostControl.maximized();
+            watinIe.HostControl.maximize();
             return watinIe;
         }
     }
