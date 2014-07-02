@@ -1,5 +1,6 @@
 using System;
 using FluentSharp.CoreLib;
+using FluentSharp.Web35;
 using FluentSharp.WinForms;
 using WatiN.Core;
 
@@ -74,6 +75,42 @@ namespace FluentSharp.Watin
             var html = "<a href='{0}' id='{1}'>{2}</a>".format(href.htmlAttributeEncode(), 
                                                                id.htmlAttributeEncode(), 
                                                                innerText.htmlEncode());
+            element.injectHtml_beforeEnd(html);
+            return element;
+        }
+
+        /// <summary>
+        /// Adds an Button (i.e. input tag with type=button) to the current element.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="element"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static T add_Button<T>(this T element, string value) where T : Element
+        {
+            var id   = "Button_Id".add_5_RandomLetters();
+            var name = "Button_Name".add_5_RandomLetters();
+            return element.add_Button(id,name, value);
+        }
+        /// <summary>
+        /// Adds an Button (i.e. input tag with type=button) to the current element.         
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="element"></param>
+        /// <param name="id"></param>
+        /// <param name="name"></param>        
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static T add_Button<T>(this T element, string id, string name, string value) where T : Element
+        {
+            return element.add_Input(id,name,"button", value);
+        }
+        public static T add_Input<T>(this T element, string id, string name, string type, string value) where T : Element
+        {
+            var html = "<input type='{0}' id='{1}' name='{2}' value='{3}' />".format(type.htmlAttributeEncode(), 
+                                                                                   id.htmlAttributeEncode(), 
+                                                                                   name.htmlAttributeEncode(), 
+                                                                                   value.htmlAttributeEncode());
             element.injectHtml_beforeEnd(html);
             return element;
         }

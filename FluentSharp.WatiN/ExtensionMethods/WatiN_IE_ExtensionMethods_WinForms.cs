@@ -42,7 +42,8 @@ namespace FluentSharp.Watin
             try
             {
                 var ie = WatiN_IE.window(control);
-                ie.showMessage(DEFAULT_IE_MESSAGE);        // show an message so that the IE object is left in a stable condition
+                ie.open("about:blank");                 // open about:blank so that the IE object is left in a stable condition
+                //ie.showMessage(DEFAULT_IE_MESSAGE);        // show an message so that the IE object is left in a stable condition
                 return ie;
             }
             catch (Exception ex)
@@ -62,6 +63,15 @@ namespace FluentSharp.Watin
         public static WatiN_IE popupWindow_With_IE(this string title)
         {
             return title.popupWindow().add_IE();            
+        }
+        /// <summary>
+        /// same as popupWindow_With_IE(this string title)
+        /// </summary>
+        /// <param name="title"></param>
+        /// <returns></returns>
+        public static WatiN_IE add_IE_PopupWindow(this string title)
+        {
+            return title.popupWindow_With_IE();
         }
         /// <summary>
         /// Same as: popupWindow_Hidden_With_IE(this string title)
@@ -142,6 +152,21 @@ namespace FluentSharp.Watin
             if (watinIe.notNull() && watinIe.HostControl.notNull())
                 return watinIe.HostControl.parentForm();
             return null;
+        }
+        public static WatiN_IE hide(this WatiN_IE watinIe)
+        {
+            watinIe.parentForm().hide();
+            return watinIe;
+        }
+        public static WatiN_IE show(this WatiN_IE watinIe)
+        {
+            watinIe.parentForm().show();
+            return watinIe;
+        }
+        public static WatiN_IE show_WaitForClose(this WatiN_IE watinIe)
+        {
+            watinIe.parentForm().show().waitForClose();
+            return watinIe;
         }
     }
 }

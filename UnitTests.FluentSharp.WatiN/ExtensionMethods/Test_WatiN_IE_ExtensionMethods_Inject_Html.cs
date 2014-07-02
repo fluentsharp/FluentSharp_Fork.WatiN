@@ -49,7 +49,38 @@ namespace UnitTests.FluentSharp_WatiN.ExtensionMethods
                      .assert_Contains (link_NoId.href,"#")
                      .assert_Are_Equal(link_NoId.innerText,innerText2);            
         }
+        [Test] public void add_Button()
+        {
+            var id    = "id"       .add_5_RandomLetters();
+            var name  = "name"     .add_5_RandomLetters();            
+            var value = "value".add_5_RandomLetters();
 
+            ie.buttons().assert_Is_Empty();
+            ie.body().add_Button(id, name, value);
+            
+            ie.buttons().assert_Not_Empty().assert_Size_Is(1);
+
+            var button = ie.buttons().first();
+
+            button.assert_Not_Null()
+                .assert_Are_Equal(button.id,id)
+                .assert_Contains (button.name,name)
+                .assert_Are_Equal(button.value,value);
+            
+            assert_Are_Equal(button, ie.buttons().first());
+            assert_Are_Equal(button, ie.elements("input").first());
+            assert_Are_Equal(button, ie.button(id));   
+            assert_Are_Equal(button, ie.button(name)); 
+            assert_Are_Equal(button, ie.button(value));
+
+            var innerText2   = "innerText 2".add_5_RandomLetters();
+            ie.body().add_Button(innerText2);
+            var button_NoId = ie.buttons().second();
+            button_NoId.assert_Not_Null()                 
+                     .assert_Contains (button_NoId.id,"Button_Id_")
+                     .assert_Contains (button_NoId.name,"Button_Name_")                     
+                     .assert_Are_Equal(button_NoId.value,innerText2);            
+        }
         [Test] public void add_H1()
         {            
             var id          = "id"       .add_5_RandomLetters();
@@ -74,47 +105,6 @@ namespace UnitTests.FluentSharp_WatiN.ExtensionMethods
             h1_NoId.assert_Not_Null()                 
                    .assert_Contains (h1_NoId.id,"H1_Id_")                   
                    .assert_Are_Equal(h1_NoId.innerText,innerText2);        
-        }
-    
-        //Workflows
-        [Test] public void Check_That_Links_With_NewLines_In_InnerText_Can_Still_Be_Found()
-        {
-            //fix and regression test for https://github.com/o2platform/FluentSharp/issues/3
-
-            var simpleText = "this is inside the link";
-            var linkText = simpleText.lineBeforeAndAfter();
-
-            assert_Size_Is(ie.links(),0);
-
-            ie.body().add_Link(linkText);
-
-            assert_Size_Is(ie.links(),1);
-            
-            var link = ie.link(simpleText);
-
-            assert_Not_Null(link);
-
-            assert_Are_Equal(link, ie.link(simpleText));
-            assert_Are_Equal(link, ie.link(linkText));
-
-            //a tipical example of this problem was with simple links with spaces (as shown in the example below)
-
-            ie.body().add_Link("    Login   ");
-            assert_Size_Is (ie.links(),2);
-            assert_Not_Null(ie.link("Login"));
-            assert_Not_Null(ie.link("login"));
-            assert_Not_Null(ie.link("LOGIN"));
-            assert_Not_Null(ie.link("     Login"));
-            assert_Not_Null(ie.link("     LOGIN"));
-
-            assert_Is_True(ie.hasLink("Login"));
-            assert_Is_True(ie.hasLink("login"));
-            assert_Is_True(ie.hasLink("login"));
-            assert_Is_True(ie.hasLink("     Login"  ));
-            assert_Is_True(ie.hasLink("     LOGIN"  ));
-            assert_Is_True(ie.hasLink("    Login   "));
-            
-
-        }
+        }            
     }
 }

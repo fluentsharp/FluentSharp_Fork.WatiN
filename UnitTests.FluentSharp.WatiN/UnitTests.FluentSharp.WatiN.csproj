@@ -56,6 +56,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="APIs\Test_IE_UnitTest.cs" />
+    <Compile Include="ExtensionMethods\Test_WatiN_IE_ExtensionMethods_Button.cs" />
     <Compile Include="ExtensionMethods\Test_WatiN_IE_ExtensionMethods_Elements.cs" />
     <Compile Include="ExtensionMethods\Test_WatiN_IE_ExtensionMethods_Inject_Html.cs" />
     <Compile Include="ExtensionMethods\Test_WatiN_IE_ExtensionMethods_Link.cs" />

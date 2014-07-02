@@ -13,9 +13,11 @@ namespace UnitTests.FluentSharp_WatiN.ExtensionMethods
     {
         [Test] public void add_IE()
         {
-            var panel = "IE in PopupWindow".popupWindow_Hidden();
-            var ie = panel.add_IE();
             
+            var panel = "IE in PopupWindow".popupWindow_Hidden();
+
+            var ie = panel.add_IE();                        
+
             var url_Before = ie.url();
             var htmlDocument_Before = ie.htmlDocument();
             var htmlDocumentElement_Before = ie.htmlDocumentElement();            
@@ -29,9 +31,9 @@ namespace UnitTests.FluentSharp_WatiN.ExtensionMethods
             Assert.IsNotNull(panel);
             Assert.IsNotNull(ie);
 
-            Assert.IsNull(url_Before);
-            Assert.IsNull(htmlDocument_Before);     
-            Assert.IsNull(htmlDocumentElement_Before);            
+            Assert.AreEqual(url_Before,"about:blank");
+            Assert.NotNull(htmlDocument_Before);     
+            Assert.NotNull(htmlDocumentElement_Before);            
             
             Assert.IsNotNull(url_After);
             Assert.IsNotNull(htmlDocument_After);            

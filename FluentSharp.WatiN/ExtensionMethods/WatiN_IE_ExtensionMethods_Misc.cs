@@ -2,6 +2,7 @@ using System;
 using System.Text;
 using FluentSharp.CoreLib;
 using FluentSharp.CoreLib.API;
+using FluentSharp.WinForms;
 using SHDocVw;
 using WatiN.Core;
 using mshtml;
@@ -360,5 +361,10 @@ namespace FluentSharp.Watin
             watinIe.IE.WaitForComplete(); 
             return watinIe;
         }
+        public static WatiN_IE parentForm_WaitForClose(this WatiN_IE watinIe)
+        {
+            watinIe.parentForm().waitForClose();
+            return watinIe;
+        }        
     }
 }

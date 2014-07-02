@@ -6,20 +6,32 @@ namespace FluentSharp.Watin
 {
     public static class WatiN_IE_ExtensionMethods_Button
     {  	    	
-        public static WatiN.Core.Button button(this WatiN_IE watinIe, string identifier)
+        /// <summary>
+        /// Finds a button based on the provided searchText (which is normalized to lowercase and trimmed), 
+        /// using the folowing search sequence (of html attributes):
+        ///    - name
+        ///    - id 
+        ///    - value
+        ///    - className
+        /// </summary>
+        /// <param name="watinIe"></param>
+        /// <param name="searchText"></param>
+        /// <returns></returns>
+        public static WatiN.Core.Button button(this WatiN_IE watinIe, string searchText)
         {
-            identifier = identifier.trim();
-            if (identifier.valid())
-            {
-                identifier = identifier.trim();
+            searchText = searchText.trim().lower();
+            if (searchText.valid())
+            {                
                 foreach(var button in watinIe.buttons())
-                    if ((button.id().notNull() && button.id().trim() == identifier) || 
-                        (button.value().notNull() && button.value().trim() == identifier) ||
-                        (button.className().notNull() && button.className().trim() == identifier) ||
-                        (button.outerText().notNull() && button.outerText().trim() == identifier) )
+                    if ((button.name     ().lower() == searchText) || 
+                        (button.id       ().lower() == searchText) || 
+                        (button.value    ().lower() == searchText) || 
+                        (button.className().lower() == searchText))
+                    { 
                         return button;
-            }    				
-            "in WatiN_IE could not find Button with identifier (searched on id,name, classname and outerText):{0}".error(identifier ?? "[null value]");
+                    }
+                "in WatiN_IE could not find Button with provided searchText (searched on name, id, value and classname ):{0}".error(searchText);
+            }    				            
             return null;    				
         }
  
@@ -50,19 +62,26 @@ namespace FluentSharp.Watin
  
         public static List<string> names(this List<WatiN.Core.Button> buttons)
         {
-            return buttons.ids();
+            return (from button in buttons 
+                    select button.name()).toList();
         }
  
         public static string value(this WatiN.Core.Button button)
         {    		
             return (button != null)
-                       ? button.Value
+                       ? button.Value.trim()
+                       : "";
+        }
+        public static string name(this WatiN.Core.Button button)
+        {    		
+            return (button != null)
+                       ? button.Name.trim()
                        : "";
         }
         public static string outerText(this WatiN.Core.Button button)
         {    		
             return (button != null)
-                       ? button.OuterText
+                       ? button.OuterText.trim()
                        : "";
         }
  		 
