@@ -26,7 +26,7 @@ namespace UnitTests.FluentSharp_WatiN.APIs
         [Test] public void IE_UnitTest_Ctor()
         {            
             Assert.NotNull(ieUnitTest.FormTitle);         
-        }
+        }       
 
         [Test] public void openIE()
         {                        
