@@ -20,7 +20,8 @@
           <group targetFramework=".NETFramework4.0">
             <dependency id="FluentSharp.CoreLib" />
             <dependency id="FluentSharp.Web_3_5" />
-            <dependency id="FluentSharp.WinForms" />            
+            <dependency id="FluentSharp.WinForms" />
+            <dependency id="WatiN" />
           </group>
         </dependencies>        
     </metadata>    
