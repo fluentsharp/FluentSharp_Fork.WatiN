@@ -7,7 +7,7 @@ using WatiN.Core;
 namespace FluentSharp.Watin
 {
     public static class WatiN_IE_ExtensionMethods_Link
-    { 	
+    {
         /// <summary>
         /// Finds a link in the current page
         /// 
@@ -18,14 +18,16 @@ namespace FluentSharp.Watin
         /// </summary>
         /// <param name="watinIe"></param>
         /// <param name="value"></param>
+        /// <param name="logError"></param>
         /// <returns></returns>
-        public static Link link(this WatiN_IE watinIe, string value)
+        public static Link link(this WatiN_IE watinIe, string value, bool logError = true)
         {
             value = value.lower().trim();
             foreach(var link in watinIe.links())
                 if (link.id().lower() == value ||link.text().lower() == value)
                     return link;
-            "in WatiN_IE could not find Link with name:{0}".error(value ?? "[null value]");
+            if(logError)
+                "in WatiN_IE could not find Link with name:{0}".error(value ?? "[null value]");
             return null;    				
         }
  
@@ -89,9 +91,9 @@ namespace FluentSharp.Watin
                     select link.Id).toList();
         }
  
-        public static bool hasLink(this WatiN_IE watinIe, string value)
+        public static bool hasLink(this WatiN_IE watinIe, string value, bool logError = false)
         {			
-            return watinIe.link(value).notNull();                        
+            return watinIe.link(value, logError).notNull();                        
         }
 		
         public static Link waitForLink(this WatiN_IE watinIe, string nameOrId)
@@ -109,7 +111,10 @@ namespace FluentSharp.Watin
                     break;
                 watinIe.sleep(500, false);
             }
-            return watinIe.link(nameOrId);
+            var link = watinIe.link(nameOrId);
+            if (link.isNull())
+                "[WatiN_IE][waitForLink] after {0} attempts, could not find Link using key: {1}".error(maxSleepTimes, nameOrId);
+            return link;
         }
         public static string href(this Link link)
         {
