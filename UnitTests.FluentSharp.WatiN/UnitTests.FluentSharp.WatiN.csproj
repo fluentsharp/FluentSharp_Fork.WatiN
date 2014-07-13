@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="APIs\Test_IE_UnitTest.cs" />
     <Compile Include="ExtensionMethods\Test_WatiN_IE_ExtensionMethods_Button.cs" />
+    <Compile Include="ExtensionMethods\Test_WatiN_IE_ExtensionMethods_DialogHandlers.cs" />
     <Compile Include="ExtensionMethods\Test_WatiN_IE_ExtensionMethods_Elements.cs" />
     <Compile Include="ExtensionMethods\Test_WatiN_IE_ExtensionMethods_Inject_Html.cs" />
     <Compile Include="ExtensionMethods\Test_WatiN_IE_ExtensionMethods_Link.cs" />
@@ -85,6 +86,10 @@
     <ProjectReference Include="..\..\FluentSharp.REPL\FluentSharp.REPL.csproj">
       <Project>{d742bbef-bfdc-477f-9880-5e0e2c89b6b2}</Project>
       <Name>FluentSharp.REPL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\FluentSharp.Web\FluentSharp.Web_3_5.csproj">
+      <Project>{FF88F616-4047-46F0-92C5-AFF282617505}</Project>
+      <Name>FluentSharp.Web_3_5</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\FluentSharp.WinForms\FluentSharp.WinForms.csproj">
       <Project>{df7e73cb-02ac-4689-bb8c-ac21ffccddc5}</Project>

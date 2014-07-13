@@ -32,6 +32,8 @@ namespace FluentSharp.Watin
             return hostPanel;
         }
         // Control Extensionmethods
+
+
          /// <summary>
          /// Adds an embeded WatiN_IE control to the provided WinForms Control object
          /// </summary>
@@ -51,6 +53,18 @@ namespace FluentSharp.Watin
                 ex.log();
                 return null;
             }
+        }
+        public static WatiN_IE add_IE(this string title)
+        {
+            return title.add_IE_PopupWindow();
+        }
+        public static WatiN_IE add_IE_PopupWindow(this string title, int width, int height)
+        {
+            var ie = title.add_IE_PopupWindow();
+            var parentForm = ie.parentForm();
+            parentForm.width(width);
+            parentForm.height(height);
+            return ie;
         }
         /// <summary>
         /// Creates a popupWindow (i.e. new WinForms Form) with the provided title.
