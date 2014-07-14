@@ -4,7 +4,7 @@ using FluentSharp.Watin;
 using FluentSharp.WinForms;
 using NUnit.Framework;
 
-namespace UnitTests.FluentSharp_WatiN.APIs
+namespace UnitTests.FluentSharp.WatiN
 {
     [TestFixture]
     public class Test_IE_UnitTest : NUnitTests

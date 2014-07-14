@@ -3,7 +3,7 @@ using FluentSharp.NUnit;
 using FluentSharp.Watin;
 using NUnit.Framework;
 
-namespace UnitTests.FluentSharp_WatiN.ExtensionMethods
+namespace UnitTests.FluentSharp.WatiN
 {
     [TestFixture]
     public class Test_WatiN_IE_ExtensionMethods_Misc : NUnitTests

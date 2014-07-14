@@ -95,10 +95,6 @@
       <Project>{df7e73cb-02ac-4689-bb8c-ac21ffccddc5}</Project>
       <Name>FluentSharp.WinForms</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\FluentSharp_Fork.SharpDevelopEditor\FluentSharp_Fork.SharpDevelopEditor.csproj">
-      <Project>{e76bce43-8511-4ce8-a965-c0150f713ce9}</Project>
-      <Name>FluentSharp_Fork.SharpDevelopEditor</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\UnitTests\UnitTests.FluentSharp.Web\UnitTests.FluentSharp.Web.csproj">
       <Project>{62f1c85f-0991-42ee-9b71-90d82ee7cd0b}</Project>
       <Name>UnitTests.FluentSharp.Web</Name>
