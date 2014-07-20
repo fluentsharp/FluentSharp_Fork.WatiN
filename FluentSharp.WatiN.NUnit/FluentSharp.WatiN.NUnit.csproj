@@ -39,10 +39,10 @@
   <ItemGroup>
     <Reference Include="Interop.SHDocVw">
       <HintPath>..\..\packages\WatiN.2.1.0\lib\net40\Interop.SHDocVw.dll</HintPath>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
     <Reference Include="Microsoft.mshtml, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
       <Private>True</Private>
       <HintPath>..\..\packages\WatiN.2.1.0\lib\net40\Microsoft.mshtml.dll</HintPath>
     </Reference>
@@ -61,13 +61,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ExtensionMethods\Watin_ExtensionMethods_NUnit_REPL.cs" />
+    <Compile Include="Classes\NUnit_WatiN_Messages.cs" />
+    <Compile Include="ExtensionMethods\Watin_REPL_ExtensionMethods.cs" />
+    <Compile Include="ExtensionMethods\WatiN_NUnit_Extension_Methods.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\FluentSharp.CoreLib\FluentSharp.CoreLib.csproj">
       <Project>{0A7CE0E0-B092-43B5-AB80-99BA909019C9}</Project>
       <Name>FluentSharp.CoreLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\FluentSharp.NUnit\FluentSharp.NUnit.csproj">
+      <Project>{0DA6B6B3-5BE3-4610-BB7B-EA9A4BAF27AF}</Project>
+      <Name>FluentSharp.NUnit</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\FluentSharp.REPL\FluentSharp.REPL.csproj">
       <Project>{D742BBEF-BFDC-477F-9880-5E0E2C89B6B2}</Project>

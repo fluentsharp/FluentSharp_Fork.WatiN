@@ -6,7 +6,7 @@ using FluentSharp.WinForms;
 
 namespace FluentSharp.WatiN.NUnit
 {
-    public static class Watin_ExtensionMethods_NUnit_REPL
+    public static class Watin_REPL_ExtensionMethods
     {
         public static WatiN_IE script_IE_WaitForClose(this WatiN_IE ie)
         {
