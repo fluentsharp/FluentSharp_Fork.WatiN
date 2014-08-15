@@ -42,7 +42,7 @@ namespace FluentSharp.Watin
 		
         public static string formatJsCode(this WatiN_IE ie, string codeToFormat)
         {			
-            if (ie.url().neq("about:blank"))
+            if (ie.url().not_Equal("about:blank"))
             {
                 "opening ABOUT:Blank".info();
                 ie.open("about:blank");
